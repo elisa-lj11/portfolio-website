@@ -1,7 +1,7 @@
 // src/components/Galaxy.js
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { useNavigate } from 'react-router-dom'; // for navigation
+import { useNavigate } from 'react-router-dom';
 
 const Galaxy = () => {
   const mountRef = useRef(null);
@@ -13,7 +13,11 @@ const Galaxy = () => {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
+
+    // Append renderer to the DOM element if mountRef is valid
+    if (mountRef.current) {
+      mountRef.current.appendChild(renderer.domElement);
+    }
 
     // Create galaxy of clickable stars
     const stars = [];
@@ -69,10 +73,15 @@ const Galaxy = () => {
 
     animate();
 
-    // Cleanup on component unmount
+    // Cleanup function: Ensure that mountRef.current exists before removing the renderer
     return () => {
       window.removeEventListener('click', handleClick);
-      mountRef.current.removeChild(renderer.domElement);
+
+      if (mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
+
+      renderer.dispose(); // Clean up the Three.js renderer to avoid memory leaks
     };
   }, [navigate]);
 
