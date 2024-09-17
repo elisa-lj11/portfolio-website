@@ -9,23 +9,14 @@ import Model from './components/Model';
 function App() {
   return (
     <div className="App">
-      <Scene />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Scene />} />
+          <Route path="/info" element={<InfoPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         {/* Landing page with the spinning galaxy */}
-//         <Route path="/" element={<Galaxy />} />
-        
-//         {/* Dynamic pages for each star/node */}
-//         <Route path="/page/:starIndex" element={<InfoPage />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
 
 export default App;

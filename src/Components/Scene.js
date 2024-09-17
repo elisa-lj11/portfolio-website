@@ -2,11 +2,13 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for page redirection
 import OrbitingNodes from './OrbitingNodes';
 import Model from './Model'; // Import the refactored Model class
 
 const Scene = () => {
   const mountRef = useRef(null);
+  const navigate = useNavigate(); // Hook to navigate between routes
   const orbitingNodes = new OrbitingNodes();
   const model = new Model(); // Create an instance of the Model class
 
@@ -34,7 +36,9 @@ const Scene = () => {
     orbitingNodes.createNodes(scene);
     orbitingNodes.enableMouseEvents(renderer, camera, (node) => {
       console.log('Clicked on node:', node);
-      // Handle the node click here, e.g., redirect or show info
+      
+      // Redirect to InfoPage when a node is clicked
+      navigate('/info'); // Trigger navigation to the /info route
     });
 
     // Load the 3D model and add it to the scene
