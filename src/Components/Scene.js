@@ -8,9 +8,8 @@ import Model from './Model'; // Import the refactored Model class
 
 const Scene = () => {
   const mountRef = useRef(null);
-  const navigate = useNavigate(); // Hook to navigate between routes
-  const orbitingNodes = new OrbitingNodes();
   const model = new Model(); // Create an instance of the Model class
+  const navigate = useNavigate(); // Hook to navigate between routes
 
   useEffect(() => {
     // Create the scene, camera, and renderer
@@ -32,13 +31,14 @@ const Scene = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Add nodes to the scene
+    // Initialize the OrbitingNodes class and add nodes to the scene
+    const orbitingNodes = new OrbitingNodes();
     orbitingNodes.createNodes(scene);
-    orbitingNodes.enableMouseEvents(renderer, camera, (node) => {
-      console.log('Clicked on node:', node);
-      
-      // Redirect to InfoPage when a node is clicked
-      navigate('/info'); // Trigger navigation to the /info route
+    orbitingNodes.enableMouseEvents(renderer, camera, (node, nodeId) => {
+      console.log(`Clicked node: ${nodeId}`);
+
+      // Redirect to InfoPage with the node's unique ID
+      navigate(`/${nodeId}`); // Navigate to a unique page for each node
     });
 
     // Load the 3D model and add it to the scene
