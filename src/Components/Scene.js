@@ -2,10 +2,12 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
+import OrbitingNodes from './OrbitingNodes';
 import Model from './Model'; // Import the refactored Model class
 
 const Scene = () => {
   const mountRef = useRef(null);
+  const orbitingNodes = new OrbitingNodes();
   const model = new Model(); // Create an instance of the Model class
 
   useEffect(() => {
@@ -28,6 +30,13 @@ const Scene = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
+    // Add nodes to the scene
+    orbitingNodes.createNodes(scene);
+    orbitingNodes.enableMouseEvents(renderer, camera, (node) => {
+      console.log('Clicked on node:', node);
+      // Handle the node click here, e.g., redirect or show info
+    });
+
     // Load the 3D model and add it to the scene
     model.loadModel(scene, () => {
       console.log('Model loaded and added to scene');
@@ -37,6 +46,9 @@ const Scene = () => {
     const animate = () => {
       requestAnimationFrame(animate);
 
+      // Update orbiting nodes
+      orbitingNodes.updateNodes(scene, camera);
+      
       // Update the animation mixer from the model
       model.updateAnimations();
 
