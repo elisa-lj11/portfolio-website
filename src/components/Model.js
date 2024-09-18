@@ -8,6 +8,7 @@ class Model {
   constructor() {
     this.model = null;
     this.mixer = null;
+    this.speed = 0.2; // Speed constant for the orbiting motion
     this.clock = new THREE.Clock(); // Clock to update animations
   }
 
@@ -16,7 +17,7 @@ class Model {
     const loader = new GLTFLoader();
     loader.load(MODEL_NAME, (gltf) => {
       this.model = gltf.scene;
-      this.model.scale.set(2.5, 2.5, 2.5);
+      this.model.scale.set(2.8, 2.8, 2.8);
       scene.add(this.model); // Add the model to the provided scene
 
       const animations = gltf.animations;
@@ -37,7 +38,7 @@ class Model {
   // Update the animation mixer based on the clock delta time
   updateAnimations() {
     if (this.mixer) {
-      const delta = this.clock.getDelta();
+      const delta = this.clock.getDelta() * this.speed * -1;
       this.mixer.update(delta);
     }
   }

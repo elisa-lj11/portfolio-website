@@ -8,9 +8,12 @@ import Model from './Model'; // Import the Model class
 
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(0, 1, 1);
-  scene.add(light);
+  const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
+  scene.add(ambLight);
+
+  const pointLight = new THREE.PointLight(0xfae696, 3);
+  pointLight.position.set(0, -2, 0);
+  scene.add(pointLight);
 };
 
 // Helper function: Handle window resize
