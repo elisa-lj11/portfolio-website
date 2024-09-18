@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three-stdlib'; // GLTFLoader for loading the .gltf/.glb files
 
-const MODEL_NAME = '/models/lynx_galaxy_animated.glb';
+const MODEL_NAME = '/models/galaxy_HD.glb';
 
 class Model {
   constructor() {
@@ -16,6 +16,7 @@ class Model {
     const loader = new GLTFLoader();
     loader.load(MODEL_NAME, (gltf) => {
       this.model = gltf.scene;
+      this.model.scale.set(2.5, 2.5, 2.5);
       scene.add(this.model); // Add the model to the provided scene
 
       const animations = gltf.animations;
