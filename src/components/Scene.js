@@ -80,17 +80,25 @@ const Scene = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
 
-      // Dispose of all objects
+      // Clean up orbiting nodes and mouse events
+      orbitingNodes.cleanupMouseEvents();
+      orbitingNodes.cleanup(scene);
+      
+      // Clean up Three.js scene objects
       scene.traverse((object) => {
         if (object.isMesh) {
-          console.log("Disposing of " + object.name);
-          // Dispose of the geometry and material associated with the mesh
+          // Dispose of geometry
           if (object.geometry) object.geometry.dispose();
 
-          if (object.material) {
-            // If the material has a texture, dispose of it
-            if (object.material.map) object.material.map.dispose();
-            object.material.dispose();
+          // Dispose of materials and associated textures
+          if (Array.isArray(object.material)) {
+            object.material.forEach((material) => {
+              if (material.map) material.map.dispose(); // Dispose of texture map
+              material.dispose(); // Dispose of material
+            });
+          } else {
+            if (object.material.map) object.material.map.dispose(); // Dispose of texture map
+            object.material.dispose(); // Dispose of material
           }
         }
       });
