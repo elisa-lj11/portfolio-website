@@ -3,8 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for page redirection
-import OrbitingNodes from './OrbitingNodes';
-import Model from './Model'; // Import the refactored Model class
+import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
+import Model from './Model'; // Import the Model class
 
 const Scene = () => {
   const mountRef = useRef(null);
@@ -31,15 +31,16 @@ const Scene = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
+    // Callback for handling click
+    const handleNodeClick = (node, nodeId) => {
+      console.log(`Clicked node: ${nodeId}`);
+      navigate(`/${nodeId}`);
+    };
+
     // Initialize the OrbitingNodes class and add nodes to the scene
     const orbitingNodes = new OrbitingNodes();
     orbitingNodes.createNodes(scene);
-    orbitingNodes.enableMouseEvents(renderer, camera, (node, nodeId) => {
-      console.log(`Clicked node: ${nodeId}`);
-
-      // Redirect to InfoPage with the node's unique ID
-      navigate(`/${nodeId}`); // Navigate to a unique page for each node
-    });
+    orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
 
     // Load the 3D model and add it to the scene
     model.loadModel(scene, () => {
@@ -51,7 +52,7 @@ const Scene = () => {
       requestAnimationFrame(animate);
 
       // Update orbiting nodes
-      orbitingNodes.updateNodes(scene, camera);
+      orbitingNodes.updateNodes();
       
       // Update the animation mixer from the model
       model.updateAnimations();
@@ -78,12 +79,31 @@ const Scene = () => {
     // Clean up on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
+
+      // Dispose of all objects
+      scene.traverse((object) => {
+        if (object.isMesh) {
+          console.log("Disposing of " + object.name);
+          // Dispose of the geometry and material associated with the mesh
+          if (object.geometry) object.geometry.dispose();
+
+          if (object.material) {
+            // If the material has a texture, dispose of it
+            if (object.material.map) object.material.map.dispose();
+            object.material.dispose();
+          }
+        }
+      });
+
+      // Dispose of the renderer
+      renderer.dispose();
+
+      // Remove the renderer DOM element
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
-      renderer.dispose();
     };
-  }, [model]);
+  });
 
   return <div ref={mountRef}></div>;
 };

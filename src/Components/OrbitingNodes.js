@@ -6,11 +6,15 @@ class OrbitingNodes {
     this.nodes = [];
     this.orbitRadius = 3; // Set a radius for the orbiting nodes
     this.numNodes = 5;    // Number of orbiting nodes
+
+    this.clock = new THREE.Clock();
+    this.angle = 0;
+
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
     this.INTERSECTED = null;
-    this.clock = new THREE.Clock();
-    this.angle = 0;
+    this.isClicking = false;
+    this.isDragging = false;
     this.clickCallback = null;
   }
 
@@ -32,36 +36,6 @@ class OrbitingNodes {
     }
   }
 
-  // Handle orbiting logic
-  updateNodes(scene, camera) {
-    this.angle += this.clock.getDelta(); // Increment angle for orbiting motion
-
-    this.nodes.forEach((node, i) => {
-      node.position.x = this.orbitRadius * Math.cos(this.angle + (i / this.numNodes) * 2 * Math.PI);
-      node.position.z = this.orbitRadius * Math.sin(this.angle + (i / this.numNodes) * 2 * Math.PI);
-    });
-
-    // Detect intersections with mouse clicks
-    this.raycaster.setFromCamera(this.mouse, camera);
-    const intersects = this.raycaster.intersectObjects(this.nodes);
-
-    if (intersects.length > 0) {
-      const intersectedNode = intersects[0].object;
-      if (this.INTERSECTED !== intersectedNode) {
-        this.INTERSECTED = intersectedNode;
-
-         // Trigger click callback only once per click
-        if (this.isClicking && this.clickCallback) {
-          const nodeId = intersectedNode.userData.id;
-          this.clickCallback(intersectedNode, nodeId); // Pass the node ID to the click callback
-          this.isClicking = false; // Reset the flag after handling the click
-        }
-      }
-    } else {
-      this.INTERSECTED = null;
-    }
-  }
-
   // Set up mouse event listeners for detecting clicks
   enableMouseEvents(renderer, camera, clickCallback) {
     this.clickCallback = clickCallback;
@@ -73,8 +47,44 @@ class OrbitingNodes {
       this.isClicking = true; // Set flag to true when mouse is pressed
     });
 
+    renderer.domElement.addEventListener('mousemove', (event) => {
+      // Set isDragging to true when mouse moves during a click
+      if (this.isClicking) {
+        this.isDragging = true;
+      }
+    });
+
     renderer.domElement.addEventListener('mouseup', () => {
-      this.isClicking = false; // Reset flag when mouse button is released
+      if (this.isClicking && !this.isDragging) {
+        this.handleClick(camera);
+      }
+      this.isClicking = false;
+      this.isDragging = false;
+    });
+  }
+
+  handleClick(camera) {
+    this.raycaster.setFromCamera(this.mouse, camera);
+
+    // Find intersected objects
+    const intersects = this.raycaster.intersectObjects(this.nodes);
+
+    if (intersects.length > 0) {
+      const intersectedNode = intersects[0].object; // Get the first intersected node
+      const nodeId = intersectedNode.userData.id; // Get the ID from userData
+      if (this.clickCallback) {
+        this.clickCallback(intersectedNode, nodeId); // Call the callback with node and nodeId
+      }
+    }
+  }
+  
+  // Handle orbiting logic
+  updateNodes() {
+    this.angle += this.clock.getDelta(); // Increment angle for orbiting motion
+
+    this.nodes.forEach((node, i) => {
+      node.position.x = this.orbitRadius * Math.cos(this.angle + (i / this.numNodes) * 2 * Math.PI);
+      node.position.z = this.orbitRadius * Math.sin(this.angle + (i / this.numNodes) * 2 * Math.PI);
     });
   }
 }
