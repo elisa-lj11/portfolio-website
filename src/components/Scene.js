@@ -32,7 +32,7 @@ const Scene = () => {
     controls.enableDamping = true;
 
     // Callback for handling click
-    const handleNodeClick = (node, nodeId) => {
+    const handleNodeClick = (nodeId) => {
       console.log(`Clicked node: ${nodeId}`);
       navigate(`/${nodeId}`);
     };

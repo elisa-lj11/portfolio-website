@@ -6,6 +6,7 @@ class OrbitingNodes {
     this.nodes = [];
     this.orbitRadius = 3; // Set a radius for the orbiting nodes
     this.numNodes = 5;    // Number of orbiting nodes
+    this.speed = 0.5;    // Speed constant for the orbiting motion
 
     this.clock = new THREE.Clock();
     this.angle = 0;
@@ -88,19 +89,24 @@ class OrbitingNodes {
       const intersectedNode = intersects[0].object; // Get the first intersected node
       const nodeId = intersectedNode.userData.id; // Get the ID from userData
       if (this.clickCallback) {
-        this.clickCallback(intersectedNode, nodeId); // Call the callback with node and nodeId
+        this.clickCallback(nodeId); // Call the callback with node and nodeId
       }
     }
   }
   
   // Handle orbiting logic
   updateNodes() {
-    this.angle += this.clock.getDelta(); // Increment angle for orbiting motion
+    this.angle += this.clock.getDelta() * this.speed; // Increment angle based on speed
 
     this.nodes.forEach((node, i) => {
       node.position.x = this.orbitRadius * Math.cos(this.angle + (i / this.numNodes) * 2 * Math.PI);
       node.position.z = this.orbitRadius * Math.sin(this.angle + (i / this.numNodes) * 2 * Math.PI);
     });
+  }
+
+  // Update the orbit speed
+  setSpeed(newSpeed) {
+    this.speed = newSpeed;
   }
 
   // Add a cleanup method to properly remove nodes and dispose of geometries/materials
