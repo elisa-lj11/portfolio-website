@@ -63,6 +63,7 @@ class OrbitingNodes {
     });
   }
 
+  // Call the click callback when the click is valid
   handleClick(camera) {
     this.raycaster.setFromCamera(this.mouse, camera);
 
