@@ -8,10 +8,8 @@ import Model from './Model'; // Import the Model class
 
 // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 const GALAXY_MODEL = '/models/galaxy_HD.glb';
-//"Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
+// "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
 const SKYBOX = '/models/milkyway.glb';
-// "Inside Galaxy Skybox HDRI 360 panorama" (https://skfb.ly/oKvV8) by Aliaksandr.melas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-//const SKYBOX = '/models/galaxy_skybox.glb';
 
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
@@ -37,6 +35,7 @@ const Scene = () => {
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
   const navigate = useNavigate(); // Hook to navigate between routes
+  let shouldSmoothReset = false;
 
   useEffect(() => {
     // Scene setup
@@ -81,6 +80,42 @@ const Scene = () => {
     controls.maxDistance = 1000;
     controls.enableDamping = true;
 
+    // Smooth reset the OrbitControl camera's angles
+    const doSmoothReset = () => {
+      if (!shouldSmoothReset) return;
+
+      // Smooth transition of controls target and camera position
+      controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+      camera.position.lerp(new THREE.Vector3(0, 1, 5), 0.05);
+
+      // Smooth zoom transition
+      camera.zoom = THREE.MathUtils.lerp(camera.zoom, 1, 0.1);
+      camera.updateProjectionMatrix();
+
+      // Stop when close enough to targets
+      if (camera.position.distanceTo(new THREE.Vector3(0, 1, 5)) < 0.1 &&
+          Math.abs(camera.zoom - 1) < 0.1 &&
+          controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
+        shouldSmoothReset = false;
+
+        // Remove angular limits after reset
+        controls.minAzimuthAngle = -Infinity;
+        controls.maxAzimuthAngle = Infinity;
+        controls.minPolarAngle = 0;
+        controls.maxPolarAngle = Math.PI;
+      }
+
+      controls.update();
+    };
+    
+
+    document.addEventListener('keyup', event => {
+      if (event.code === 'Space') {
+        shouldSmoothReset = true;
+        console.log('Camera view has been reset');
+      }
+    });
+
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
@@ -90,6 +125,9 @@ const Scene = () => {
 
       // Update the animation mixer from the model
       galaxyModel.updateAnimations();
+
+      // Run the smooth reset if triggered
+      if (shouldSmoothReset) doSmoothReset();
 
       // Update the controls
       controls.update();
@@ -139,12 +177,9 @@ const Scene = () => {
       {/* Debugging styles */}
       <style>
         {`
-          body, html {
+          body, html, #root {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-          }
-          #root {
             width: 100vw;
             height: 100vh;
             overflow: hidden;
