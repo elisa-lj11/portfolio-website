@@ -108,21 +108,6 @@ class OrbitingNodes {
   setSpeed(newSpeed) {
     this.speed = newSpeed;
   }
-
-  // Add a cleanup method to properly remove nodes and dispose of geometries/materials
-  cleanup(scene) {
-    this.nodes.forEach((node) => {
-      // Remove the node from the scene
-      scene.remove(node);
-
-      // Dispose of the geometry and material
-      if (node.geometry) node.geometry.dispose();
-      if (node.material) {
-        if (node.material.map) node.material.map.dispose();
-        node.material.dispose();
-      }
-    });
-  }
 }
 
 export default OrbitingNodes;
