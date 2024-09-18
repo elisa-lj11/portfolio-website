@@ -96,7 +96,7 @@ class OrbitingNodes {
   
   // Handle orbiting logic
   updateNodes() {
-    this.angle += this.clock.getDelta() * this.speed; // Increment angle based on speed
+    this.angle += this.clock.getDelta() * -1 * this.speed; // Increment angle based on speed
 
     this.nodes.forEach((node, i) => {
       node.position.x = this.orbitRadius * Math.cos(this.angle + (i / this.numNodes) * 2 * Math.PI);

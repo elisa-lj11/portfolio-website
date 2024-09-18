@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for page r
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
 
+const GALAXY_MODEL = '/models/galaxy_HD.glb';
+const SKYBOX = '/models/galaxy_skybox.glb';
+
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
   const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
@@ -27,7 +30,10 @@ const handleResize = (renderer, camera) => {
 
 const Scene = () => {
   const mountRef = useRef(null);
-  const model = new Model(); // Create an instance of the Model class
+  // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
+  const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
+  // "Inside Galaxy Skybox HDRI 360 panorama" (https://skfb.ly/oKvV8) by Aliaksandr.melas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+  const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
   const navigate = useNavigate(); // Hook to navigate between routes
 
   useEffect(() => {
@@ -44,9 +50,16 @@ const Scene = () => {
     // Initialize lighting (from helper function)
     initializeLighting(scene);
 
-    // Model loading
-    model.loadModel(scene, () => {
-      console.log('Model loaded and added to scene');
+    // Galaxy model loading
+    galaxyModel.loadModel(scene, () => {
+      console.log('Galaxy model loaded and added to scene');
+    });
+
+    galaxyModel.setSpeed(-0.2);
+
+    // Skybox model loading
+    skyboxModel.loadModel(scene, () => {
+      console.log('Skybox model loaded and added to scene');
     });
 
     // Initialize the OrbitingNodes class and add nodes to the scene
@@ -72,7 +85,7 @@ const Scene = () => {
       orbitingNodes.updateNodes();
 
       // Update the animation mixer from the model
-      model.updateAnimations();
+      galaxyModel.updateAnimations();
 
       // Update the controls
       controls.update();
