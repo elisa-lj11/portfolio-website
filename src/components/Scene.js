@@ -6,8 +6,12 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for page r
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
 
+// Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 const GALAXY_MODEL = '/models/galaxy_HD.glb';
-const SKYBOX = '/models/galaxy_skybox.glb';
+//"Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
+const SKYBOX = '/models/milkyway.glb';
+// "Inside Galaxy Skybox HDRI 360 panorama" (https://skfb.ly/oKvV8) by Aliaksandr.melas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+//const SKYBOX = '/models/galaxy_skybox.glb';
 
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
@@ -30,9 +34,7 @@ const handleResize = (renderer, camera) => {
 
 const Scene = () => {
   const mountRef = useRef(null);
-  // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
-  // "Inside Galaxy Skybox HDRI 360 panorama" (https://skfb.ly/oKvV8) by Aliaksandr.melas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
   const navigate = useNavigate(); // Hook to navigate between routes
 
