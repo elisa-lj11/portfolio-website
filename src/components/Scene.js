@@ -77,6 +77,8 @@ const Scene = () => {
 
     // Add OrbitControls for camera interaction
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 0.1;
+    controls.maxDistance = 1000;
     controls.enableDamping = true;
 
     // Animation loop
