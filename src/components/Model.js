@@ -6,6 +6,7 @@ class Model {
   constructor(modelName, scale) {
     this.modelName = modelName;
     this.model = null;
+    this.mesh = null;
     this.scale = scale;
     this.mixer = null;
     this.speed = 1; // Speed constant for the orbiting motion
@@ -16,11 +17,13 @@ class Model {
   loadModel(scene, onLoadCallback) {
     const loader = new GLTFLoader();
     loader.load(this.modelName, (gltf) => {
+      this.mesh = gltf.scene.getObjectByName("Object_4");
       this.model = gltf.scene;
       this.model.scale.set(this.scale, this.scale, this.scale);
       scene.add(this.model); // Add the model to the provided scene
 
       const animations = gltf.animations;
+      // FIXME: Play multiple animations
       if (animations && animations.length > 0) {
         // Set up the AnimationMixer
         this.mixer = new THREE.AnimationMixer(this.model);
@@ -51,6 +54,11 @@ class Model {
   // Return the model object
   getModel() {
     return this.model;
+  }
+
+  // Return the mesh of the object
+  getMesh() {
+    return this.mesh;
   }
 }
 

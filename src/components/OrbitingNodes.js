@@ -2,28 +2,25 @@
 import * as THREE from 'three';
 
 class OrbitingNodes {
-  constructor() {
+  constructor(galaxyMesh) {
     this.nodes = [];
-    this.startRadius = 0.0;
-    this.finalRadius = 3.2;
     this.numNodes = 5;
-    this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
+    this.galaxyMesh = galaxyMesh; // The actual galaxy mesh geometry
+    this.orbitRadius = 3.2; // Orbit radius outside the mesh
+
     this.rotationSpeed = 0.5; // Speed of swirling motion
     this.clock = new THREE.Clock();
-    this.angleOffset = []; // Store initial angle offsets for each node
-
-    this.heightMultiplier = 2; // Controls how much the nodes "climb" the cone vertically
-    this.startHeight = -2; // Starting below the galaxy center (negative y value)
 
     // Raycaster for interaction
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
 
     // Interaction states
-    this.INTERSECTED = null;
     this.isClicking = false;
     this.isDragging = false;
     this.clickCallback = null;
+
+    this.galaxyVertices = []; // Array to store relevant points from the galaxy mesh
   }
 
   // Function to create orbiting nodes with unique IDs
@@ -31,23 +28,74 @@ class OrbitingNodes {
     const geometry = new THREE.SphereGeometry(0.2, 32, 32);
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
+    // Extract relevant vertices from the galaxy mesh
+    this.extractGalaxyVertices();
+
     for (let i = 0; i < this.numNodes; i++) {
       const node = new THREE.Mesh(geometry, material);
 
-      node.position.set(
-        this.startRadius * Math.cos((i / this.numNodes) * 2 * Math.PI),
-        0,
-        this.startRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
-      );
+      // Start at the center or an initial point inside the galaxy
+      node.position.set(0, 0, 0);
 
-      node.userData = { id: `node${i + 1}` }; // Assign a unique ID to each node
+      node.userData = { id: `node${i + 1}`, phase: 1 }; // Assign a unique ID to each node, phase 1 is to traverse the galaxy
       this.nodes.push(node);
 
       scene.add(node);
-
-      // Store an initial angle offset for each node
-      this.angleOffset.push((i / this.numNodes) * 2 * Math.PI);
     }
+  }
+
+  // Extract vertices from the galaxy mesh to guide node paths
+  extractGalaxyVertices() {
+    const positionAttribute = this.galaxyMesh.geometry.getAttribute('position');
+    
+    // Loop through the positions and store them as vectors
+    for (let i = 0; i < positionAttribute.count; i++) {
+      const vertex = new THREE.Vector3().fromBufferAttribute(positionAttribute, i);
+      this.galaxyVertices.push(vertex);
+    }
+  }
+    
+  // Update nodes' positions along the galaxy path
+  updateNodes() {
+    const elapsedTime = this.clock.getElapsedTime();
+
+    this.nodes.forEach((node, i) => {
+      // Get the phase (1: traversing galaxy, 2: orbiting outside)
+      const phase = node.userData.phase;
+
+      if (phase === 1) {
+        // Phase 1: Moving along the galaxy mesh
+        this.moveAlongGalaxyMesh(node, i, elapsedTime);
+      } else if (phase === 2) {
+        // Phase 2: Orbiting outside the galaxy
+        this.orbitOutsideGalaxy(node, i, elapsedTime);
+      }
+    });
+  }
+
+  // Move the node along the galaxy mesh
+  moveAlongGalaxyMesh(node, i, elapsedTime) {
+    // Select a target vertex from the galaxy mesh
+    const vertexIndex = Math.floor((elapsedTime * 10 + i) % this.galaxyVertices.length);
+    const targetVertex = this.galaxyVertices[vertexIndex];
+
+    // Move node towards the target vertex (interpolating for smooth movement)
+    const lerpSpeed = 0.02;
+    node.position.lerp(targetVertex, lerpSpeed);
+
+    // Once near the edge of the galaxy, transition to orbiting phase
+    if (node.position.distanceTo(targetVertex) < 0.1 && vertexIndex > this.galaxyVertices.length * 0.9) {
+      node.userData.phase = 2;
+    }
+  }
+
+  // Orbit the node outside the galaxy
+  orbitOutsideGalaxy(node, i, elapsedTime) {
+    // Orbit at a fixed radius and height (adjust position based on time)
+    const angle = elapsedTime * this.rotationSpeed + (i / this.numNodes) * Math.PI * 2;
+    node.position.x = this.orbitRadius * Math.cos(angle);
+    node.position.z = this.orbitRadius * Math.sin(angle);
+    node.position.y = this.galaxyMesh.position.y; // Stay at the galaxy's height
   }
 
   // Set up mouse event listeners for detecting clicks
@@ -104,35 +152,6 @@ class OrbitingNodes {
         this.clickCallback(nodeId); // Call the callback with node and nodeId
       }
     }
-  }
-  
-  // Handle orbiting logic
-  updateNodes() {
-    const elapsedTime = this.clock.getElapsedTime();
-
-    // Update orbitRadius based on time, for outward movement
-    this.orbitRadius =
-      this.startRadius +
-      (this.finalRadius - this.startRadius) *
-        (2 / (1 + 2 ** (-3 * elapsedTime)) - 1); // Sigmoid-like smooth expansion
-
-    // Swirl nodes around and update positions along the upside-down cone, starting from below
-    this.nodes.forEach((node, i) => {
-      const angle = this.angleOffset[i] + this.rotationSpeed * elapsedTime; // Swirling over time
-
-      // Cone motion: x and z expand outward, y starts below the center and rises
-      node.position.x = this.orbitRadius * Math.cos(angle);
-      node.position.z = this.orbitRadius * Math.sin(angle);
-
-      // Calculate the y-position for upward movement, simulating an upside-down cone
-      const normalizedRadius = this.orbitRadius / this.finalRadius; // 0 at start, 1 at max
-      node.position.y = this.startHeight + normalizedRadius * this.heightMultiplier; // Rising upward
-    });
-  }
-
-  // Update the orbit speed
-  setSpeed(newSpeed) {
-    this.speed = newSpeed;
   }
 }
 

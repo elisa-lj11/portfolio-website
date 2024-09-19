@@ -35,6 +35,7 @@ const Scene = () => {
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
   const navigate = useNavigate(); // Hook to navigate between routes
+  let orbitingNodes = null;
   let shouldSmoothReset = false;
 
   useEffect(() => {
@@ -54,6 +55,30 @@ const Scene = () => {
     // Galaxy model loading
     galaxyModel.loadModel(scene, () => {
       console.log('Galaxy model loaded and added to scene');
+
+      initializeOrbitingNodes();
+      /*console.log('Galaxy mesh is: ' + galaxyModel.getMesh().name);
+
+      galaxyModel.getModel().traverse((object) => {
+        if (object.isMesh) {
+          console.log("Galaxy model object - name: " + object.name + ", isMesh: " + object.isMesh + ", is geometry: " + object.geometry + ", typeof: " + object.type);
+          console.log(object.geometry);
+        }
+        if (object.isMesh) {
+          if (object.geometry) object.geometry.dispose();
+    
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach((material) => {
+                if (material.map) material.map.dispose(); // Dispose of textures
+                material.dispose();
+              });
+            } else {
+              if (object.material.map) object.material.map.dispose();
+              object.material.dispose();
+            }
+          }
+        });*/
     });
 
     galaxyModel.setSpeed(-0.2);
@@ -63,16 +88,19 @@ const Scene = () => {
       console.log('Skybox model loaded and added to scene');
     });
 
-    // Initialize the OrbitingNodes class and add nodes to the scene
-    const orbitingNodes = new OrbitingNodes();
-    orbitingNodes.createNodes(scene);
-
     // Set up mouse events for clicking on nodes
     const handleNodeClick = (nodeId) => {
       console.log(`Clicked node: ${nodeId}`);
       navigate(`/${nodeId}`);
     };
-    orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
+
+    // Initialize the OrbitingNodes class and add nodes to the scene
+    const initializeOrbitingNodes = () => {
+      orbitingNodes = new OrbitingNodes(galaxyModel.getMesh());
+      orbitingNodes.createNodes(scene);
+
+      orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
+    }
 
     // Add OrbitControls for camera interaction
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -121,7 +149,7 @@ const Scene = () => {
       requestAnimationFrame(animate);
 
       // Update orbiting nodes
-      orbitingNodes.updateNodes();
+      if (orbitingNodes != null) orbitingNodes.updateNodes();
 
       // Update the animation mixer from the model
       galaxyModel.updateAnimations();
