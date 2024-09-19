@@ -4,15 +4,19 @@ import * as THREE from 'three';
 class OrbitingNodes {
   constructor() {
     this.nodes = [];
-    this.orbitRadius = 3; // Set a radius for the orbiting nodes
-    this.numNodes = 5;    // Number of orbiting nodes
-    this.speed = 0.5;    // Speed constant for the orbiting motion
-
+    this.startRadius = 0.0;
+    this.finalRadius = 3;
+    this.numNodes = 5;
+    this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
+    this.rotationSpeed = 0.5; // Speed of swirling motion
     this.clock = new THREE.Clock();
-    this.angle = 0;
+    this.angleOffset = []; // Store initial angle offsets for each node
 
+    // Raycaster for interaction
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
+
+    // Interaction states
     this.INTERSECTED = null;
     this.isClicking = false;
     this.isDragging = false;
@@ -22,20 +26,21 @@ class OrbitingNodes {
   // Function to create orbiting nodes with unique IDs
   createNodes(scene) {
     const geometry = new THREE.SphereGeometry(0.2, 32, 32);
-    const material = new THREE.MeshBasicMaterial(
-      { color: 0xffffff }
-    );
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
     for (let i = 0; i < this.numNodes; i++) {
       const node = new THREE.Mesh(geometry, material);
       node.position.set(
-        this.orbitRadius * Math.cos((i / this.numNodes) * 2 * Math.PI),
+        this.startRadius * Math.cos((i / this.numNodes) * 2 * Math.PI),
         0,
-        this.orbitRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
+        this.startRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
       );
       node.userData = { id: `node${i + 1}` }; // Assign a unique ID to each node
       this.nodes.push(node);
       scene.add(node);
+
+      // Store an initial angle offset for each node
+      this.angleOffset.push((i / this.numNodes) * 2 * Math.PI);
     }
   }
 
@@ -88,6 +93,7 @@ class OrbitingNodes {
     if (intersects.length > 0) {
       const intersectedNode = intersects[0].object; // Get the first intersected node
       const nodeId = intersectedNode.userData.id; // Get the ID from userData
+      
       if (this.clickCallback) {
         this.clickCallback(nodeId); // Call the callback with node and nodeId
       }
@@ -96,11 +102,22 @@ class OrbitingNodes {
   
   // Handle orbiting logic
   updateNodes() {
-    this.angle += this.clock.getDelta() * -1 * this.speed; // Increment angle based on speed
+    const deltaTime = this.clock.getDelta();
+    const elapsedTime = this.clock.getElapsedTime();
 
+    // Update orbitRadius based on time, for outward movement
+    this.orbitRadius =
+      this.startRadius +
+      (this.finalRadius - this.startRadius) *
+        (2 / (1 + 2 ** (-3 * elapsedTime)) - 1); // Sigmoid-like smooth expansion
+
+    // Swirl nodes around and update positions
     this.nodes.forEach((node, i) => {
-      node.position.x = this.orbitRadius * Math.cos(this.angle + (i / this.numNodes) * 2 * Math.PI);
-      node.position.z = this.orbitRadius * Math.sin(this.angle + (i / this.numNodes) * 2 * Math.PI);
+      const angle = this.angleOffset[i] + this.rotationSpeed * elapsedTime; // Swirling over time
+
+      // Set the new position for each node
+      node.position.x = this.orbitRadius * Math.cos(angle);
+      node.position.z = this.orbitRadius * Math.sin(angle);
     });
   }
 
