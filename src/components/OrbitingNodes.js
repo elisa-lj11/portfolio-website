@@ -5,12 +5,15 @@ class OrbitingNodes {
   constructor() {
     this.nodes = [];
     this.startRadius = 0.0;
-    this.finalRadius = 3;
+    this.finalRadius = 3.2;
     this.numNodes = 5;
     this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
     this.rotationSpeed = 0.5; // Speed of swirling motion
     this.clock = new THREE.Clock();
     this.angleOffset = []; // Store initial angle offsets for each node
+
+    this.heightMultiplier = 2; // Controls how much the nodes "climb" the cone vertically
+    this.startHeight = -2; // Starting below the galaxy center (negative y value)
 
     // Raycaster for interaction
     this.raycaster = new THREE.Raycaster();
@@ -30,13 +33,16 @@ class OrbitingNodes {
 
     for (let i = 0; i < this.numNodes; i++) {
       const node = new THREE.Mesh(geometry, material);
+
       node.position.set(
         this.startRadius * Math.cos((i / this.numNodes) * 2 * Math.PI),
         0,
         this.startRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
       );
+
       node.userData = { id: `node${i + 1}` }; // Assign a unique ID to each node
       this.nodes.push(node);
+
       scene.add(node);
 
       // Store an initial angle offset for each node
@@ -102,7 +108,6 @@ class OrbitingNodes {
   
   // Handle orbiting logic
   updateNodes() {
-    const deltaTime = this.clock.getDelta();
     const elapsedTime = this.clock.getElapsedTime();
 
     // Update orbitRadius based on time, for outward movement
@@ -111,13 +116,17 @@ class OrbitingNodes {
       (this.finalRadius - this.startRadius) *
         (2 / (1 + 2 ** (-3 * elapsedTime)) - 1); // Sigmoid-like smooth expansion
 
-    // Swirl nodes around and update positions
+    // Swirl nodes around and update positions along the upside-down cone, starting from below
     this.nodes.forEach((node, i) => {
       const angle = this.angleOffset[i] + this.rotationSpeed * elapsedTime; // Swirling over time
 
-      // Set the new position for each node
+      // Cone motion: x and z expand outward, y starts below the center and rises
       node.position.x = this.orbitRadius * Math.cos(angle);
       node.position.z = this.orbitRadius * Math.sin(angle);
+
+      // Calculate the y-position for upward movement, simulating an upside-down cone
+      const normalizedRadius = this.orbitRadius / this.finalRadius; // 0 at start, 1 at max
+      node.position.y = this.startHeight + normalizedRadius * this.heightMultiplier; // Rising upward
     });
   }
 
