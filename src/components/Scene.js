@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for page redirection
+import { useNavigate } from 'react-router-dom';
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
 
@@ -34,8 +34,62 @@ const Scene = () => {
   const mountRef = useRef(null);
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
+  let orbitingNodes = null; // The nodes will be initialized inside the useEffect() call
   const navigate = useNavigate(); // Hook to navigate between routes
   let shouldSmoothReset = false;
+
+  // Animation loop needs to be defined outside of useEffect to be accessible
+  const animate = (scene, camera, controls, renderer, galaxyModel) => {
+    const animationLoop = () => {
+      requestAnimationFrame(animationLoop);
+
+      // Update orbiting nodes
+      orbitingNodes.updateNodes();
+
+      // Update the animation mixer from the model
+      galaxyModel.updateAnimations();
+
+      // Run the smooth reset if triggered
+      if (shouldSmoothReset) doSmoothReset(camera, controls);
+
+      // Update the controls
+      controls.update();
+
+      // Render the scene
+      renderer.render(scene, camera);
+    };
+
+    // Start the animation loop
+    animationLoop();
+  };
+
+  // Smooth reset function also needs to be defined outside of useEffect
+  const doSmoothReset = (camera, controls) => {
+    if (!shouldSmoothReset) return;
+
+    // Smooth transition of controls target and camera position
+    controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+    camera.position.lerp(new THREE.Vector3(0, 1, 5), 0.05);
+
+    // Smooth zoom transition
+    camera.zoom = THREE.MathUtils.lerp(camera.zoom, 1, 0.1);
+    camera.updateProjectionMatrix();
+
+    // Stop when close enough to targets
+    if (camera.position.distanceTo(new THREE.Vector3(0, 1, 5)) < 0.1 &&
+      Math.abs(camera.zoom - 1) < 0.1 &&
+      controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
+      shouldSmoothReset = false;
+
+      // Remove angular limits after reset
+      controls.minAzimuthAngle = -Infinity;
+      controls.maxAzimuthAngle = Infinity;
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle = Math.PI;
+    }
+
+    controls.update();
+  };
 
   useEffect(() => {
     // Scene setup
@@ -51,28 +105,40 @@ const Scene = () => {
     // Initialize lighting (from helper function)
     initializeLighting(scene);
 
-    // Galaxy model loading
-    galaxyModel.loadModel(scene, () => {
-      console.log('Galaxy model loaded and added to scene');
-    });
-
-    galaxyModel.setSpeed(-0.2);
-
-    // Skybox model loading
-    skyboxModel.loadModel(scene, () => {
-      console.log('Skybox model loaded and added to scene');
-    });
-
-    // Initialize the OrbitingNodes class and add nodes to the scene
-    const orbitingNodes = new OrbitingNodes();
-    orbitingNodes.createNodes(scene);
-
-    // Set up mouse events for clicking on nodes
-    const handleNodeClick = (nodeId) => {
-      console.log(`Clicked node: ${nodeId}`);
-      navigate(`/${nodeId}`);
+    // Create promises for loading each model or asset
+    const loadGalaxyModel = () => {
+      return new Promise((resolve) => {
+        galaxyModel.loadModel(scene, () => {
+          console.log('Galaxy model loaded and added to scene');
+          resolve();
+        });
+      });
     };
-    orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
+
+    const loadSkyboxModel = () => {
+      return new Promise((resolve) => {
+        skyboxModel.loadModel(scene, () => {
+          console.log('Skybox model loaded and added to scene');
+          resolve();
+        });
+      });
+    };
+
+    const loadOrbitingNodes = () => {
+      return new Promise((resolve) => {
+        orbitingNodes = new OrbitingNodes();
+        orbitingNodes.createNodes(scene);
+        console.log('Orbiting nodes created and added to scene');
+
+        // Set up mouse events for clicking on nodes
+        const handleNodeClick = (nodeId) => {
+          console.log(`Clicked node: ${nodeId}`);
+          navigate(`/${nodeId}`);
+        };
+        orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
+        resolve(); // Resolve after the nodes are set up
+      });
+    };
 
     // Add OrbitControls for camera interaction
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -80,62 +146,17 @@ const Scene = () => {
     controls.maxDistance = 1000;
     controls.enableDamping = true;
 
-    // Smooth reset the OrbitControl camera's angles
-    const doSmoothReset = () => {
-      if (!shouldSmoothReset) return;
+    // Wait for all models and nodes to load using Promise.all
+    Promise.all([loadGalaxyModel(), loadSkyboxModel(), loadOrbitingNodes()])
+      .then(() => {
+        console.log('All assets loaded. Starting animation.');
 
-      // Smooth transition of controls target and camera position
-      controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-      camera.position.lerp(new THREE.Vector3(0, 1, 5), 0.05);
-
-      // Smooth zoom transition
-      camera.zoom = THREE.MathUtils.lerp(camera.zoom, 1, 0.1);
-      camera.updateProjectionMatrix();
-
-      // Stop when close enough to targets
-      if (camera.position.distanceTo(new THREE.Vector3(0, 1, 5)) < 0.1 &&
-          Math.abs(camera.zoom - 1) < 0.1 &&
-          controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
-        shouldSmoothReset = false;
-
-        // Remove angular limits after reset
-        controls.minAzimuthAngle = -Infinity;
-        controls.maxAzimuthAngle = Infinity;
-        controls.minPolarAngle = 0;
-        controls.maxPolarAngle = Math.PI;
-      }
-
-      controls.update();
-    };
-    
-
-    document.addEventListener('keyup', event => {
-      if (event.code === 'Space') {
-        shouldSmoothReset = true;
-        console.log('Camera view has been reset');
-      }
-    });
-
-    // Animation loop
-    const animate = () => {
-      requestAnimationFrame(animate);
-
-      // Update orbiting nodes
-      orbitingNodes.updateNodes();
-
-      // Update the animation mixer from the model
-      galaxyModel.updateAnimations();
-
-      // Run the smooth reset if triggered
-      if (shouldSmoothReset) doSmoothReset();
-
-      // Update the controls
-      controls.update();
-
-      // Render the scene
-      renderer.render(scene, camera);
-    };
-    animate();
+        // Start animation loop once all assets are loaded
+        animate(scene, camera, controls, renderer, galaxyModel);
+      })
+      .catch((error) => {
+        console.error('An error occurred while loading assets:', error);
+      });
 
     // Handle window resize
     window.addEventListener('resize', () => handleResize(renderer, camera));
@@ -148,7 +169,7 @@ const Scene = () => {
       scene.traverse((object) => {
         if (object.isMesh) {
           if (object.geometry) object.geometry.dispose();
-    
+
           if (object.material) {
             if (Array.isArray(object.material)) {
               object.material.forEach((material) => {
@@ -165,7 +186,7 @@ const Scene = () => {
 
       // Dispose of the renderer and remove the DOM element
       renderer.dispose();
-      
+
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
