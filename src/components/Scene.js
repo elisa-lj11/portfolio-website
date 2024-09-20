@@ -32,12 +32,14 @@ const handleResize = (renderer, camera) => {
 
 const Scene = () => {
   const mountRef = useRef(null);
-  const [isFading, setIsFading] = useState(true); // State to control fade
+
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
   const orbitingNodes = new OrbitingNodes(); // Instantiate the nodes with the OrbitingNodes class
+
+  const [isFading, setIsFading] = useState(true); // State to control fade
   const navigate = useNavigate(); // Hook to navigate between routes
-  let shouldSmoothReset = false;
+  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
 
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
@@ -45,7 +47,7 @@ const Scene = () => {
       requestAnimationFrame(animationLoop);
 
       // Update orbiting nodes
-      orbitingNodes.updateNodes();
+      orbitingNodes.updateNodes(camera);
 
       // Update the animation mixer from the model
       galaxyModel.updateAnimations();
