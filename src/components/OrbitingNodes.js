@@ -108,7 +108,7 @@ class OrbitingNodes {
   
   // Handle orbiting logic
   updateNodes() {
-    const elapsedTime = this.clock.getElapsedTime() - 0.5;
+    const elapsedTime = this.clock.getElapsedTime() - 0.2;
 
     if (elapsedTime > 0) {
       // Update orbitRadius based on time, for outward movement

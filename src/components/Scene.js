@@ -1,5 +1,5 @@
 // src/components/Scene.js
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
 import { useNavigate } from 'react-router-dom';
@@ -32,9 +32,10 @@ const handleResize = (renderer, camera) => {
 
 const Scene = () => {
   const mountRef = useRef(null);
+  const [isFading, setIsFading] = useState(true); // State to control fade
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
-  let orbitingNodes = null; // The nodes will be initialized inside the useEffect() call
+  const orbitingNodes = new OrbitingNodes(); // Instantiate the nodes with the OrbitingNodes class
   const navigate = useNavigate(); // Hook to navigate between routes
   let shouldSmoothReset = false;
 
@@ -59,8 +60,9 @@ const Scene = () => {
       renderer.render(scene, camera);
     };
 
-    // Start the animation loop
+    // Start the animation loop and trigger fade-in
     animationLoop();
+    setIsFading(false); // This triggers the fade-out of the black overlay
   };
 
   // Smooth reset function also needs to be defined outside of useEffect
@@ -90,6 +92,13 @@ const Scene = () => {
 
     controls.update();
   };
+
+  document.addEventListener('keyup', event => {
+    if (event.code === 'Space') {
+      shouldSmoothReset = true;
+      console.log('Camera view has been reset');
+    }
+  });
 
   useEffect(() => {
     // Scene setup
@@ -126,7 +135,6 @@ const Scene = () => {
 
     const loadOrbitingNodes = () => {
       return new Promise((resolve) => {
-        orbitingNodes = new OrbitingNodes();
         orbitingNodes.createNodes(scene);
         console.log('Orbiting nodes created and added to scene');
 
@@ -194,8 +202,21 @@ const Scene = () => {
   }, []); // Empty dependency array, runs once on mount
 
   return (
-    <div ref={mountRef} style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
-      {/* Debugging styles */}
+    <div ref={mountRef} style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
+      {/* Black overlay for fade-in effect */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'black',
+        opacity: isFading ? 1 : 0, // Controls opacity
+        transition: 'opacity 2s ease-out', // 2-second fade-out
+        zIndex: 1000,
+        pointerEvents: 'none' // Ensure overlay doesn’t block interaction
+      }}></div>
+
       <style>
         {`
           body, html, #root {
