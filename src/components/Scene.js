@@ -119,6 +119,7 @@ const Scene = () => {
       return new Promise((resolve) => {
         galaxyModel.loadModel(scene, () => {
           console.log('Galaxy model loaded and added to scene');
+          galaxyModel.setSpeed(-0.3); // Galaxy orbits in reverse
           resolve();
         });
       });
