@@ -29,10 +29,11 @@ class OrbitingNodes {
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
 
-    // Interaction states
-    this.INTERSECTED = null;
-    this.isClicking = false;
-    this.isDragging = false;
+    // Edge case handling for node clicks
+    this.shouldBlockMouseUpClick = false;
+    this.lastNodeClicked = null;
+
+    // Callback to navigate to node page, defined in Scene.js
     this.clickCallback = null;
 
     // Initialize the starting angles for the nodes
@@ -69,28 +70,20 @@ class OrbitingNodes {
   enableMouseEvents(renderer, camera, clickCallback) {
     this.clickCallback = clickCallback;
 
-    // Listen for mousedown and mouseup to track clicks
-    const onMouseDown = (event) => {
-      this.isClicking = true; // Set flag to true when mouse is pressed
+    // Listen for mousedown to track start of click
+    const onMouseDown = () => {
+      this.handleClick(camera, false);
     };
 
     const onMouseMove = (event) => {
-      // Set isDragging to true when mouse moves during a click
-      if (this.isClicking) {
-        this.isDragging = true;
-      }
-
       // Only listen to intersections when mouse is moving
       this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };
 
+    // Listen for mouseup to track end of click
     const onMouseUp = () => {
-      if (this.isClicking && !this.isDragging) {
-        this.handleClick(camera);
-      }
-      this.isClicking = false;
-      this.isDragging = false;
+      this.handleClick(camera, true);
     };
 
     // Attach events
@@ -107,19 +100,31 @@ class OrbitingNodes {
   }
 
   // Call the click callback when the click is valid
-  handleClick(camera) {
+  handleClick(camera, isMouseUp) {
     this.raycaster.setFromCamera(this.mouse, camera);
 
     // Find intersected objects
     const intersects = this.raycaster.intersectObjects(this.nodes);
 
-    if (intersects.length > 0) {
+    if (intersects.length == 0 && !isMouseUp) {
+      // When mouse is clicked down on something that is not a node, block
+      // the unintentional triggering of a node on mouse click up
+      this.shouldBlockMouseUpClick = true;
+    } else if (intersects.length > 0 && !isMouseUp) {
+      // Track the node clicked on mouse down to prevent unintentional trigger
+      // of mouse click up on different node
+      this.lastNodeClicked = intersects[0].object;
+    } else if (intersects.length > 0 && isMouseUp && !this.shouldBlockMouseUpClick) {
       const intersectedNode = intersects[0].object; // Get the first intersected node
       const nodeId = intersectedNode.userData.id; // Get the ID from userData
       
-      if (this.clickCallback) {
+      if (this.lastNodeClicked == intersectedNode && this.clickCallback) {
         this.clickCallback(nodeId); // Call the callback with node and nodeId
       }
+      this.lastNodeClicked = null;
+    } else {
+      // Reset the mouse up click block in all other cases
+      this.shouldBlockMouseUpClick = false;
     }
   }
   
