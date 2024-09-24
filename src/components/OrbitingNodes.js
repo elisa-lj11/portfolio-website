@@ -6,7 +6,7 @@ class OrbitingNodes {
     this.nodes = [];
     this.startRadius = 0.0;
     this.finalRadius = 3.2;
-    this.numNodes = 5;
+    this.numNodes = 3;
     this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
     this.rotationSpeed = 0.5; // Speed of swirling motion
     this.baseRotationSpeed = 0.5; // Default rotation speed
