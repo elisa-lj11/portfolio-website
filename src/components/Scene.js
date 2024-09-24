@@ -5,7 +5,7 @@ import { OrbitControls } from 'three-stdlib';
 import { useNavigate } from 'react-router-dom';
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
-import '../assets/Scene.css'; // Import the external CSS file
+import '../assets/style/Scene.css'; // Import the external CSS file
 
 // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 const GALAXY_MODEL = '/models/galaxy_HD.glb';
@@ -212,7 +212,10 @@ const Scene = () => {
 
       <div id="title"></div>
         <div id="overlay">
-          <p>You have warped to Elisa's space</p>
+          <p>
+            You have warped to Elisa's space <br /><br />
+            Click on a celestial body to explore creative manifestations
+          </p>
         </div>
     </div>
   );
