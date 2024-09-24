@@ -18,6 +18,7 @@ class OrbitingNodes {
     this.hoverTimeout = null; // Timer for delay
     this.hovered = false; // Track if the mouse is hovering
     this.hoverDelay = 200; // Time in milliseconds before switching speeds
+    this.hoveredNode = null; // Track the currently hovered node
 
     this.clock = new THREE.Clock();
     this.angles = []; // Store the current angle for each node
@@ -64,6 +65,10 @@ class OrbitingNodes {
       // Store an initial angle offset for each node
       this.angles.push((i / this.numNodes) * 2 * Math.PI);
     }
+  }
+
+  getHoveredNode() {
+    return this.hoveredNode;
   }
 
   // Set up mouse event listeners for detecting clicks
@@ -139,7 +144,9 @@ class OrbitingNodes {
 
     // Lerp rotation speed based on mouse hover
     if (intersects.length > 0) {
-      // Mouse is hovering over a node, delay the speed change
+      this.hoveredNode = intersects[0].object; // Store the hovered node
+
+      // Mouse started hovering over a node, delay the speed change
       if (!this.hovered) {
         this.hovered = true;
         clearTimeout(this.hoverTimeout); // Clear any pending timeout
@@ -148,7 +155,9 @@ class OrbitingNodes {
         }, this.hoverDelay);
       }
     } else {
-      // Mouse is not hovering, delay switching back to base speed
+      this.hoveredNode = null; // No nodes are hovered
+
+      // Mouse stopped hovering, delay switching back to base speed
       if (this.hovered) {
         this.hovered = false;
         clearTimeout(this.hoverTimeout); // Clear any pending timeout

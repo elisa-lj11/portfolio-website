@@ -12,6 +12,12 @@ const GALAXY_MODEL = '/models/galaxy_HD.glb';
 // "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
 const SKYBOX = '/models/milkyway.glb';
 
+const pageTitles = {
+  node1: "Node One",
+  node2: "Node Two",
+  node3: "Node Three"
+}
+
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
   const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
@@ -31,8 +37,25 @@ const handleResize = (renderer, camera) => {
   camera.updateProjectionMatrix();
 };
 
+// Helper function: Add a label div to display the node name
+const createNodeLabel = (labelDiv, labelRef) => {
+  labelDiv.style.position = 'absolute';
+  labelDiv.style.color = 'white';
+  labelDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+  labelDiv.style.padding = '5px';
+  labelDiv.style.borderRadius = '3px';
+  labelDiv.style.pointerEvents = 'none';
+  labelDiv.style.display = 'none'; // Initially hidden
+  document.body.appendChild(labelDiv);
+  labelRef.current = labelDiv;
+}
+
 const Scene = () => {
   const mountRef = useRef(null);
+  const labelRef = useRef(null);
+  const orbitingNodesRef = useRef(null);
+  const labelDiv = document.createElement('div');
+  createNodeLabel(labelDiv, labelRef);
 
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
@@ -40,7 +63,7 @@ const Scene = () => {
 
   const [isFading, setIsFading] = useState(true); // State to control fade
   const navigate = useNavigate(); // Hook to navigate between routes
-  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
+  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames  
 
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
@@ -49,6 +72,18 @@ const Scene = () => {
 
       // Update orbiting nodes
       orbitingNodes.updateNodes(camera);
+
+      const hoveredNode = orbitingNodes.getHoveredNode(camera); // Get the hovered node
+      if (hoveredNode) {
+        const { x, y } = getScreenPosition(hoveredNode, camera, renderer);
+        const nodeId = hoveredNode.userData.id;
+        labelDiv.style.left = `${x}px`;
+        labelDiv.style.top = `${y}px`;
+        labelDiv.textContent = pageTitles[nodeId]; // Set the node name
+        labelDiv.style.display = 'block';
+      } else {
+        labelDiv.style.display = 'none';
+      }
 
       // Update the animation mixer from the model
       galaxyModel.updateAnimations();
@@ -140,6 +175,7 @@ const Scene = () => {
     const loadOrbitingNodes = () => {
       return new Promise((resolve) => {
         orbitingNodes.createNodes(scene);
+        orbitingNodesRef.current = orbitingNodes;
         console.log('Orbiting nodes created and added to scene');
 
         // Set up mouse events for clicking on nodes
@@ -199,11 +235,29 @@ const Scene = () => {
       // Dispose of the renderer and remove the DOM element
       renderer.dispose();
 
+      document.body.removeChild(labelDiv);
+
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
+      
     };
   }, []); // Empty dependency array, runs once on mount
+
+  // Convert the node's 3D position to 2D screen coordinates
+  const getScreenPosition = (node, camera, renderer) => {
+    const vector = new THREE.Vector3();
+    node.getWorldPosition(vector);
+    vector.project(camera);
+
+    const halfWidth = renderer.domElement.clientWidth / 2;
+    const halfHeight = renderer.domElement.clientHeight / 2;
+
+    return {
+      x: vector.x * halfWidth + halfWidth,
+      y: -(vector.y * halfHeight) + halfHeight
+    };
+  };
 
   return (
     <div ref={mountRef} className="scene-container">
