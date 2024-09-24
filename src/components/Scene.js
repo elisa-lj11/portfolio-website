@@ -5,6 +5,7 @@ import { OrbitControls } from 'three-stdlib';
 import { useNavigate } from 'react-router-dom';
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
+import '../assets/Scene.css'; // Import the external CSS file
 
 // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 const GALAXY_MODEL = '/models/galaxy_HD.glb';
@@ -205,69 +206,14 @@ const Scene = () => {
   }, []); // Empty dependency array, runs once on mount
 
   return (
-    <div ref={mountRef} style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
-      {/* Black overlay for fade-in effect */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'black',
-        opacity: isFading ? 1 : 0, // Controls opacity
-        transition: 'opacity 2s ease-out', // 2-second fade-out
-        zIndex: 1000,
-        pointerEvents: 'none' // Ensure overlay doesn’t block interaction
-      }}></div>
-
-      <style>
-        {`
-          body, html, #root {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-          }
-        `}
-      </style>
+    <div ref={mountRef} className="scene-container">
+      {/* Use CSS class to control fading effect */}
+      <div className={`black-overlay ${isFading ? 'fade-in' : 'fade-out'}`}></div>
 
       <div id="title"></div>
         <div id="overlay">
           <p>You have warped to Elisa's space</p>
         </div>
-
-        <style>
-          {
-            `#title {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 10%;
-            }
-
-            #overlay {
-              position: absolute;
-              top: 10%;
-              left: 50%;
-              transform: translate(-50%, -50%); /* Center the overlay */
-              color: white;
-              font-size: 20px;
-              pointer-events: none; /* Ensures overlay text doesn't block interactions with WebGL */
-              z-index: 1; /* Ensures the text is always on top */
-              user-select: none;
-              display: flex;
-              justify-content: center; /* Horizontal center */
-              width: 100%; /* Makes sure the overlay covers the width of the screen */
-              height: 10%; /* Keep the overlay toward the top of the screen */
-            }
-
-            .center {
-              text-align: center;
-            }
-          `}
-        </style>
     </div>
   );
 };
