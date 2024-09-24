@@ -209,14 +209,16 @@ const Scene = () => {
     <div ref={mountRef} className="scene-container">
       {/* Use CSS class to control fading effect */}
       <div className={`black-overlay ${isFading ? 'fade-in' : 'fade-out'}`}></div>
-
-      <div id="title"></div>
-        <div id="overlay">
-          <p>
-            You have warped to Elisa's space <br /><br />
-            Click on a celestial body to explore creative manifestations
-          </p>
-        </div>
+      <div id="title">
+        <p>You have warped to <b>Elisa's space</b></p>
+      </div>
+      <div id="instruction-text">
+        <p>
+          &gt; Click on a celestial body to explore creative manifestations<br></br>
+          &gt; Play around the interactive space with your pointer<br></br>
+          &gt; Press the "Space" key to reset your view
+        </p>
+      </div>
     </div>
   );
 };
