@@ -231,6 +231,43 @@ const Scene = () => {
           }
         `}
       </style>
+
+      <div id="title"></div>
+        <div id="overlay">
+          <p>You have warped to Elisa's space</p>
+        </div>
+
+        <style>
+          {
+            `#title {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 10%;
+            }
+
+            #overlay {
+              position: absolute;
+              top: 10%;
+              left: 50%;
+              transform: translate(-50%, -50%); /* Center the overlay */
+              color: white;
+              font-size: 20px;
+              pointer-events: none; /* Ensures overlay text doesn't block interactions with WebGL */
+              z-index: 1; /* Ensures the text is always on top */
+              user-select: none;
+              display: flex;
+              justify-content: center; /* Horizontal center */
+              width: 100%; /* Makes sure the overlay covers the width of the screen */
+              height: 10%; /* Keep the overlay toward the top of the screen */
+            }
+
+            .center {
+              text-align: center;
+            }
+          `}
+        </style>
     </div>
   );
 };
