@@ -38,6 +38,17 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i, // Add more extensions as needed
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]', // This preserves the file's original name and path
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [

@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Scene from './components/Scene';
-import Strivr from './pages/Strivr/Strivr';
+import Strivr from './pages/Strivr';
 import NodeTwo from './pages/NodeTwo';
 import NodeThree from './pages/NodeThree';
 import NotFound from './pages/NotFound';

@@ -1,10 +1,13 @@
 // src/pages/Strivr.js
 import React from 'react';
-import PageTemplate from '../../components/PageTemplate';
+import PageTemplate from '../components/PageTemplate';
+
+import newLobbyImageUrl from '../assets/images/new-lobby.png';
 
 const Strivr = () => {
   return (
-    <PageTemplate title='Strivr: "Immersive Lobby" revamp'>
+    <PageTemplate title='Strivr: "Immersive Lobby" Upgrade'>
+      <img src={newLobbyImageUrl} alt='New Lobby'/>
       <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dictum metus sit; sollicitudin mollis arcu mus phasellus dolor. Magnis pulvinar integer consequat vehicula, aenean lobortis maecenas penatibus. Senectus turpis lobortis nulla sollicitudin donec adipiscing semper lacus cursus. Rhoncus faucibus lacinia porta pellentesque odio ut tellus ad. Luctus lacinia posuere tortor amet at aptent. Finibus rutrum montes euismod etiam dictum.
 <br></br>
 <br></br>
