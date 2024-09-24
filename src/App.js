@@ -5,6 +5,7 @@ import Scene from './components/Scene';
 import NodeOne from './pages/NodeOne';
 import NodeTwo from './pages/NodeTwo';
 import NodeThree from './pages/NodeThree';
+import NotFound from './pages/NotFound';
 import './assets/style/fonts.css';
 
 const App = () => {
@@ -12,13 +13,12 @@ const App = () => {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/" element={<Scene />} />
           <Route path="/node1" element={< NodeOne />} />
           <Route path="/node2" element={< NodeTwo />} />
           <Route path="/node3" element={< NodeThree />} />
-          {/* Add more routes for other nodes */}
-          <Route path="/" exact element={<Scene />}>
-            {/* You can link to nodes here or show some default content */}
-          </Route>
+          {/* Catch-all route for 404 Not Found */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
       
