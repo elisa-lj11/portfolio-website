@@ -3,10 +3,17 @@ import * as THREE from 'three';
 
 class OrbitingNodes {
   constructor() {
+    // Map for node page titles, make sure to update the route path in App.js
+    this.nodeTitles = new Map([
+      ['node1', 'Node One'],
+      ['node2', 'Node Two'],
+      ['node3', 'Node Three'],
+    ]);
+    
     this.nodes = [];
     this.startRadius = 0.0;
     this.finalRadius = 3.2;
-    this.numNodes = 3;
+    this.numNodes = this.nodeTitles.size;
     this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
     this.rotationSpeed = 0.5; // Speed of swirling motion
     this.baseRotationSpeed = 0.5; // Default rotation speed
@@ -48,7 +55,8 @@ class OrbitingNodes {
     const geometry = new THREE.SphereGeometry(0.2, 32, 32);
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-    for (let i = 0; i < this.numNodes; i++) {
+    let i = 0;
+    for (const [nodeId, nodeTitle] of this.nodeTitles) {
       const node = new THREE.Mesh(geometry, material);
 
       node.position.set(
@@ -57,18 +65,30 @@ class OrbitingNodes {
         this.startRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
       );
 
-      node.userData = { id: `node${i + 1}` }; // Assign a unique ID to each node
+      // Assign a unique ID to each node, this is used as the route path to navigate to in Scene.js
+      node.userData = { id: `${nodeId}` };
       this.nodes.push(node);
 
       scene.add(node);
 
       // Store an initial angle offset for each node
       this.angles.push((i / this.numNodes) * 2 * Math.PI);
+
+      i++;
     }
+
   }
 
   getHoveredNode() {
     return this.hoveredNode;
+  }
+
+  getHoveredNodeTitle() {
+    if (this.hoveredNode != null)
+    {
+      return this.nodeTitles.get(String(this.hoveredNode.userData.id));
+    }
+    return null;
   }
 
   // Set up mouse event listeners for detecting clicks

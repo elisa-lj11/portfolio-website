@@ -12,12 +12,6 @@ const GALAXY_MODEL = '/models/galaxy_HD.glb';
 // "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
 const SKYBOX = '/models/milkyway.glb';
 
-const pageTitles = {
-  node1: "Node One",
-  node2: "Node Two",
-  node3: "Node Three"
-}
-
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
   const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
@@ -74,12 +68,12 @@ const Scene = () => {
       orbitingNodes.updateNodes(camera);
 
       const hoveredNode = orbitingNodes.getHoveredNode(camera); // Get the hovered node
+      const hoveredNodeTitle = orbitingNodes.getHoveredNodeTitle();
       if (hoveredNode) {
         const { x, y } = getScreenPosition(hoveredNode, camera, renderer);
-        const nodeId = hoveredNode.userData.id;
         labelDiv.style.left = `${x}px`;
         labelDiv.style.top = `${y}px`;
-        labelDiv.textContent = pageTitles[nodeId]; // Set the node name
+        labelDiv.textContent = hoveredNodeTitle; // Set the node name
         labelDiv.style.display = 'block';
       } else {
         labelDiv.style.display = 'none';
@@ -181,6 +175,7 @@ const Scene = () => {
         // Set up mouse events for clicking on nodes
         const handleNodeClick = (nodeId) => {
           console.log(`Clicked node: ${nodeId}`);
+          // The nodeId is set in OrbitingNodes
           navigate(`/${nodeId}`);
         };
         orbitingNodes.enableMouseEvents(renderer, camera, handleNodeClick);
