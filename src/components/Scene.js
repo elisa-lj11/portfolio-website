@@ -57,12 +57,15 @@ const Scene = () => {
 
   const [isFading, setIsFading] = useState(true); // State to control fade
   const navigate = useNavigate(); // Hook to navigate between routes
-  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames  
+  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
+
+  // Store the animation frame for cleanup later
+  let animationFrameId;
 
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
     const animationLoop = () => {
-      requestAnimationFrame(animationLoop);
+      animationFrameId = requestAnimationFrame(animationLoop);
 
       // Update orbiting nodes
       orbitingNodes.updateNodes(camera);
@@ -206,6 +209,7 @@ const Scene = () => {
 
     // Cleanup function when the component unmounts
     return () => {
+      cancelAnimationFrame(animationFrameId); // Stop animation
       window.removeEventListener('resize', handleResize);
 
       // Cleanup all objects in the scene
