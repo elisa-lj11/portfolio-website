@@ -1,0 +1,63 @@
+/* PageTemplate.css */
+
+body {
+  margin: 0;
+  background-color: #0c0921; /* Dark blackish-purple background */
+  color: white; /* White text color */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent body scrolling */
+}
+
+.page-template {
+  margin: 0 auto; /* Center the article */
+  padding-top: 5%; /* Add some padding around the content */
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 5%;
+  height: calc(100vh - 40px); /* Full height minus padding */
+  overflow-y: auto; /* Allow vertical scrolling */
+  box-sizing: border-box; /* Include padding in height calculation */
+  position: relative; /* Set position relative to allow absolute positioning of scroll bar */
+}
+
+/* Ensure the scrollbar is styled appropriately */
+.page-template::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.page-template::-webkit-scrollbar-thumb {
+  background: #444; /* Dark scrollbar thumb */
+  border-radius: 6px; /* Rounded edges for scrollbar thumb */
+}
+
+.page-template::-webkit-scrollbar-track {
+  background: #2d2a40; /* Background for the scrollbar track */
+}
+
+h1, h2, h3 {
+  color: #ffffff; /* White color for headings */
+  margin-top: 0; /* Remove top margin from headings */
+}
+
+p {
+  line-height: 1.6; /* Increase line height for better readability */
+}
+
+.image-container {
+  text-align: center; /* Center images */
+  margin: 20px 0; /* Add margin above and below images */
+}
+
+.image-container img {
+  width: 100%; /* Make images responsive */
+  max-height: 400px; /* Set a max height for images */
+  object-fit: cover; /* Ensure the image covers the container */
+  border-radius: 10px; /* Add some rounded corners */
+}
+
+.footer {
+  margin-top: 40px; /* Add margin above footer */
+  text-align: center; /* Center footer text */
+  font-size: 0.9em; /* Smaller font size for footer */
+  color: #b0b0b0; /* Slightly lighter gray for footer text */
+}

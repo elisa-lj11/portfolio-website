@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Scene from './components/Scene';
-import NodeOne from './pages/NodeOne';
+import Strivr from './pages/Strivr/Strivr';
 import NodeTwo from './pages/NodeTwo';
 import NodeThree from './pages/NodeThree';
 import NotFound from './pages/NotFound';
@@ -14,7 +14,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Scene />} />
-          <Route path="/node1" element={< NodeOne />} />
+          <Route path="/strivr" element={< Strivr />} />
           <Route path="/node2" element={< NodeTwo />} />
           <Route path="/node3" element={< NodeThree />} />
           {/* Catch-all route for 404 Not Found */}

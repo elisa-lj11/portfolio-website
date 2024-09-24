@@ -5,7 +5,7 @@ class OrbitingNodes {
   constructor() {
     // Map for node page titles, make sure to update the route path in App.js
     this.nodeTitles = new Map([
-      ['node1', 'Node One'],
+      ['strivr', 'Strivr: "Immersive Lobby" revamp'],
       ['node2', 'Node Two'],
       ['node3', 'Node Three'],
     ]);
