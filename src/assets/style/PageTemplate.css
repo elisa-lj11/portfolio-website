@@ -8,7 +8,7 @@ body {
   overflow: hidden; /* Prevent body scrolling */
 }
 
-.page-template {
+.content {
   margin: 0 auto; /* Center the article */
   padding-top: 5%; /* Add some padding around the content */
   padding-left: 20%;
@@ -21,16 +21,16 @@ body {
 }
 
 /* Ensure the scrollbar is styled appropriately */
-.page-template::-webkit-scrollbar {
+.content::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
 }
 
-.page-template::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb {
   background: #444; /* Dark scrollbar thumb */
   border-radius: 6px; /* Rounded edges for scrollbar thumb */
 }
 
-.page-template::-webkit-scrollbar-track {
+.content::-webkit-scrollbar-track {
   background: #2d2a40; /* Background for the scrollbar track */
 }
 
@@ -39,7 +39,7 @@ h1, h2, h3 {
   margin-top: 0; /* Remove top margin from headings */
 }
 
-p {
+p, ol, ul {
   line-height: 1.6; /* Increase line height for better readability */
 }
 
@@ -51,8 +51,31 @@ img {
   border-radius: 5px; /* Add some rounded corners */
 }
 
+button.home {
+  display: flex;
+  align-items: center; /* Vertically center the image and text */
+  background: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+}
+
+button.home:hover {
+  font-weight: bold;
+}
+
 hr.solid {
   border-top: 1px solid #bbb;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  padding: 5px 20px;
+  background: black;
+  color: white;
 }
 
 .footer {
