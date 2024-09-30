@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background-color: #0c0921; /* Dark blackish-purple background */
+  background-color: #16122b; /* Dark blackish-purple background */
   color: white; /* White text color */
   height: 100vh; /* Full viewport height */
   overflow: hidden; /* Prevent body scrolling */
@@ -49,6 +49,10 @@ img {
   display: block;   /* Remove potential extra space */
   margin: 0 auto;   /* Center the image horizontally */
   border-radius: 5px; /* Add some rounded corners */
+}
+
+hr.solid {
+  border-top: 1px solid #bbb;
 }
 
 .footer {
