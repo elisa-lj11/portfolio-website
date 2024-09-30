@@ -5,32 +5,56 @@ body {
   background-color: #16122b; /* Dark blackish-purple background */
   color: white; /* White text color */
   height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column; /* Ensure body content flows vertically */
   overflow: hidden; /* Prevent body scrolling */
+}
+
+.page-template {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height for the entire page */
+  overflow: hidden;
+  position: relative;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make header span the full width */
+  padding: 5px 20px;
+  background: black;
+  color: white;
+  z-index: 100; /* Ensure the header stays above content */
+}
+
+main {
+  flex: 1; /* Let the main content take up remaining space */
+  overflow-y: auto; /* Allow the main content to scroll */
+  margin-top: 60px; /* Push content down so it's not hidden by the header */
+  position: relative; /* To ensure scrollbar stays visible */
 }
 
 .content {
   margin: 0 auto; /* Center the article */
-  padding-top: 5%; /* Add some padding around the content */
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-bottom: 0%;
-  height: calc(100vh); /* Full height */
-  overflow-y: auto; /* Allow vertical scrolling */
+  padding-top: 5%;
+  padding-left: 20%; /* Padding around the content */
+  padding-right: 20%; /* Padding around the content */
   box-sizing: border-box; /* Include padding in height calculation */
-  position: relative; /* Set position relative to allow absolute positioning of scroll bar */
 }
 
-/* Ensure the scrollbar is styled appropriately */
-.content::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
+/* Custom scrollbar styling */
+main::-webkit-scrollbar {
+  width: 12px;
 }
 
-.content::-webkit-scrollbar-thumb {
+main::-webkit-scrollbar-thumb {
   background: #444; /* Dark scrollbar thumb */
   border-radius: 6px; /* Rounded edges for scrollbar thumb */
 }
 
-.content::-webkit-scrollbar-track {
+main::-webkit-scrollbar-track {
   background: #2d2a40; /* Background for the scrollbar track */
 }
 
@@ -70,17 +94,9 @@ hr.solid {
   border-top: 1px solid #bbb;
 }
 
-header {
-  position: sticky;
-  top: 0;
-  padding: 5px 20px;
-  background: black;
-  color: white;
-}
-
 .footer {
-  margin-top: 40px; /* Add margin above footer */
-  text-align: center; /* Center footer text */
-  font-size: 0.9em; /* Smaller font size for footer */
-  color: #b0b0b0; /* Slightly lighter gray for footer text */
+  padding: 20px;
+  background: #111;
+  color: #b0b0b0;
+  text-align: center;
 }
