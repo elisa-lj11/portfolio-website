@@ -2,6 +2,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import galaxyImageUrl from '../assets/images/galaxy.png';
+
 const NotFound = () => {
   const navigate = useNavigate(); // Hook to programmatically navigate
 
@@ -15,9 +17,21 @@ const NotFound = () => {
       <p>Oops! The page you are looking for crossed the event horizon.</p>
       <button 
         onClick={goHome} 
-        style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer', marginTop: '20px' }}
+        style={
+          {
+            padding: '5px 10px',
+            fontSize: '16px',
+            cursor: 'pointer',
+            marginTop: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center', 
+            margin: '0 auto'
+          }
+        }
       >
-        Go back in time
+        <img src={galaxyImageUrl} width="40px" />
+          Go back in time
       </button>
     </div>
   );
