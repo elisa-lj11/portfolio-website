@@ -6,7 +6,7 @@ class OrbitingNodes {
     // Map for node page titles, make sure to update the route path in App.js
     this.nodeTitles = new Map([
       ['strivr', 'Strivr: "Immersive Lobby" Upgrade'],
-      ['node2', 'Node Two'],
+      ['local-hive', '"Local Hive": A Human-Centered AI Project'],
       ['node3', 'Node Three'],
     ]);
     

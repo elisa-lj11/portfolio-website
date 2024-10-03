@@ -52,6 +52,20 @@ main {
   padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 
+.video-vertical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Ensure there's no extra margin */
+}
+
+.video-vertical video {
+  height: 100%; /* Make the video take up full vertical space */
+  max-height: 100vh; /* Constrain the video height to the viewport height */
+  width: auto; /* Maintain aspect ratio */
+}
+
 .responsive-iframe {
   position: absolute;
   top: 0;
