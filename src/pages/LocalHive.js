@@ -24,7 +24,14 @@ import easyTaskFlowImageUrl from '../assets/images/local-hive/easy-task-flow.png
 import mediumTaskFlowImageUrl from '../assets/images/local-hive/medium-task-flow.png';
 import complexTaskFlowImageUrl from '../assets/images/local-hive/complex-task-flow.png';
 import lowFiOverviewImageUrl from '../assets/images/local-hive/low-fi-overview.jpg';
+import medFi1FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-1-figma-overview.png';
+import medFi1JoinTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-join-task-flow.png';
+import medFi1CreateTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-create-task-flow.png';
+import medFi1MonitorTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-monitor-task-flow.png';
+import medFi2FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-2-figma-overview.png';
 
+const FIGMA_MEDFI_1_URL = 'https://www.figma.com/proto/ISM4ITEIjEmCWPJzAwXgneCa/MidFi?node-id=46-8&node-type=canvas&t=UM1cFDasWXdlhJmJ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
+const FIGMA_MEDFI_2_URL = 'https://www.figma.com/proto/bNHJX5jYid0RXOPx7Y1bab/MidFi-2?node-id=153-90&node-type=canvas&t=UXP0hEhQLf8r8pON-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
 const FIGMA_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
 
 const LocalHive = () => {
@@ -374,14 +381,16 @@ const LocalHive = () => {
       <br></br>
       <h2>Low Fidelity Prototype</h2>
       <p>
-        At this point in our project, we branded ourselves as <b>Local Hive</b> and described our mission/problem/solution:
+        At this point in our project, we branded ourselves as <b>Local Hive</b> and described our mission/problem/solution/value proposition:
         <br></br>
         <br></br>
         <b>Mission:</b> Boost your projects and build your own skills with the power of your community.
         <br></br>
         <b>Problem:</b> How can community members support each other when they are not in close physical proximity?
         <br></br>
-        <b>Solution:</b> Create a marketplace of projects and skills using social capital as currency.
+        <b>Solution:</b> Create a marketplace of projects and skills using volunteering time as currency.
+        <br></br>
+        <b>Value Proposition:</b> Providing a platform that fosters community cohesion and social capital.
         <br></br>
         <br></br>
         We took to the drawing boards once again to sketch out concepts for our solution.
@@ -489,7 +498,123 @@ const LocalHive = () => {
       </p>
       <h3>User Testing</h3>
       <p>
-        We developed a test plan that included an interview question template and aimed to investigate:
+        We conducted 20-minute user tests with 3 separate participants of different ages and backgrounds. We asked them to run through our 3 tasks by interacting with our paper prototype and using our "buttons" to make selections. Members of our team took turns operating as an interview facilitator who ran through the task instructions, a "computer" who would manually switch paper screens based on user selections, and a notetaker who logged any critical incidents and successes that occurred during the test.
+      </p>
+      <p>
+        Critical incidents included:
+      </p>
+      <ul>
+        <li>
+          The attitudinal screen was confusing.
+        </li>
+        <li>
+          Users wanted a screen for specific projects.
+        </li>
+        <li>
+          Users were only interested in their projects, not in the community status.
+        </li>
+      </ul>
+      <p>
+        Critical successes included:
+      </p>
+      <ul>
+        <li>
+          Creating a project elicited a positive response.
+        </li>
+        <li>
+          Having both people and projects is helpful for users.
+        </li>
+        <li>
+          Tree visualization was appreciated as symbolism for community growth.
+        </li>
+      </ul>
+      <p>
+        Our major takeaways from our low-fi testing were:
+      </p>
+      <ul>
+        <li>
+          (-) The point system needs to be explicit and clear.
+        </li>
+        <li>
+          (-) Navigation between screens needs to be streamlined.
+        </li>
+        <li>
+          (+) The “social network” aspect was intuitive.
+        </li>
+        <li>
+          (+) Joining a community was straightforward.
+        </li>
+      </ul>
+      <p>
+        After this thorough evaluation of our low-fi prototype, we started development on our medium fidelity prototype using our testing insights to redesign our app's user experience.
+      </p>
+      <br></br>
+      <hr className="solid"></hr>
+      <br></br>
+      <h2>Medium Fidelity Prototype</h2>
+      <p>
+        Going into our med-fi prototype development, we brought a few changes from low-fi testing:
+      </p>
+      <ul>
+        <li>
+          Giving users a starting amount of points (Honey Money) when they sign up
+        </li>
+        <li>
+          Adding due dates and locations
+        </li>
+        <li>
+          Being able to see experience gained from community involvement
+        </li>
+      </ul>
+      <p>
+        A major concept that we wanted to put to the test with our med-fi prototype was the time banking point system that we had indexed on since we started work on this project. In our app, we planned to use "Honey Money" as a form of currency. Users would be able to utilize Honey Money to create their own projects and use it as compensation or join projects to earn more. They would start with 50 Honey Moneys, where 10 Honey Moneys would equal one hour of work. Their experience, Honey Money balance, and transaction history would be viewable on a Wallet Page from their profile.
+      </p>
+      <p>
+        We also wanted to build out a taxonomy of skills. Skills would be taken into account in two situations: when users build their profiles and when they list skills needed for a project. These skills would be categorized into general groups and further divided into specific ones. AI technology would be used to recommend projects users would be qualified for and interested in.
+      </p>
+      <p>
+        We used Figma to build our prototype. It is available to try out <a href={FIGMA_MEDFI_1_URL}>here</a>.
+      </p>
+      <img src={medFi1FigmaOverviewImageUrl} alt='Med-Fi 1 Figma Overview' width='100%' />
+      <br></br>
+      <p>
+        Our 3 task flows using our med-fi prototype are captured below.
+      </p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
+        <figure>
+            <img
+            src={medFi1JoinTaskFlowImageUrl}
+            alt='"Join a Project" Task Flow'
+            style={{ width: '100%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>Med-Fi "Join a Project" Task Flow</figcaption>
+        </figure>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
+        <figure>
+            <img
+            src={medFi1CreateTaskFlowImageUrl}
+            alt='"Create a Project" Task Flow'
+            style={{ width: '100%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>Med-Fi "Create a Project" Task Flow</figcaption>
+        </figure>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
+        <figure>
+            <img
+            src={medFi1MonitorTaskFlowImageUrl}
+            alt='"Monitor a Community" Task Flow'
+            style={{ width: '100%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>Med-Fi "Monitor a Community" Task Flow</figcaption>
+        </figure>
+      </div>
+      <p>
+      We tested 4 participants on our med-fi prototype, with each study running about 10 minutes as they worked through our 3 tasks.
+      </p>
+      <p>
+        Our test plan aimed to investigate the following:
       </p>
       <ol>
         <li>
@@ -523,9 +648,35 @@ const LocalHive = () => {
         </li>
       </ol>
       <p>
-        We conducted 20-minute user tests with 3 separate participants of different ages and backgrounds. We asked them to run through our 3 tasks by interacting with our paper prototype and using our "buttons" to make selections. Members of our team took turns operating as an interview facilitator who ran through the template interview questions, a "computer" who would manually switch paper screens based on user selections, and a notetaker who logged any critical incidents and successes that occurred during the test.
+         Our results indicated that we needed to:
       </p>
-
+      <ul>
+        <li>
+          Simplify the "Honey Money" concept
+        </li>
+        <li>
+          Rephrase onboarding
+        </li>
+        <li>
+          Add a list of sub-tasks left to complete above the join button
+        </li>
+        <li>
+          Add a social media button to accelerate recruiting
+        </li>
+        <li>
+          List required skills on a task
+        </li>
+      </ul>
+      <p>
+        With these insights we performed one more design iteration, then we moved on to our heuristic evaluation phase.
+      </p>
+      <br></br>
+      <img src={medFi2FigmaOverviewImageUrl} alt='Med-Fi 2 Figma Overview' width='100%' />
+      <br></br>
+      <h3>Heuristic Evaluation</h3>
+      <p>
+        In this phase of our process we gave our <a href={FIGMA_MEDFI_2_URL}>med-fi #2 Figma prototype</a> to 4 evaluators, 
+      </p>
 
 
       <br></br>
