@@ -29,9 +29,18 @@ import medFi1JoinTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-joi
 import medFi1CreateTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-create-task-flow.png';
 import medFi1MonitorTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-monitor-task-flow.png';
 import medFi2FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-2-figma-overview.png';
+import heuristicViolationsImageUrl from '../assets/images/local-hive/heuristic-violations.png';
+import medFi1HomeImageUrl from '../assets/images/local-hive/med-fi-1-home.png';
+import medFi2HomeImageUrl from '../assets/images/local-hive/med-fi-2-home.png';
+import medFi3HomeImageUrl from '../assets/images/local-hive/med-fi-3-home.png';
+import appWebsiteImageUrl from '../assets/images/local-hive/app-website.png';
+import posterImageUrl from '../assets/images/local-hive/poster.png';
 
 const FIGMA_MEDFI_1_URL = 'https://www.figma.com/proto/ISM4ITEIjEmCWPJzAwXgneCa/MidFi?node-id=46-8&node-type=canvas&t=UM1cFDasWXdlhJmJ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
 const FIGMA_MEDFI_2_URL = 'https://www.figma.com/proto/bNHJX5jYid0RXOPx7Y1bab/MidFi-2?node-id=153-90&node-type=canvas&t=UXP0hEhQLf8r8pON-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
+const FIGMA_MEDFI_3_URL = 'https://www.figma.com/proto/VYpOKOfXgN9EMJZHS87aiP/MidFi-3-(Decluttered-on-right)?node-id=153-90&node-type=canvas&t=4Ji7p1jIXveXk3MW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
+const FIGMA_FINAL_URL = 'https://www.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&t=qu5Y3ct7QZOm2kf1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
+const APP_WEBSITE_URL = 'https://hci.stanford.edu/courses/cs377e/2019/sp/projects/ResQ/';
 const FIGMA_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
 
 const LocalHive = () => {
@@ -45,7 +54,7 @@ const LocalHive = () => {
       </div>
       <br></br>
       <p>
-        In my Senior Spring quarter at Stanford in 2019, I took "<a href="https://hci.stanford.edu/courses/cs377e/2019/sp/">CS 377E</a>: Designing Solutions to Global Grand Challenges: Human-Centered AI." In this class, I worked with a team of 4 on a quarter-long project applying design thinking, processes, and tools to the intersection of healthcare and smart technology. Over the course of 10 weeks, we underwent the design journey from ideation to iterating on prototypes to presenting our final product in a public fair, in which we received special recognition for our work.
+        In my Senior Spring quarter at Stanford in 2019, I took "<a target='_blank' rel='noopener noreferrer' href="https://hci.stanford.edu/courses/cs377e/2019/sp/">CS 377E</a>: Designing Solutions to Global Grand Challenges: Human-Centered AI." In this class, I worked with a team of 4 on a quarter-long project applying design thinking, processes, and tools to the intersection of healthcare and smart technology. Over the course of 10 weeks, we underwent the design journey from ideation to iterating on prototypes to presenting our final product in a public fair, in which we received special recognition for our work.
         <br></br>
         <br></br>
         Our final product was an app-hosted platform that fostered community cohesion and social capital through a marketplace of projects and skills that allow community members to create and join projects, volunteer time, and further community involvement. Not only was the project fun to work on, but it gave me a fantastic template for how to design and build out a product. I detail this process in the sections below.
@@ -573,7 +582,7 @@ const LocalHive = () => {
         We also wanted to build out a taxonomy of skills. Skills would be taken into account in two situations: when users build their profiles and when they list skills needed for a project. These skills would be categorized into general groups and further divided into specific ones. AI technology would be used to recommend projects users would be qualified for and interested in.
       </p>
       <p>
-        We used Figma to build our prototype. It is available to try out <a href={FIGMA_MEDFI_1_URL}>here</a>.
+        We used Figma to build our <a target='_blank' rel='noopener noreferrer' href={FIGMA_MEDFI_1_URL}>first med-fi prototype</a>.
       </p>
       <img src={medFi1FigmaOverviewImageUrl} alt='Med-Fi 1 Figma Overview' width='100%' />
       <br></br>
@@ -668,23 +677,221 @@ const LocalHive = () => {
         </li>
       </ul>
       <p>
-        With these insights we performed one more design iteration, then we moved on to our heuristic evaluation phase.
+        With these insights we performed one more design iteration to create our <a target='_blank' rel='noopener noreferrer' href={FIGMA_MEDFI_2_URL}>second med-fi Figma prototype</a>, then we moved on to our heuristic evaluation phase.
       </p>
       <br></br>
       <img src={medFi2FigmaOverviewImageUrl} alt='Med-Fi 2 Figma Overview' width='100%' />
       <br></br>
       <h3>Heuristic Evaluation</h3>
       <p>
-        In this phase of our process we gave our <a href={FIGMA_MEDFI_2_URL}>med-fi #2 Figma prototype</a> to 4 evaluators, 
+        In this phase of our process we gave our Figma prototype to 4 evaluators who were assigned our 3 tasks and asked to call out any heuristic violations they encountered as they used our prototype. Violations were graded on severity on a 0-4 scale and organized into 10 heuristic categories:
       </p>
-
-
+      <ol>
+        <li>
+          Visibility of Status
+        </li>
+        <li>
+          Match System & World
+        </li>
+        <li>
+          User Control
+        </li>
+        <li>
+          Consistency
+        </li>
+        <li>
+          Error Prevention
+        </li>
+        <li>
+          Recognition not Recall
+        </li>
+        <li>
+          Efficiency of Use
+        </li>
+        <li>
+          Minimalist Design
+        </li>
+        <li>
+          Help Users with Errors
+        </li>
+        <li>
+          Documentation
+        </li>
+      </ol>
+      <br></br>
+      <img src={heuristicViolationsImageUrl} alt='Heuristic Violations Summary' width='100%' />
+      <br></br>
+      <p>
+        Our testers identified 46 heuristic violations altogether and included feedback for what they expected and how they would fix it. An example of a feedback item is below:
+      </p>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <p style={{ marginLeft: '10%', marginRight: '10%', textAlign: 'justify' }}>
+          <b>[H6: Recognition rather than recall][Severity: 3]</b>
+          <br></br>
+          <i>Evaluators: 1, 2, 3, 4</i>
+          <br></br>
+          <br></br>
+          What is the difference between the buzz page and the projects page? It's not intuitive that the buzz page includes projects that you are not currently “enrolled” in. I think that searching for new projects and looking at the ones that you are already signed up for should just all be in the same place. It’s makes it confusing to need to remember where the different things regarding the projects are.
+          <br></br>
+          <br></br>
+          Fix: Make them one category and have subcategories for searching through projects easily or on the project page having a buzz “someone else” button in addition to a join project button. 
+        </p>
+      </div>
+      <p>
+        We carefully considered each of the 46 violations and designated action items to incorporate into our <a target='_blank' rel='noopener noreferrer' href={FIGMA_MEDFI_3_URL}>third med-fi prototype</a> iteration. Our major design changes were grouped into four areas: conceptual clarification, content sizing, information consistency, and task prioritization.
+      </p>
+      <ul>
+        <li>
+          <b>Conceptual Clarification:</b> Simplify onboarding by explaining new app concepts (like Hive and HoneyMoney) while keeping the process concise and visually engaging
+        </li>
+        <li>
+          <b>Content Sizing:</b> Declutter pages to ensure that all content was appropriately sized and relevant
+        </li>
+        <li>
+          <b>Information Consistency:</b> Standardize key details across screens, such as project skills and status, to avoid confusion
+        </li>
+        <li>
+          <b>Task Prioritization:</b> Reorder the home screen to emphasize actionable tasks, like joining or creating a project, over less important information
+        </li>
+      </ul>
+      <p>
+        To highlight the changes between our 3 med-fi prototypes, below is a progression of our app's home screen.
+      </p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
+        <figure>
+            <img
+            src={medFi1HomeImageUrl}
+            alt='First Med-Fi Prototype Home Screen'
+            style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>First Med-Fi Prototype Home Screen</figcaption>
+        </figure>
+        <figure>
+            <img
+            src={medFi2HomeImageUrl}
+            alt='Second Med-Fi Prototype Home Screen'
+            style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>Second Med-Fi Prototype Home Screen</figcaption>
+        </figure>
+        <figure>
+            <img
+            src={medFi3HomeImageUrl}
+            alt='Third Med-Fi Prototype Home Screen'
+            style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+          />
+          <figcaption>Third Med-Fi Prototype Home Screen</figcaption>
+        </figure>
+      </div>
+      <p>
+        By this point in our process, we were ready to conduct one more round of user research before we would start our final prototype.
+      </p>
+      <br></br>
+      <hr className="solid"></hr>
+      <br></br>
+      <h2>User Research</h2>
+      <p>
+        The goal of our user research was to gather feedback on how effectively the prototype addressed issues related to creating and joining community projects. We also aimed to ensure that the app's concepts (Hive, HoneyMoney, Buzz, etc.) were clear and useful, and that the information size and overall design were appropriate and visually appealing to users.
+        <br></br>
+        <br></br>
+        We recruited volunteers from four key groups (identified in our needfinding stage) for testing:
+      </p>
+      <ol>
+        <li>
+          <b>Community members:</b> Regular members of communities, where we aimed to observe how the app blurred the line between members and leaders, encouraging them to create projects and recruit others.
+        </li>
+        <li>
+          <b>Community leaders:</b> Potential power-users who already organize community efforts, with a focus on how the app could enhance their actions, encouraging them to join existing projects and help others.
+        </li>
+        <li>
+          <b>Low cohesion/motivation:</b> Members who are less engaged in their communities, to see if the app motivates them to get more involved.
+        </li>
+        <li>
+          <b>High cohesion/motivation:</b> Highly engaged users, to assess how useful the app remains for communities already functioning well.
+        </li>
+      </ol>
+      <p>
+        We conducted tests with 4 volunteers in total and summarized their feedback below:
+      </p>
+      <ul>
+        <li>
+          The design and Hive theme were well-received, though a few colors in the onboarding process felt out of place.
+        </li>
+        <li>
+          There was some confusion about the scale of projects the app is intended for (large vs. small) and how the "buzzing" feature works.
+        </li>
+        <li>
+          Users appreciated the potential for organizing and tracking both personal and community goals but expressed concerns about whether small communities would have enough engagement.
+        </li>
+        <li>
+          Suggestions were made to improve realism (e.g., filling in project images) and add more interactive features for sorting and monitoring project progress.
+        </li>
+        <li>
+          The Honey Moneys system was well-liked as a way to incentivize helping others, but some wanted clearer ways to track involvement and progress.
+        </li>
+      </ul>
+      <p>
+        For our final iterative pass over our prototype, we decided to prioritize the following changes:
+      </p>
+      <ul>
+        <li>
+          <b>Improve fidelity</b> so people can be more fully immersed in the app
+        </li>
+        <li>
+          <b>Put in real pictures</b> for profiles and projects
+        </li>
+        <li>
+          <b>Sort by category</b> of tasks on a separate screen
+        </li>
+        <li>
+          <b>Declutter</b> by prioritizing tasks
+        </li>
+        <li>
+          <b>Consistency</b> of key terms like "buzz" across the app
+        </li>
+      </ul>
+      <p>
+        With this final user study under our belt, we were finally ready to develop and launch our final prototype.
+      </p>
+      <br></br>
+      <hr className="solid"></hr>
+      <br></br>
+      <h2>Final Prototype</h2>
+      <p>
+        We launched our <a target='_blank' rel='noopener noreferrer' href={FIGMA_FINAL_URL}>final Figma prototype</a> in an end-of-quarter project fair.
+        <br></br>
+        <br></br>
+        Alongside our prototype we deployed an <a target='_blank' rel='noopener noreferrer' href={APP_WEBSITE_URL}>app website</a> describing our app's functionality and the design process behind it.
+        <br></br>
+        <br></br>
+        <img src={appWebsiteImageUrl} alt='App Website' width='60%'/>
+        <br></br>
+        <br></br>
+        At the fair, we delivered a 15-minute presentation on our app evolution, and we showcased an accompanying project poster which won "Best Poster" within our cohort of 6 teams.
+        <br></br>
+        <br></br>
+        <img src={posterImageUrl} alt='Poster' width='40%'/>
+        <br></br>
+        <br></br>
+      </p>
+      <p>
+        I was proud that in just 10 weeks, we started from a nebulous idea of strengthening communities and worked all the way to a robust prototype that we could present to dozens of people. If there had been more time, we would have loved to take our app to the next level by piloting in a real community for ecological validity, building a minimum viable product, then launching a pilot internationally; but, alas, we had other projects to move onto. Still, we could "bee" happy that we got as far as we did in such a short period.
+      </p>
       <br></br>
       <hr className="solid"></hr>
       <br></br>
       <h2>Try Our Prototype</h2>
       <p>FIXME: Prototype not embedding</p>
       <iframe style={{border: '1px solid rgba(0, 0, 0, 0.1)', width: '800', height: '450', src: FIGMA_URL}} allowFullScreen></iframe>
+      <br></br>
+      <hr className="solid"></hr>
+      <br></br>
+      <h2>Learnings</h2>
+      <p>
+        <ul>
+          
+        </ul>
+      </p>
       <br></br>
       <hr className="solid"></hr>
       <br></br>
