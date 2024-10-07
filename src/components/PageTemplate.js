@@ -12,14 +12,18 @@ const PageTemplate = ({ title, refs, children }) => {
     navigate('/'); // Navigate to the home page
   };
 
-  // FIXME: Update the URL hash to include section name
   const handleScroll = (event) => {
-    const targetId = event.target.value;
+    const targetId = event.target.value; // Get the selected value from the dropdown
     if (targetId) {
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      const targetElement = document.getElementById(targetId); // Get the element to scroll to
+  
+      // Scroll to the target element smoothly
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+  
+      // Update the URL hash after a short delay to ensure the scroll is finished
+      setTimeout(() => {
+        window.location.hash = targetId;
+      }, 800); // Delay time matches scroll time
     }
   };
 
@@ -34,7 +38,7 @@ const PageTemplate = ({ title, refs, children }) => {
         {/* FIXME: Dropdown box is not centered */}
         <div className="dropdown">
           <select onChange={handleScroll} defaultValue="">
-            <option value="" disabled>Select a section</option>
+            <option value="" disabled>Warp to a section</option>
             {refs.map((ref) => (
               <option key={ref.id} value={ref.id}>
                 {ref.label}
