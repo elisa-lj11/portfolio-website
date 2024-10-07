@@ -8,6 +8,7 @@ import galaxyImageUrl from '../assets/images/galaxy.png';
 const PageTemplate = ({ title, refs, children }) => {
   const navigate = useNavigate(); // Hook to programmatically navigate
   const [selectedSection, setSelectedSection] = useState(''); // To keep track of the selected section
+  const [jumpScroll, setJumpScroll] = useState(false); // Track if a scroll is manual
 
   const goHome = () => {
     navigate('/'); // Navigate to the home page
@@ -18,14 +19,17 @@ const PageTemplate = ({ title, refs, children }) => {
     if (targetId) {
       const targetElement = document.getElementById(targetId); // Get the element to scroll to
   
-      // Scroll to the target element smoothly
-      targetElement.scrollIntoView({ behavior: 'smooth' });
+      if (targetElement) {
+        setJumpScroll(true); // Set flag before scroll starts
   
-      // Update the URL hash after a short delay to ensure the scroll is finished
-      setTimeout(() => {
-        window.location.hash = targetId;
+        // Scroll and update hash without delay
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+        window.history.replaceState(null, '', `#${targetId}`);
         setSelectedSection(targetId);
-      }, 800); // Delay time matches scroll time
+  
+        // Reset manual scroll flag after a delay
+        setTimeout(() => setJumpScroll(false), 800);
+      }
     }
   };
 
@@ -33,17 +37,18 @@ const PageTemplate = ({ title, refs, children }) => {
   useEffect(() => {
     const observerOptions = {
       root: null, // Observe within the viewport
-      threshold: 0.5, // Trigger when at least 50% of the section is visible
+      rootMargin: '0px 0px -10% 0px', // Start detecting sections when they are entering the viewport
+      threshold: [0.1], // Trigger when 10% of the section is visible
     };
 
     const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const visibleSectionId = entry.target.id;
-          setSelectedSection(visibleSectionId); // Update the dropdown to the visible section
-          window.history.replaceState(null, '', `#${visibleSectionId}`); // Update the URL hash without jumping
-        }
-      });
+      const visibleSections = entries.filter((entry) => entry.isIntersecting);
+      if (visibleSections.length > 0) {
+        // If at least one section is visible, set the selected section
+        const visibleSection = visibleSections[0].target.id;
+        setSelectedSection(visibleSection);
+        window.history.replaceState(null, '', `#${visibleSection}`); // Update the URL hash
+      }
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -58,10 +63,15 @@ const PageTemplate = ({ title, refs, children }) => {
     return () => {
       refs.forEach((ref) => {
         const section = document.getElementById(ref.id);
-        if (section) observer.unobserve(section);
+        if (section) {
+          observer.unobserve(section);
+        }
       });
+
+      // Clean up the observer on component unmount
+      observer.disconnect();
     };
-  }, [refs]);
+  }, [refs, jumpScroll]);
 
   return (
     <div className="page-template">
