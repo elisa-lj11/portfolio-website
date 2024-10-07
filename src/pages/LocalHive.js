@@ -64,8 +64,8 @@ const LocalHive = () => {
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         <iframe
           style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
-          width="800px"
-          height="450px"
+          width="400px"
+          height="800px"
           src={FIGMA_EMBED_URL}
           allowFullScreen
         >This Figma prototype does not support embedding.</iframe>
