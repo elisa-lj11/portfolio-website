@@ -1,5 +1,5 @@
 // src/components/PageTemplate.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/style/PageTemplate.css'; // Import the CSS file
 
@@ -7,6 +7,7 @@ import galaxyImageUrl from '../assets/images/galaxy.png';
 
 const PageTemplate = ({ title, refs, children }) => {
   const navigate = useNavigate(); // Hook to programmatically navigate
+  const [selectedSection, setSelectedSection] = useState(''); // To keep track of the selected section
 
   const goHome = () => {
     navigate('/'); // Navigate to the home page
@@ -23,9 +24,44 @@ const PageTemplate = ({ title, refs, children }) => {
       // Update the URL hash after a short delay to ensure the scroll is finished
       setTimeout(() => {
         window.location.hash = targetId;
+        setSelectedSection(targetId);
       }, 800); // Delay time matches scroll time
     }
   };
+
+  // Use IntersectionObserver to track section visibility
+  useEffect(() => {
+    const observerOptions = {
+      root: null, // Observe within the viewport
+      threshold: 0.5, // Trigger when at least 50% of the section is visible
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const visibleSectionId = entry.target.id;
+          setSelectedSection(visibleSectionId); // Update the dropdown to the visible section
+          window.history.replaceState(null, '', `#${visibleSectionId}`); // Update the URL hash without jumping
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe each section (the refs should correspond to section headers)
+    refs.forEach((ref) => {
+      const section = document.getElementById(ref.id);
+      if (section) observer.observe(section);
+    });
+
+    // Clean up the observer when the component unmounts
+    return () => {
+      refs.forEach((ref) => {
+        const section = document.getElementById(ref.id);
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, [refs]);
 
   return (
     <div className="page-template">
@@ -37,7 +73,7 @@ const PageTemplate = ({ title, refs, children }) => {
         </button>
         {/* FIXME: Dropdown box is not centered */}
         <div className="dropdown">
-          <select onChange={handleScroll} defaultValue="">
+          <select onChange={handleScroll} value={selectedSection || ""}>
             <option value="" disabled>Warp to a section</option>
             {refs.map((ref) => (
               <option key={ref.id} value={ref.id}>
