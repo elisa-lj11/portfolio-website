@@ -28,6 +28,47 @@ header {
   color: white;
   z-index: 100; /* Ensure the header stays above content */
   border-bottom: 2px solid #db13bd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.dropdown {
+  flex: 1;
+  text-align: center;
+  margin: 0 auto; /* Center the dropdown */
+  width: auto;
+  padding: 5px;
+  border-radius: 5px; /* Rounded corners */
+  position: relative; /* Positioning for dropdown items if needed */
+}
+
+.dropdown select {
+  padding: 5px;
+  font-size: 16px;
+  color: white; /* Text color */
+  background-color: #2d2d2d; /* Background color of the dropdown */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Border for the dropdown */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Custom styles for the selected option */
+.dropdown select option {
+  background-color: #2d2d2d; /* Background color for options */
+  color: white; /* Text color for options */
+}
+
+/* Optional: custom styles for the dropdown when focused */
+.dropdown select:focus {
+  outline: none; /* Remove default focus outline */
+  border: 1px solid #db13bd; /* Optional: change border color on focus */
+}
+
+/* Style for selected option (no direct CSS for this in standard select) */
+.dropdown select option:checked {
+  background-color: #db13bd; /* Background color for selected option */
+  color: white; /* Text color for selected option */
 }
 
 main {

@@ -45,9 +45,23 @@ const FIGMA_EMBED_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/Mi
 // Figma Embed API 1.0, outdated // const FIGMA_EMBED_URL = 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
 
 const LocalHive = () => {
+  const refs = [
+    { id: 'background-research', label: 'Background Research' },
+    { id: 'needfinding', label: 'Needfinding'},
+    { id: 'pov-hmw', label: 'POVs and HMWs'},
+    { id: 'solution-ideation', label: 'Solution Ideation'},
+    { id: 'experience-prototypes', label: 'Experience Prototypes'},
+    { id: 'low-fi-prototype', label: 'Low Fidelity Prototype'},
+    { id: 'med-fi-prototype', label: 'Medium Fidelity Prototype'},
+    { id: 'user-research', label: 'User Research'},
+    { id: 'final-prototype', label: 'Final Prototype'},
+    { id: 'learnings', label: 'Learnings'},
+    { id: 'works-cited', label: 'Works Cited'}
+  ];
+
   return (
-    <PageTemplate title='"Local Hive": A Human-Centered AI Project'>
-      <h2>Completed June 2019</h2>
+    <PageTemplate title='"Local Hive": A Human-Centered AI Project' refs={refs}>
+      <h3>Completed June 2019</h3>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         <iframe
           style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
@@ -68,7 +82,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Background Research</h2>
+      <h2 id='background-research'>Background Research</h2>
       <p>
         Since the goal of the class was to develop a project using human-centered AI to address global challenges, we wanted to apply our technical skills for social good. One of our team members was from Colombia, so we began researching issues in the region. We quickly identified the pressing need to address the impacts of conflict and violence, particularly how these crises affect social infrastructure and community cohesion.
         <br></br>
@@ -81,7 +95,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Needfinding</h2>
+      <h2 id='needfinding'>Needfinding</h2>
       <p>
         We interviewed 8 people in total: 2 from Buenaventura, Colombia and 6 from Palo Alto, California, some of which self-identified as "community leaders" and others as "community members." We wanted to get a sense of the differences between disparate communities, so we hoped that by reaching out to folks in Buenaventura, we could break out of our own Palo Alto bubble.
       </p>
@@ -202,7 +216,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>"Point of View" and "How Might We?" Statements</h2>
+      <h2 id='pov-hmw'>"Point of View" and "How Might We?" Statements</h2>
       <p>
         We collected the following 3 points of view from a subset of our interviewees:
       </p>
@@ -260,7 +274,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Solution Ideation</h2>
+      <h2 id='solution-ideation'>Solution Ideation</h2>
       <p>
         We launched another sticky note brainstorm session, this time generating 48 ideas for our 3 HMW groups.
       </p>
@@ -296,7 +310,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Experience Prototypes</h2>
+      <h2 id='experience-prototypes'>Experience Prototypes</h2>
       <p>
         We developed 3 experience prototypes based on the outcomes of our solution ideation exercise. For each prototype, we tested a hypothesis over a short week-long timeframe and analyzed our assumptions based on testing results.
       </p>
@@ -394,7 +408,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Low Fidelity Prototype</h2>
+      <h2 id='low-fi-prototype'>Low Fidelity Prototype</h2>
       <p>
         At this point in our project, we branded ourselves as <b>Local Hive</b> and described our mission/problem/solution/value proposition:
         <br></br>
@@ -566,7 +580,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Medium Fidelity Prototype</h2>
+      <h2 id='med-fi-prototype'>Medium Fidelity Prototype</h2>
       <p>
         Going into our med-fi prototype development, we brought a few changes from low-fi testing:
       </p>
@@ -795,7 +809,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>User Research</h2>
+      <h2 id='user-research'>User Research</h2>
       <p>
         The goal of our user research was to gather feedback on how effectively the prototype addressed issues related to creating and joining community projects. We also aimed to ensure that the app's concepts (Hive, HoneyMoney, Buzz, etc.) were clear and useful, and that the information size and overall design were appropriate and visually appealing to users.
         <br></br>
@@ -862,7 +876,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Final Prototype</h2>
+      <h2 id='final-prototype'>Final Prototype</h2>
       <div className="video-vertical" style={{ height: '60%' }}>
         <video controls autoPlay muted>
           <source src={fullAppVideoUrl} type="video/mp4" />
@@ -891,7 +905,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Learnings</h2>
+      <h2 id='learnings'>Learnings</h2>
       <ul>
         <li>
           Needfinding is a crucial step in product development, but it can easily be overlooked if you're too focused on your initial idea of a solution. To apply human-centered design effectively, it's essential to step outside your own perspective and listen objectively to the needs of your target users before forming assumptions about how they think or what they need.</li>
@@ -905,7 +919,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <h2>Works Cited</h2>
+      <h2 id='works-cited'>Works Cited</h2>
       <ul>
         <li>
           Miroff, N (August 24, 2016) The staggering toll of Colombia's war with FARC rebels explained in numbers. The Washington Post. Available in  https://www.washingtonpost.com/

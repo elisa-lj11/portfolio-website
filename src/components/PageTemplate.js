@@ -5,11 +5,22 @@ import '../assets/style/PageTemplate.css'; // Import the CSS file
 
 import galaxyImageUrl from '../assets/images/galaxy.png';
 
-const PageTemplate = ({ title, children }) => {
+const PageTemplate = ({ title, refs, children }) => {
   const navigate = useNavigate(); // Hook to programmatically navigate
 
   const goHome = () => {
     navigate('/'); // Navigate to the home page
+  };
+
+  // FIXME: Update the URL hash to include section name
+  const handleScroll = (event) => {
+    const targetId = event.target.value;
+    if (targetId) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -20,6 +31,17 @@ const PageTemplate = ({ title, children }) => {
           <img src={galaxyImageUrl} width="40px"/>
           Go back to space
         </button>
+        {/* FIXME: Dropdown box is not centered */}
+        <div className="dropdown">
+          <select onChange={handleScroll} defaultValue="">
+            <option value="" disabled>Select a section</option>
+            {refs.map((ref) => (
+              <option key={ref.id} value={ref.id}>
+                {ref.label}
+              </option>
+            ))}
+          </select>
+        </div>
         {/* Add other common header elements here */}
       </header>
       <main>
