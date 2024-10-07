@@ -30,17 +30,17 @@ header {
   border-bottom: 2px solid #db13bd;
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: center;
 }
 
 .dropdown {
-  flex: 1;
+  position: absolute;
+  left: 50%; /* Start dropdown at the horizontal center */
+  transform: translateX(-50%); /* Offset by 50% of its width to fully center */
   text-align: center;
-  margin: 0 auto; /* Center the dropdown */
   max-width: auto;
   padding: 5px;
   border-radius: 5px; /* Rounded corners */
-  position: relative; /* Positioning for dropdown items if needed */
 }
 
 .dropdown select {
@@ -156,6 +156,7 @@ img {
 button.home {
   display: flex;
   align-items: center; /* Vertically center the image and text */
+  margin-right: auto; /* Push button to the left */
   background: none;
   color: white;
   padding: 5px 10px;
@@ -177,4 +178,52 @@ hr.solid {
   background: #111;
   color: #b0b0b0;
   text-align: center;
+}
+
+/* Media query for small screens */
+@media (pointer:none), (pointer:coarse) {
+  header {
+    flex-direction: row; /* Stack elements horizontally */
+    align-items: flex-start; /* Align to the left */
+  }
+
+  .content {
+    margin: 0 auto; /* Center the article */
+    padding-top: 5%;
+    padding-left: 5%; /* Padding around the content */
+    padding-right: 5%; /* Padding around the content */
+    box-sizing: border-box; /* Include padding in height calculation */
+  }
+
+  .dropdown {
+    position: static; /* Allow dropdown to follow normal flow */
+    transform: none;
+    width: 100%; /* Make the dropdown take the full width */
+    max-width: 100%; /* Ensure it doesn’t overflow the container */
+    margin-left: 10px; /* Add space between button and dropdown */
+    margin-right: 10px;
+  }
+
+  button.home {
+    margin-right: 10px; /* Add space between button and dropdown */
+  }
+
+  button.home span {
+    display: none; /* Hides the next sibling span */
+  }
+
+  img {
+    width: 100%; /* Make all images fit the full width of their container */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  /* Create exception for header "Go back to space" image */
+  img.galaxy-image {
+    width: 40px;
+  }
+
+  /* Hide scrollbar for webkit browsers */
+  main::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
 }

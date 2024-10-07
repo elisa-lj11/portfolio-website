@@ -98,10 +98,9 @@ const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) =
       <header>
         <button className="home" onClick={goHome}>
           &lt;
-          <img src={galaxyImageUrl} width="40px"/>
-          Go back to space
+          <img src={galaxyImageUrl} className="galaxy-image" width="40px"/>
+          <span>Go back to space</span>
         </button>
-        {/* FIXME: Dropdown box is not centered */}
         <div className="dropdown">
           <select onChange={handleScroll} value={selectedSection || ""}>
             <option value="" disabled>Warp to a section</option>
