@@ -41,7 +41,8 @@ const FIGMA_MEDFI_2_URL = 'https://www.figma.com/proto/bNHJX5jYid0RXOPx7Y1bab/Mi
 const FIGMA_MEDFI_3_URL = 'https://www.figma.com/proto/VYpOKOfXgN9EMJZHS87aiP/MidFi-3-(Decluttered-on-right)?node-id=153-90&node-type=canvas&t=4Ji7p1jIXveXk3MW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
 const FIGMA_FINAL_URL = 'https://www.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&t=qu5Y3ct7QZOm2kf1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
 const APP_WEBSITE_URL = 'https://hci.stanford.edu/courses/cs377e/2019/sp/projects/ResQ/';
-const FIGMA_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
+const FIGMA_EMBED_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share&client-id=W0bOyp7s8UCjcCHJYXANQr'
+// Figma Embed API 1.0, outdated // const FIGMA_EMBED_URL = 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
 
 const LocalHive = () => {
   return (
@@ -881,17 +882,28 @@ const LocalHive = () => {
       <hr className="solid"></hr>
       <br></br>
       <h2>Try Our Prototype</h2>
-      <p>FIXME: Prototype not embedding</p>
-      <iframe style={{border: '1px solid rgba(0, 0, 0, 0.1)', width: '800', height: '450', src: FIGMA_URL}} allowFullScreen></iframe>
+      <iframe
+        style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
+        width="800px"
+        height="450px"
+        src={FIGMA_EMBED_URL}
+        allowFullScreen
+      >This Figma prototype does not support embedding.</iframe>
+      <br></br>
       <br></br>
       <hr className="solid"></hr>
       <br></br>
       <h2>Learnings</h2>
-      <p>
-        <ul>
-          
-        </ul>
-      </p>
+      <ul>
+        <li>
+          Needfinding is a crucial step in product development, but it can easily be overlooked if you're too focused on your initial idea of a solution. To apply human-centered design effectively, it's essential to step outside your own perspective and listen objectively to the needs of your target users before forming assumptions about how they think or what they need.</li>
+        <li>
+          Just as you shouldn't get too attached to your initial solution, it's important not to cling to the first, second, or even third iteration of a design. User testing will consistently reveal opportunities for improvement, and often, different users will have conflicting preferences. Refining a design requires balancing the needs of the majority without neglecting the minority.
+        </li>
+        <li>
+          While it's important to remain humble, it's also gratifying to acknowledge when your instincts prove correct. We recognized we had a promising idea when we aimed to leverage social capital to foster community growth. Throughout the design process, we made numerous adjustments to the specifics of how "HoneyMoneys" would effectively motivate community members. However, user tests consistently reinforced our belief that using volunteer time as a currency to support community projects was fundamentally a sound approach.
+        </li>
+      </ul>
       <br></br>
       <hr className="solid"></hr>
       <br></br>
