@@ -1,12 +1,24 @@
 // src/pages/Strivr.js
-import React from 'react';
+import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
 import newLobbyImageUrl from '../assets/images/new-lobby.png';
 
 const Strivr = () => {
+  const [refs, setRefs] = useState([]);
+
+  // Function to be used in PageTemplate and passed down
+  const generateRefsFromDOM = (generateRefsFunction) => {
+    generateRefsFunction();  // Call the function that scans the DOM and sets the refs
+  };
+
   return (
-    <PageTemplate title='Strivr: "Immersive Lobby" Upgrade'>
+    <PageTemplate
+      title='Strivr: "Immersive Lobby" Upgrade' 
+      refs={refs} 
+      setRefs={setRefs} 
+      generateRefsFromDOM={generateRefsFromDOM}
+    >
       <img src={newLobbyImageUrl} alt='New Lobby'/>
       <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dictum metus sit; sollicitudin mollis arcu mus phasellus dolor. Magnis pulvinar integer consequat vehicula, aenean lobortis maecenas penatibus. Senectus turpis lobortis nulla sollicitudin donec adipiscing semper lacus cursus. Rhoncus faucibus lacinia porta pellentesque odio ut tellus ad. Luctus lacinia posuere tortor amet at aptent. Finibus rutrum montes euismod etiam dictum.
 <br></br>

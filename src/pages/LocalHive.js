@@ -1,5 +1,5 @@
 // src/pages/LocalHive.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
 import fullAppVideoUrl from '../assets/images/local-hive/full-app.mp4';
@@ -59,7 +59,6 @@ const LocalHive = () => {
       setRefs={setRefs} 
       generateRefsFromDOM={generateRefsFromDOM}
     >
-    <>
       <h3>Completed June 2019</h3>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         <iframe
@@ -949,7 +948,6 @@ const LocalHive = () => {
           </li>
         </ul>
       </div>
-    </>
     </PageTemplate>
   );
 };
