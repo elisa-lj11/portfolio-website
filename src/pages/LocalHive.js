@@ -48,11 +48,16 @@ const LocalHive = () => {
   return (
     <PageTemplate title='"Local Hive": A Human-Centered AI Project'>
       <h2>Completed June 2019</h2>
-      <div className="video-vertical">
-        <video controls autoPlay muted>
-          <source src={fullAppVideoUrl} type="video/mp4" />
-        </video>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+        <iframe
+          style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
+          width="800px"
+          height="450px"
+          src={FIGMA_EMBED_URL}
+          allowFullScreen
+        >This Figma prototype does not support embedding.</iframe>
       </div>
+        
       <br></br>
       <p>
         In my Senior Spring quarter at Stanford in 2019, I took "<a target='_blank' rel='noopener noreferrer' href="https://hci.stanford.edu/courses/cs377e/2019/sp/">CS 377E</a>: Designing Solutions to Global Grand Challenges: Human-Centered AI." In this class, I worked with a team of 4 on a quarter-long project applying design thinking, processes, and tools to the intersection of healthcare and smart technology. Over the course of 10 weeks, we underwent the design journey from ideation to iterating on prototypes to presenting our final product in a public fair, in which we received special recognition for our work.
@@ -732,7 +737,7 @@ const LocalHive = () => {
           <i>Evaluators: 1, 2, 3, 4</i>
           <br></br>
           <br></br>
-          What is the difference between the buzz page and the projects page? It's not intuitive that the buzz page includes projects that you are not currently “enrolled” in. I think that searching for new projects and looking at the ones that you are already signed up for should just all be in the same place. It’s makes it confusing to need to remember where the different things regarding the projects are.
+          What is the difference between the buzz page and the projects page? It's not intuitive that the buzz page includes projects that you are not currently “enrolled” in. I think that searching for new projects and looking at the ones that you are already signed up for should just all be in the same place. It makes it confusing to need to remember where the different things regarding the projects are.
           <br></br>
           <br></br>
           Fix: Make them one category and have subcategories for searching through projects easily or on the project page having a buzz “someone else” button in addition to a join project button. 
@@ -858,6 +863,11 @@ const LocalHive = () => {
       <hr className="solid"></hr>
       <br></br>
       <h2>Final Prototype</h2>
+      <div className="video-vertical" style={{ height: '60%' }}>
+        <video controls autoPlay muted>
+          <source src={fullAppVideoUrl} type="video/mp4" />
+        </video>
+      </div>
       <p>
         We launched our <a target='_blank' rel='noopener noreferrer' href={FIGMA_FINAL_URL}>final Figma prototype</a> in an end-of-quarter project fair.
         <br></br>
@@ -878,18 +888,6 @@ const LocalHive = () => {
       <p>
         I was proud that in just 10 weeks, we started from a nebulous idea of strengthening communities and worked all the way to a robust prototype that we could present to dozens of people. If there had been more time, we would have loved to take our app to the next level by piloting in a real community for ecological validity, building a minimum viable product, then launching a pilot internationally; but, alas, we had other projects to move onto. Still, we could "bee" happy that we got as far as we did in such a short period.
       </p>
-      <br></br>
-      <hr className="solid"></hr>
-      <br></br>
-      <h2>Try Our Prototype</h2>
-      <iframe
-        style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
-        width="800px"
-        height="450px"
-        src={FIGMA_EMBED_URL}
-        allowFullScreen
-      >This Figma prototype does not support embedding.</iframe>
-      <br></br>
       <br></br>
       <hr className="solid"></hr>
       <br></br>
