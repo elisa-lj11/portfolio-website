@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background-color: #16122b; /* Dark blackish-purple background */
+  background: linear-gradient(black, #16122b); /* Dark blackish-purple background */
   color: white; /* White text color */
   height: 100vh; /* Full viewport height */
   display: flex;
@@ -27,6 +27,7 @@ header {
   background: black;
   color: white;
   z-index: 100; /* Ensure the header stays above content */
+  border-bottom: 2px solid #db13bd;
 }
 
 main {
