@@ -1,5 +1,5 @@
 // src/pages/LocalHive.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
 import fullAppVideoUrl from '../assets/images/local-hive/full-app.mp4';
@@ -45,22 +45,21 @@ const FIGMA_EMBED_URL = 'https://embed.figma.com/proto/3kFM2Rku8FVGHng69FMslw/Mi
 // Figma Embed API 1.0, outdated // const FIGMA_EMBED_URL = 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/3kFM2Rku8FVGHng69FMslw/MidFi-(Final-Draft)?node-id=7-8&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share';
 
 const LocalHive = () => {
-  const refs = [
-    { id: 'background-research', label: 'Background Research' },
-    { id: 'needfinding', label: 'Needfinding'},
-    { id: 'pov-hmw', label: 'POVs and HMWs'},
-    { id: 'solution-ideation', label: 'Solution Ideation'},
-    { id: 'experience-prototypes', label: 'Experience Prototypes'},
-    { id: 'low-fi-prototype', label: 'Low Fidelity Prototype'},
-    { id: 'med-fi-prototype', label: 'Medium Fidelity Prototype'},
-    { id: 'user-research', label: 'User Research'},
-    { id: 'final-prototype', label: 'Final Prototype'},
-    { id: 'learnings', label: 'Learnings'},
-    { id: 'works-cited', label: 'Works Cited'}
-  ];
+  const [refs, setRefs] = useState([]);
+
+  // Function to be used in PageTemplate and passed down
+  const generateRefsFromDOM = (generateRefsFunction) => {
+    generateRefsFunction();  // Call the function that scans the DOM and sets the refs
+  };
 
   return (
-    <PageTemplate title='"Local Hive": A Human-Centered AI Project' refs={refs}>
+    <PageTemplate
+      title='"Local Hive": A Human-Centered AI Project' 
+      refs={refs} 
+      setRefs={setRefs} 
+      generateRefsFromDOM={generateRefsFromDOM}
+    >
+    <>
       <h3>Completed June 2019</h3>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         <iframe
@@ -82,7 +81,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='background-research'>
+      <div className="section" id='background-research'>
         <h2>Background Research</h2>
         <p>
           Since the goal of the class was to develop a project using human-centered AI to address global challenges, we wanted to apply our technical skills for social good. One of our team members was from Colombia, so we began researching issues in the region. We quickly identified the pressing need to address the impacts of conflict and violence, particularly how these crises affect social infrastructure and community cohesion.
@@ -97,7 +96,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='needfinding'>
+      <div className="section" id='needfinding'>
         <h2>Needfinding</h2>
         <p>
           We interviewed 8 people in total: 2 from Buenaventura, Colombia and 6 from Palo Alto, California, some of which self-identified as "community leaders" and others as "community members." We wanted to get a sense of the differences between disparate communities, so we hoped that by reaching out to folks in Buenaventura, we could break out of our own Palo Alto bubble.
@@ -220,8 +219,8 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='pov-hmw'>
-        <h2>"Point of View" and "How Might We?" Statements</h2>
+      <div className="section" id='pov-hmw'>
+        <h2>"POV"s and "HMW"s</h2>
         <p>
           We collected the following 3 points of view from a subset of our interviewees:
         </p>
@@ -280,7 +279,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='solution-ideation'>
+      <div className="section" id='solution-ideation'>
         <h2>Solution Ideation</h2>
         <p>
           We launched another sticky note brainstorm session, this time generating 48 ideas for our 3 HMW groups.
@@ -318,7 +317,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='experience-prototypes'>
+      <div className="section" id='experience-prototypes'>
         <h2>Experience Prototypes</h2>
         <p>
           We developed 3 experience prototypes based on the outcomes of our solution ideation exercise. For each prototype, we tested a hypothesis over a short week-long timeframe and analyzed our assumptions based on testing results.
@@ -418,7 +417,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='low-fi-prototype'>
+      <div className="section" id='low-fi-prototype'>
         <h2>Low Fidelity Prototype</h2>
         <p>
           At this point in our project, we branded ourselves as <b>Local Hive</b> and described our mission/problem/solution/value proposition:
@@ -592,7 +591,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='med-fi-prototype'>
+      <div className="section" id='med-fi-prototype'>
         <h2>Medium Fidelity Prototype</h2>
         <p>
           Going into our med-fi prototype development, we brought a few changes from low-fi testing:
@@ -823,7 +822,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='user-research'>
+      <div className="section" id='user-research'>
         <h2>User Research</h2>
         <p>
           The goal of our user research was to gather feedback on how effectively the prototype addressed issues related to creating and joining community projects. We also aimed to ensure that the app's concepts (Hive, HoneyMoney, Buzz, etc.) were clear and useful, and that the information size and overall design were appropriate and visually appealing to users.
@@ -892,7 +891,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='final-prototype'>
+      <div className="section" id='final-prototype'>
         <h2>Final Prototype</h2>
         <div className="video-vertical" style={{ height: '60%' }}>
           <video controls autoPlay muted>
@@ -923,7 +922,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='learnings'>
+      <div className="section" id='learnings'>
         <h2>Learnings</h2>
         <ul>
           <li>
@@ -939,7 +938,7 @@ const LocalHive = () => {
       <br></br>
       <hr className="solid"></hr>
       <br></br>
-      <div id='works-cited'>
+      <div className="section" id='works-cited'>
         <h2>Works Cited</h2>
         <ul>
           <li>
@@ -950,6 +949,7 @@ const LocalHive = () => {
           </li>
         </ul>
       </div>
+    </>
     </PageTemplate>
   );
 };

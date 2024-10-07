@@ -37,7 +37,7 @@ header {
   flex: 1;
   text-align: center;
   margin: 0 auto; /* Center the dropdown */
-  width: auto;
+  max-width: auto;
   padding: 5px;
   border-radius: 5px; /* Rounded corners */
   position: relative; /* Positioning for dropdown items if needed */

@@ -5,7 +5,7 @@ import '../assets/style/PageTemplate.css'; // Import the CSS file
 
 import galaxyImageUrl from '../assets/images/galaxy.png';
 
-const PageTemplate = ({ title, refs, children }) => {
+const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) => {
   const navigate = useNavigate(); // Hook to programmatically navigate
   const [selectedSection, setSelectedSection] = useState(''); // To keep track of the selected section
   const [jumpScroll, setJumpScroll] = useState(false); // Track if a scroll is manual
@@ -13,6 +13,26 @@ const PageTemplate = ({ title, refs, children }) => {
   const goHome = () => {
     navigate('/'); // Navigate to the home page
   };
+
+  // Function to search DOM for div elements and generate refs array
+  const generateRefsFromDOMInternal = () => {
+    const divs = document.querySelectorAll('div.section'); // Select all div section elements
+    const newRefs = Array.from(divs).map((div) => {
+      const h2 = div.querySelector('h2');
+      return {
+        id: div.id,
+        label: h2 ? h2.textContent : div.id // Use h2 text if available, otherwise use the div id
+      };
+    });
+    setRefs(newRefs); // Update refs
+  };
+
+  useEffect(() => {
+    if (generateRefsFromDOM) {
+      generateRefsFromDOM(generateRefsFromDOMInternal); // Call internal function
+    }
+    // Empty dependency array ensures this effect runs only on mount
+  }, []);
 
   const handleScroll = (event) => {
     const targetId = event.target.value; // Get the selected value from the dropdown
