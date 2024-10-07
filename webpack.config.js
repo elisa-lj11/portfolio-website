@@ -18,6 +18,16 @@ module.exports = {
     hot: true,
     liveReload: true,
     historyApiFallback: true,
+    client: {
+      overlay: {
+        runtimeErrors: error => {
+          const ignoreErrors = [
+            'ResizeObserver loop completed with undelivered notifications.'
+          ]
+          return !ignoreErrors.includes(error.message)
+        }
+      }
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
