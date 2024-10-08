@@ -60,8 +60,8 @@ const Home = () => {
   let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
 
   // Default positions for desktop and mobile
-  const DEFAULT_DESKTOP_CAMERA_POSITION = new THREE.Vector3(0, 1, 5);
-  const DEFAULT_MOBILE_CAMERA_POSITION = new THREE.Vector3(-0.66, 5.55, 7);
+  const DEFAULT_DESKTOP_CAMERA_POSITION = new THREE.Vector3(-1.32, 2.64, -4.12);
+  const DEFAULT_MOBILE_CAMERA_POSITION = new THREE.Vector3(-7.54, 7.94, 2.59);
   let defaultCameraPosition; // Will be set in useEffect()
 
   // Store the animation frame for cleanup later
@@ -98,6 +98,8 @@ const Home = () => {
 
       // Render the scene
       renderer.render(scene, camera);
+
+      //console.log("Camera position: x: " + camera.position.x + ", y: " + camera.position.y + ", z: " + camera.position.z);
     };
 
     // Start the animation loop and trigger fade-in
