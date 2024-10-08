@@ -1,18 +1,22 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
   entry: './index.js',
-  mode: 'development',
+  mode: isDevelopment ? 'development' : 'production',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
+    publicPath: '/portfolio-website/',
   },
   target: 'web',
   devServer: {
     port: '5000',
     static: {
-      directory: path.join(__dirname, 'public')
+      directory: path.join(__dirname, 'build')
     },
     open: true,
     hot: true,
@@ -59,11 +63,23 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(glb|gltf)$/, // Match both .glb and .gltf files if needed
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]', // Keep original path and name
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(), // This will clear out the build folder before each new build
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html')
-    })
+      template: path.join(__dirname, 'index.html')
+    }),
   ]
 };

@@ -8,9 +8,14 @@ import Model from './Model'; // Import the Model class
 import '../assets/style/Scene.css'; // Import the external CSS file
 
 // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
-const GALAXY_MODEL = '/models/galaxy_HD.glb';
+import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
 // "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
+import SKYBOX from '../assets/models/milkyway.glb';
+
+/* When 3D assets were still in a 'public' folder
+const GALAXY_MODEL = '/models/galaxy_HD.glb';
 const SKYBOX = '/models/milkyway.glb';
+*/
 
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
