@@ -318,7 +318,7 @@ const Home = () => {
       <div id="instruction-text-mobile">
         <p>
           &gt; Click a celestial body to explore projects<br></br>
-          &gt; Drag and scroll to navigate the space<br></br>
+          &gt; Drag and zoom to navigate the space<br></br>
           &gt; Triple-tap to reset the view
         </p>
       </div>
