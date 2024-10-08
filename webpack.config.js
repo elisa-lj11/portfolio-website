@@ -10,13 +10,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
-    publicPath: '/portfolio/',
+    publicPath: isDevelopment ? '/' : '/portfolio/',
   },
   target: 'web',
   devServer: {
     port: '5000',
     static: {
-      directory: path.join(__dirname, 'build')
+      // Serve from the root directory (or 'public' if your assets are there) in development
+      directory: path.join(__dirname)
     },
     open: true,
     hot: true,
