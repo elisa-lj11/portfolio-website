@@ -288,6 +288,9 @@ const Scene = () => {
       <div id="title">
         <p>You have warped to <b>Elisa's space</b></p>
       </div>
+      <div id="title-mobile">
+        <p>You have warped to <br></br><b>Elisa's space</b></p>
+      </div>
       <div id="instruction-text">
         <p>
           &gt; Click a celestial body to explore projects<br></br>

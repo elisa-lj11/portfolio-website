@@ -53,6 +53,10 @@ body, html, #root {
   height: 10%;
 }
 
+#title-mobile {
+  display: none;
+}
+
 #instruction-text {
   position: absolute;
   bottom: 0%;
@@ -75,7 +79,24 @@ body, html, #root {
 
 @media (pointer:none), (pointer:coarse) {
   #title {
+    display: none;
+  }
+
+  #title-mobile {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
     font-size: 25px;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
   }
 
   #instruction-text {
