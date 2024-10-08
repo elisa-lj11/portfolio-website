@@ -68,3 +68,34 @@ body, html, #root {
   width: auto;
   height: auto;
 }
+
+#instruction-text-mobile {
+  display: none;
+}
+
+@media (pointer:none), (pointer:coarse) {
+  #title {
+    font-size: 25px;
+  }
+
+  #instruction-text {
+    display: none;
+  }
+
+  #instruction-text-mobile {
+    position: absolute; /* Keep it absolute */
+    top: 100px; /* Adjust this value based on the height of the title */
+    left: 5%; /* Align left or center as per the layout */
+    right: 5%; /* Provide some margin on the right */
+    color: white;
+    font-size: 15px;
+    pointer-events: none;
+    z-index: 2;
+    user-select: none;
+    display: flex;
+    justify-content: flex-start; /* Align to start */
+    text-align: left; /* Left align the text */
+    max-width: 90%; /* Limit width for better responsiveness */
+    word-wrap: break-word; /* Break long words */
+  }
+}

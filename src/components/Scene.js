@@ -12,11 +12,6 @@ import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
 // "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
 import SKYBOX from '../assets/models/milkyway.glb';
 
-/* When 3D assets were still in a 'public' folder
-const GALAXY_MODEL = '/models/galaxy_HD.glb';
-const SKYBOX = '/models/milkyway.glb';
-*/
-
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
   const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
@@ -138,6 +133,29 @@ const Scene = () => {
       shouldSmoothReset = true;
       console.log('Camera view has been reset');
     }
+  });
+
+  let tapCount = 0;
+  let lastTapTime = 0;
+  const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
+
+  document.addEventListener('touchstart', event => {
+    const currentTime = new Date().getTime();
+    const timeSinceLastTap  = currentTime - lastTapTime;
+  
+    if (timeSinceLastTap < maxTapInterval) {
+      tapCount++;
+    } else {
+      tapCount = 1; // Reset to single tap if time interval is too long
+    }
+  
+    if (tapCount === 3) {
+      shouldSmoothReset = true;
+      console.log('Camera view has been reset (triple-tap)');
+      tapCount = 0; // Reset tap count after triple tap
+    }
+  
+    lastTapTime = currentTime; // Update the last tap time
   });
 
   useEffect(() => {
@@ -273,8 +291,15 @@ const Scene = () => {
       <div id="instruction-text">
         <p>
           &gt; Click on a celestial body to explore creative manifestations<br></br>
-          &gt; Play around the interactive space with your pointer<br></br>
-          &gt; Press the "Space" key to reset your view
+          &gt; Play around the interactive space by dragging and scrolling<br></br>
+          &gt; Press the "Space" key to reset view
+        </p>
+      </div>
+      <div id="instruction-text-mobile">
+        <p>
+          &gt; Click on a celestial body to explore creative manifestations<br></br>
+          &gt; Play around the interactive space by dragging and zooming<br></br>
+          &gt; Triple-tap to reset view
         </p>
       </div>
     </div>
