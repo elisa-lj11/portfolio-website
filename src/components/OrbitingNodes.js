@@ -48,6 +48,9 @@ class OrbitingNodes {
     // Callback to navigate to node page, defined in Home.js
     this.clickCallback = null;
 
+    // Callback to clean up node-related mouse events, called in Home.js
+    this.cleanupMouseEvents = null;
+
     // Initialize the starting angles for the nodes
     for (let i = 0; i < this.numNodes; i++) {
       this.angles.push((i / this.numNodes) * 2 * Math.PI);

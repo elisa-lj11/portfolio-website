@@ -253,9 +253,14 @@ const Home = () => {
     return () => {
       cancelAnimationFrame(animationFrameId); // Stop animation
 
+      // Clean up event listeners to avoid memory leaks
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('keyup', handleSpaceUp);
       document.removeEventListener('touchstart', handleTouchStart);
+      
+      if (orbitingNodesRef.current && orbitingNodesRef.current.cleanupMouseEvents) {
+        orbitingNodesRef.current.cleanupMouseEvents();
+      }
 
       // Cleanup all objects in the scene
       scene.traverse((object) => {
