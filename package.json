@@ -1,9 +1,9 @@
 {
   "name": "elisa-portfolio-app",
   "version": "1.0.0",
-  "description": "A website format of my project portfolio",
+  "description": "A far-out portfolio of my projects from work, school, and leisure",
   "main": "index.js",
-  "homepage": "https://elisa-lj11.github.io/portfolio-website",
+  "homepage": "https://elisa-lj11.github.io/portfolio",
   "scripts": {
     "start": "webpack-dev-server .",
     "build": "webpack --mode production",

@@ -10,7 +10,7 @@ import './assets/style/fonts.css';
 
 const App = () => {
   // Determine if the app is running on GitHub Pages or locally
-  const basename = process.env.NODE_ENV === 'development' ? '' : '/portfolio-website';
+  const basename = process.env.NODE_ENV === 'development' ? '' : '/portfolio';
 
   return (
     <div className="App">

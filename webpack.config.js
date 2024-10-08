@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
-    publicPath: '/portfolio-website/',
+    publicPath: '/portfolio/',
   },
   target: 'web',
   devServer: {
