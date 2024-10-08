@@ -893,7 +893,7 @@ const LocalHive = () => {
       <div className="section" id='final-prototype'>
         <h2>Final Prototype</h2>
         <div className="video-vertical" style={{ height: '60%' }}>
-          <video controls autoPlay muted>
+          <video controls muted>
             <source src={fullAppVideoUrl} type="video/mp4" />
           </video>
         </div>
