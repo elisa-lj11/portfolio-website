@@ -67,6 +67,9 @@ const Home = () => {
   // Store the animation frame for cleanup later
   let animationFrameId;
 
+  // Will be set in useEffect()
+  let isMobile;
+
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
     const animationLoop = () => {
@@ -75,13 +78,14 @@ const Home = () => {
       // Update orbiting nodes
       orbitingNodes.updateNodes(camera);
 
-      const hoveredNode = orbitingNodes.getHoveredNode(camera); // Get the hovered node
+      const hoveredNode = orbitingNodes.getHoveredNode(); // Get the hovered node
       const hoveredNodeTitle = orbitingNodes.getHoveredNodeTitle();
+
       if (hoveredNode) {
         const { x, y } = getScreenPosition(hoveredNode, camera, renderer);
         labelDiv.style.left = `${x}px`;
         labelDiv.style.top = `${y}px`;
-        labelDiv.textContent = hoveredNodeTitle; // Set the node name
+        labelDiv.textContent = hoveredNodeTitle;
         labelDiv.style.display = 'block';
       } else {
         labelDiv.style.display = 'none';
@@ -174,13 +178,11 @@ const Home = () => {
     mountRef.current.appendChild(renderer.domElement);
 
     // Media query to check for devices with no precise pointer or coarse pointer (e.g., touchscreens)
-    const isOnMobile = window.matchMedia('(pointer:none), (pointer:coarse)');
+    isMobile = window.matchMedia('(pointer:none), (pointer:coarse)').matches;
     defaultCameraPosition = DEFAULT_DESKTOP_CAMERA_POSITION;
 
     // Change default camera position for mobile devices
-    if (isOnMobile.matches) {
-      defaultCameraPosition = DEFAULT_MOBILE_CAMERA_POSITION;
-    }
+    defaultCameraPosition = isMobile ? DEFAULT_MOBILE_CAMERA_POSITION : DEFAULT_DESKTOP_CAMERA_POSITION;
 
     // Set up camera position
     camera.position.copy(defaultCameraPosition);
@@ -210,7 +212,7 @@ const Home = () => {
 
     const loadOrbitingNodes = () => {
       return new Promise((resolve) => {
-        orbitingNodes.createNodes(scene);
+        orbitingNodes.createNodes(scene, isMobile);
         orbitingNodesRef.current = orbitingNodes;
         console.log('Orbiting nodes created and added to scene');
 

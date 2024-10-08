@@ -16,6 +16,7 @@ const App = () => {
     <div className="App">
       <Router basename={basename}>
         <Routes>
+          {/* Update node map in OrbitingNodes.js with new routes */}
           <Route path="/" element={< Home />} />
           <Route path="/strivr" element={< Strivr />} />
           <Route path="/local-hive" element={< LocalHive />} />

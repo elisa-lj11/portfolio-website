@@ -15,10 +15,11 @@ class OrbitingNodes {
     this.finalRadius = 3.2;
     this.numNodes = this.nodeTitles.size;
     this.orbitRadius = this.startRadius; // Orbit radius starts from 0 and expands
-    this.rotationSpeed = 0.5; // Speed of swirling motion
-    this.baseRotationSpeed = 0.5; // Default rotation speed
+
+    this.baseRotationSpeed = 0.5; // Base rotation speed
     this.slowRotationSpeed = 0.05; // Slower speed when hovering
     this.targetRotationSpeed = this.baseRotationSpeed; // Add a target for smooth lerping
+    this.rotationSpeed = this.baseRotationSpeed; // This is the rotation speed that controls current node motion
     this.lerpSpeed = 0.02; // Adjusted to make lerping smoother
     this.rotationStartDelay = 0.2; // How long to wait before starting the animation
 
@@ -41,6 +42,9 @@ class OrbitingNodes {
     this.shouldBlockMouseUpClick = false;
     this.lastNodeClicked = null;
 
+    // Store the media type when createNodes() is called
+    this.isMobile = null;
+
     // Callback to navigate to node page, defined in Home.js
     this.clickCallback = null;
 
@@ -51,7 +55,16 @@ class OrbitingNodes {
   }
 
   // Function to create orbiting nodes with unique IDs
-  createNodes(scene) {
+  createNodes(scene, isMobile) {
+    this.isMobile = isMobile;
+
+    // Nodes should always rotate slowly on mobile
+    if (isMobile) {
+      this.rotationSpeed = this.slowRotationSpeed;
+      this.targetRotationSpeed = this.slowRotationSpeed;
+      this.baseRotationSpeed = this.slowRotationSpeed;
+    }
+
     const geometry = new THREE.SphereGeometry(0.2, 32, 32);
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
@@ -166,8 +179,9 @@ class OrbitingNodes {
     if (intersects.length > 0) {
       this.hoveredNode = intersects[0].object; // Store the hovered node
 
+      // Hover not supported on mobile
       // Mouse started hovering over a node, delay the speed change
-      if (!this.hovered) {
+      if (!this.isMobile && !this.hovered) {
         this.hovered = true;
         clearTimeout(this.hoverTimeout); // Clear any pending timeout
         this.hoverTimeout = setTimeout(() => {
@@ -177,8 +191,9 @@ class OrbitingNodes {
     } else {
       this.hoveredNode = null; // No nodes are hovered
 
+      // Hover not supported on mobile
       // Mouse stopped hovering, delay switching back to base speed
-      if (this.hovered) {
+      if (!this.isMobile && this.hovered) {
         this.hovered = false;
         clearTimeout(this.hoverTimeout); // Clear any pending timeout
         this.hoverTimeout = setTimeout(() => {
