@@ -1,5 +1,5 @@
-# portfolio
-A far-out portfolio of my projects from work, school, and leisure
+# Elisa's space
+A far-out portfolio of my projects from work, school, and leisure.
 
 ## Setup
 Following this guide: https://dev.to/ivadyhabimana/how-to-create-a-react-app-without-using-create-react-app-a-step-by-step-guide-30nl
