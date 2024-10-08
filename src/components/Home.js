@@ -61,7 +61,7 @@ const Home = () => {
 
   // Default positions for desktop and mobile
   const DEFAULT_DESKTOP_CAMERA_POSITION = new THREE.Vector3(-1.32, 2.64, -4.12);
-  const DEFAULT_MOBILE_CAMERA_POSITION = new THREE.Vector3(-7.54, 7.94, 2.59);
+  const DEFAULT_MOBILE_CAMERA_POSITION = new THREE.Vector3(-6.1, 6, 1.52);
   let defaultCameraPosition; // Will be set in useEffect()
 
   // Store the animation frame for cleanup later
@@ -179,7 +179,6 @@ const Home = () => {
 
     // Media query to check for devices with no precise pointer or coarse pointer (e.g., touchscreens)
     isMobile = window.matchMedia('(pointer:none), (pointer:coarse)').matches;
-    defaultCameraPosition = DEFAULT_DESKTOP_CAMERA_POSITION;
 
     // Change default camera position for mobile devices
     defaultCameraPosition = isMobile ? DEFAULT_MOBILE_CAMERA_POSITION : DEFAULT_DESKTOP_CAMERA_POSITION;
