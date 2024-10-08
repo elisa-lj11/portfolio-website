@@ -139,18 +139,19 @@ const Home = () => {
     controls.update();
   };
 
-  document.addEventListener('keyup', event => {
+  const handleSpaceUp = (event) => {
     if (event.code === 'Space') {
       shouldSmoothReset = true;
       console.log('Camera view has been reset');
     }
-  });
+  }
+  document.addEventListener('keyup', handleSpaceUp);
 
   let tapCount = 0;
   let lastTapTime = 0;
   const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
 
-  document.addEventListener('touchstart', event => {
+  const handleTouchStart = (event) => {
     const currentTime = new Date().getTime();
     const timeSinceLastTap  = currentTime - lastTapTime;
   
@@ -167,7 +168,8 @@ const Home = () => {
     }
   
     lastTapTime = currentTime; // Update the last tap time
-  });
+  }
+  document.addEventListener('touchstart', handleTouchStart);
 
   useEffect(() => {
     // Scene setup
@@ -250,7 +252,10 @@ const Home = () => {
     // Cleanup function when the component unmounts
     return () => {
       cancelAnimationFrame(animationFrameId); // Stop animation
+
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('keyup', handleSpaceUp);
+      document.removeEventListener('touchstart', handleTouchStart);
 
       // Cleanup all objects in the scene
       scene.traverse((object) => {
