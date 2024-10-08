@@ -59,6 +59,11 @@ const Scene = () => {
   const navigate = useNavigate(); // Hook to navigate between routes
   let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
 
+  // Default positions for desktop and mobile
+  const DEFAULT_DESKTOP_CAMERA_POSITION = new THREE.Vector3(0, 1, 5);
+  const DEFAULT_MOBILE_CAMERA_POSITION = new THREE.Vector3(-0.66, 5.55, 7);
+  let defaultCameraPosition; // Will be set in useEffect()
+
   // Store the animation frame for cleanup later
   let animationFrameId;
 
@@ -106,14 +111,14 @@ const Scene = () => {
 
     // Smooth transition of controls target and camera position
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-    camera.position.lerp(new THREE.Vector3(0, 1, 5), 0.05);
+    camera.position.lerp(defaultCameraPosition, 0.05);
 
     // Smooth zoom transition
     camera.zoom = THREE.MathUtils.lerp(camera.zoom, 1, 0.1);
     camera.updateProjectionMatrix();
 
     // Stop when close enough to targets
-    if (camera.position.distanceTo(new THREE.Vector3(0, 1, 5)) < 0.1 &&
+    if (camera.position.distanceTo(defaultCameraPosition) < 0.1 &&
       Math.abs(camera.zoom - 1) < 0.1 &&
       controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
       shouldSmoothReset = false;
@@ -166,8 +171,17 @@ const Scene = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
+    // Media query to check for devices with no precise pointer or coarse pointer (e.g., touchscreens)
+    const isOnMobile = window.matchMedia('(pointer:none), (pointer:coarse)');
+    defaultCameraPosition = DEFAULT_DESKTOP_CAMERA_POSITION;
+
+    // Change default camera position for mobile devices
+    if (isOnMobile.matches) {
+      defaultCameraPosition = DEFAULT_MOBILE_CAMERA_POSITION;
+    }
+
     // Set up camera position
-    camera.position.set(0, 1, 5);
+    camera.position.copy(defaultCameraPosition);
 
     // Initialize lighting (from helper function)
     initializeLighting(scene);
