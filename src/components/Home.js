@@ -1,11 +1,11 @@
-// src/components/Scene.js
+// src/components/Home.js
 import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
 import { useNavigate } from 'react-router-dom';
 import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import Model from './Model'; // Import the Model class
-import '../assets/style/Scene.css'; // Import the external CSS file
+import '../assets/style/Home.css'; // Import the external CSS file
 
 // Purchased from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
@@ -44,7 +44,7 @@ const createNodeLabel = (labelDiv, labelRef) => {
   labelRef.current = labelDiv;
 }
 
-const Scene = () => {
+const Home = () => {
   const mountRef = useRef(null);
   const labelRef = useRef(null);
   const orbitingNodesRef = useRef(null);
@@ -323,4 +323,4 @@ const Scene = () => {
   );
 };
 
-export default Scene;
+export default Home;

@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Scene from './components/Scene';
+import Home from './components/Home';
 import Strivr from './pages/Strivr';
 import LocalHive from './pages/LocalHive';
 import NodeThree from './pages/NodeThree';
@@ -16,7 +16,7 @@ const App = () => {
     <div className="App">
       <Router basename={basename}>
         <Routes>
-          <Route path="/" element={< Scene />} />
+          <Route path="/" element={< Home />} />
           <Route path="/strivr" element={< Strivr />} />
           <Route path="/local-hive" element={< LocalHive />} />
           <Route path="/node3" element={< NodeThree />} />

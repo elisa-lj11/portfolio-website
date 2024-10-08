@@ -41,7 +41,7 @@ class OrbitingNodes {
     this.shouldBlockMouseUpClick = false;
     this.lastNodeClicked = null;
 
-    // Callback to navigate to node page, defined in Scene.js
+    // Callback to navigate to node page, defined in Home.js
     this.clickCallback = null;
 
     // Initialize the starting angles for the nodes
@@ -65,7 +65,7 @@ class OrbitingNodes {
         this.startRadius * Math.sin((i / this.numNodes) * 2 * Math.PI)
       );
 
-      // Assign a unique ID to each node, this is used as the route path to navigate to in Scene.js
+      // Assign a unique ID to each node, this is used as the route path to navigate to in Home.js
       node.userData = { id: `${nodeId}` };
       this.nodes.push(node);
 
