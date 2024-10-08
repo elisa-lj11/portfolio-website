@@ -290,16 +290,16 @@ const Scene = () => {
       </div>
       <div id="instruction-text">
         <p>
-          &gt; Click on a celestial body to explore creative manifestations<br></br>
-          &gt; Play around the interactive space by dragging and scrolling<br></br>
-          &gt; Press the "Space" key to reset view
+          &gt; Click a celestial body to explore projects<br></br>
+          &gt; Drag and scroll to navigate the space<br></br>
+          &gt; Press the "Space" key to reset the view
         </p>
       </div>
       <div id="instruction-text-mobile">
         <p>
-          &gt; Click on a celestial body to explore creative manifestations<br></br>
-          &gt; Play around the interactive space by dragging and zooming<br></br>
-          &gt; Triple-tap to reset view
+          &gt; Click a celestial body to explore projects<br></br>
+          &gt; Drag and scroll to navigate the space<br></br>
+          &gt; Triple-tap to reset the view
         </p>
       </div>
     </div>
