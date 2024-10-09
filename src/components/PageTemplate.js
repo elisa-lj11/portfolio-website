@@ -10,6 +10,8 @@ const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) =
   const [selectedSection, setSelectedSection] = useState(''); // To keep track of the selected section
   const [jumpScroll, setJumpScroll] = useState(false); // Track if a scroll is manual
 
+  const projectName = window.location.hash.split('#/')[1].split('#')[0];
+
   const goHome = () => {
     navigate('/'); // Navigate to the home page
   };
@@ -34,22 +36,30 @@ const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) =
     // Empty dependency array ensures this effect runs only on mount
   }, []);
 
+  const scrollToSection = (targetId) => {
+    const targetElement = document.getElementById(targetId); // Get the element to scroll to
+
+    if (targetElement) {
+      setJumpScroll(true); // Set flag before scroll starts
+
+      // Scroll and update hash without delay
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/#/${projectName}#${targetId}`);
+      setSelectedSection(targetId);
+
+      // Reset manual scroll flag after a delay
+      setTimeout(() => setJumpScroll(false), 800);
+    } else {
+      // If target section doesn't exist, redirect to the base project URL
+      window.history.replaceState(null, '', `#/${projectName}`);
+    }
+  };
+
+  // Handle scroll action from dropdown
   const handleScroll = (event) => {
     const targetId = event.target.value; // Get the selected value from the dropdown
     if (targetId) {
-      const targetElement = document.getElementById(targetId); // Get the element to scroll to
-  
-      if (targetElement) {
-        setJumpScroll(true); // Set flag before scroll starts
-  
-        // Scroll and update hash without delay
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-        window.history.replaceState(null, '', `#${targetId}`);
-        setSelectedSection(targetId);
-  
-        // Reset manual scroll flag after a delay
-        setTimeout(() => setJumpScroll(false), 800);
-      }
+      scrollToSection(targetId);
     }
   };
 
@@ -67,7 +77,7 @@ const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) =
         // If at least one section is visible, set the selected section
         const visibleSection = visibleSections[0].target.id;
         setSelectedSection(visibleSection);
-        window.history.replaceState(null, '', `#${visibleSection}`); // Update the URL hash
+        window.history.replaceState(null, '', `/#/${projectName}#${visibleSection}`); // Update the URL hash
       }
     };
 
@@ -92,6 +102,14 @@ const PageTemplate = ({ title, refs, setRefs, children, generateRefsFromDOM }) =
       observer.disconnect();
     };
   }, [refs, jumpScroll]);
+
+  // Effect to handle initial scrolling based on the URL
+  useEffect(() => {
+    const targetId = window.location.hash.split('#').pop(); // Extract the target ID from the hash
+    if (targetId) {
+      scrollToSection(targetId); // Scroll to the section if found
+    }
+  }, []);
 
   return (
     <div className="page-template">
