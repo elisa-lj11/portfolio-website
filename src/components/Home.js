@@ -12,6 +12,10 @@ import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
 // "Sky Pano - Milkyway" (https://skfb.ly/6BZ67) by MozillaHubs is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
 import SKYBOX from '../assets/models/milkyway.glb';
 
+// To track cursor intersection
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
 // Helper function: Initialize lighting
 const initializeLighting = (scene) => {
   const ambLight = new THREE.AmbientLight(0xc6b5f5, 4);
@@ -29,6 +33,24 @@ const handleResize = (renderer, camera) => {
   renderer.setSize(width, height);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
+};
+
+// Event listener to track mouse position
+const handleMouseMove = (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+};
+
+let isMouseDown = false;
+
+// Event listener to handle mouse down
+const handleMouseDown = (event) => {
+  isMouseDown = true;
+};
+
+// Event listener to handle mouse up
+const handleMouseUp = (event) => {
+  isMouseDown = false;
 };
 
 const labelMap = new Map(); // Map to track existing labelDivs
@@ -109,10 +131,27 @@ const Home = () => {
         // If on desktop, only display node labels when one node is hovered
         if (!isMobile) {
           if (hoveredNode) {
-            nodeLabelDiv.style.display = 'block';
+            document.body.style.cursor = 'pointer'; // Change the cursor to pointer if hovering over a node
+            nodeLabelDiv.style.display = 'block'; // Show node labels
           } else {
-            nodeLabelDiv.style.display = 'none';
+            nodeLabelDiv.style.display = 'none'; // Hide node labels when not hovered
           }
+        }
+
+        // Update the raycaster with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // Check for intersections with the galaxy model
+        const intersects = raycaster.intersectObject(galaxyModel.model);
+
+        if (intersects.length > 0) {
+          if (isMouseDown) {
+            document.body.style.cursor = 'grabbing'; // Galaxy click -> 'grabbing'
+          } else {
+            document.body.style.cursor = 'grab'; // Galaxy hover -> 'grab'
+          }
+        } else if (!hoveredNode) { // Ensure galaxy hover only changes cursor if no node is hovered
+          document.body.style.cursor = 'default'; // Reset cursor
         }
       });
 
@@ -286,6 +325,9 @@ const Home = () => {
     document.addEventListener('touchstart', handleTouchStart);
     document.addEventListener('touchstart', stopSmoothReset);
     document.addEventListener('mousedown', stopSmoothReset);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
 
     // Cleanup function when the component unmounts
     return () => {
@@ -296,6 +338,9 @@ const Home = () => {
       document.removeEventListener('keyup', handleSpaceUp);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('mousedown', stopSmoothReset);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
       
       if (orbitingNodesRef.current && orbitingNodesRef.current.cleanupMouseEvents) {
         orbitingNodesRef.current.cleanupMouseEvents();
