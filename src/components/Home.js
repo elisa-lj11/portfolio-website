@@ -31,8 +31,10 @@ const handleResize = (renderer, camera) => {
   camera.updateProjectionMatrix();
 };
 
+const labelMap = new Map(); // Map to track existing labelDivs
+
 // Helper function: Add a label div to display the node name
-const createNodeLabel = (labelDiv, labelRef) => {
+const createNodeLabel = (labelDiv) => {
   labelDiv.style.position = 'absolute';
   labelDiv.style.color = 'white';
   labelDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -41,15 +43,11 @@ const createNodeLabel = (labelDiv, labelRef) => {
   labelDiv.style.pointerEvents = 'none';
   labelDiv.style.display = 'none'; // Initially hidden
   document.body.appendChild(labelDiv);
-  labelRef.current = labelDiv;
 }
 
 const Home = () => {
   const mountRef = useRef(null);
-  const labelRef = useRef(null);
   const orbitingNodesRef = useRef(null);
-  const labelDiv = document.createElement('div');
-  createNodeLabel(labelDiv, labelRef);
 
   const galaxyModel = new Model(GALAXY_MODEL, 2.8); // Instantiate the galaxy with the Model class
   const skyboxModel = new Model(SKYBOX, 100); // Instantiate the galaxy skybox with the Model class
@@ -77,24 +75,46 @@ const Home = () => {
 
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
+    const nodesInfoArray = orbitingNodes.getNodesInfoArray(camera, renderer);
+    
     const animationLoop = () => {
       animationFrameId = requestAnimationFrame(animationLoop);
 
       // Update orbiting nodes
       orbitingNodes.updateNodes(camera);
 
-      const hoveredNode = orbitingNodes.getHoveredNode(); // Get the hovered node
-      const hoveredNodeTitle = orbitingNodes.getHoveredNodeTitle();
+      // Iterate through each node
+      nodesInfoArray.forEach(({ node, nodeLabel }) => {
+        // Check if a labelDiv already exists for this node
+        let nodeLabelDiv = labelMap.get(node.userData.id);
 
-      if (hoveredNode) {
-        const { x, y } = getScreenPosition(hoveredNode, camera, renderer);
-        labelDiv.style.left = `${x}px`;
-        labelDiv.style.top = `${y}px`;
-        labelDiv.textContent = hoveredNodeTitle;
-        labelDiv.style.display = 'block';
-      } else {
-        labelDiv.style.display = 'none';
-      }
+        if (!nodeLabelDiv) {
+          // Create a new label if it doesn't exist
+          nodeLabelDiv = document.createElement('div');
+          createNodeLabel(nodeLabelDiv);
+          labelMap.set(node.userData.id, nodeLabelDiv); // Store in the map
+        }
+
+        // Get node's screen position
+        const { x, y } = getScreenPosition(node, camera, renderer);
+
+        // Update the label position and content
+        nodeLabelDiv.style.left = `${x}px`;
+        nodeLabelDiv.style.top = `${y}px`;
+        nodeLabelDiv.textContent = nodeLabel;
+        nodeLabelDiv.style.display = 'block'; // Ensure the label is visible
+
+        const hoveredNode = orbitingNodes.getHoveredNode(); // Get the hovered node
+
+        // If on desktop, only display node labels when one node is hovered
+        if (!isMobile) {
+          if (hoveredNode) {
+            nodeLabelDiv.style.display = 'block';
+          } else {
+            nodeLabelDiv.style.display = 'none';
+          }
+        }
+      });
 
       // Update the animation mixer from the model
       galaxyModel.updateAnimations();
@@ -303,7 +323,11 @@ const Home = () => {
       // Dispose of the renderer and remove the DOM element
       renderer.dispose();
 
-      document.body.removeChild(labelDiv);
+      // Remove the div elements for each node label
+      labelMap.forEach((labelDiv, nodeId) => {
+        document.body.removeChild(labelDiv);
+      });
+      labelMap.clear();
 
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);

@@ -92,19 +92,24 @@ class OrbitingNodes {
 
       i++;
     }
-
   }
 
+  // Returns all the nodes and their associated label to Home.js
+  getNodesInfoArray() {
+    let nodesInfoArray = [];
+    this.nodes.forEach((node, index) => {
+      let nodeLabel = this.nodeTitles.get(node.userData.id);
+
+      let nodeInfo = { node, nodeLabel };
+      nodesInfoArray.push(nodeInfo);
+    });
+
+    return nodesInfoArray;
+  }
+
+  // Returns the node that is currently being hovered or null if no node is hovered
   getHoveredNode() {
     return this.hoveredNode;
-  }
-
-  getHoveredNodeTitle() {
-    if (this.hoveredNode != null)
-    {
-      return this.nodeTitles.get(String(this.hoveredNode.userData.id));
-    }
-    return null;
   }
 
   // Set up mouse event listeners for detecting clicks
