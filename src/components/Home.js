@@ -145,6 +145,7 @@ const Home = () => {
     controls.update();
   };
 
+  // Event callback to reset view when space key is pressed
   const handleSpaceUp = (event) => {
     if (event.code === 'Space') {
       shouldSmoothReset = true;
@@ -152,6 +153,7 @@ const Home = () => {
     }
   }
 
+  // Event callback to reset view when screen is triple-tapped
   const handleTouchStart = (event) => {
     const currentTime = new Date().getTime();
     const timeSinceLastTap  = currentTime - lastTapTime;
@@ -171,7 +173,7 @@ const Home = () => {
     lastTapTime = currentTime; // Update the last tap time
   }
 
-  // Event listener to stop smooth reset on mouse/touch interruption
+  // Event callback to stop smooth reset on mouse/touch interruption
   const stopSmoothReset = () => {
     // Check if a smooth reset is happening (=true) and
     // (edge case check) that the tap count was reset to 0 on mobile since
