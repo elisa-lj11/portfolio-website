@@ -45,6 +45,11 @@ const createNodeLabel = (labelDiv, labelRef) => {
 }
 
 const Home = () => {
+  const shouldSmoothResetRef = useRef(false);
+  const tapCountRef = useRef(0);
+  const lastTapTimeRef = useRef(0); // Use ref to store the last tap time
+  const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
+
   const mountRef = useRef(null);
   const labelRef = useRef(null);
   const orbitingNodesRef = useRef(null);
@@ -57,7 +62,6 @@ const Home = () => {
 
   const [isFading, setIsFading] = useState(true); // State to control fade
   const navigate = useNavigate(); // Hook to navigate between routes
-  let shouldSmoothReset = false; // shouldSmoothReset is checked during animate frames
 
   // Default positions for desktop and mobile
   const DEFAULT_DESKTOP_CAMERA_POSITION = new THREE.Vector3(-1.32, 2.64, -4.12);
@@ -95,7 +99,7 @@ const Home = () => {
       galaxyModel.updateAnimations();
 
       // Run the smooth reset if triggered
-      if (shouldSmoothReset) doSmoothReset(camera, controls);
+      if (shouldSmoothResetRef.current) doSmoothReset(camera, controls);
 
       // Update the controls
       controls.update();
@@ -113,7 +117,8 @@ const Home = () => {
 
   // Smooth reset function also needs to be defined outside of useEffect
   const doSmoothReset = (camera, controls) => {
-    if (!shouldSmoothReset) return;
+    // Only run if shouldSmoothReset is true
+    if (!shouldSmoothResetRef.current) return;
 
     // Smooth transition of controls target and camera position
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
@@ -127,50 +132,54 @@ const Home = () => {
     if (camera.position.distanceTo(defaultCameraPosition) < 0.1 &&
       Math.abs(camera.zoom - 1) < 0.1 &&
       controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
-      shouldSmoothReset = false;
+        shouldSmoothResetRef.current = false;
 
-      // Remove angular limits after reset
-      controls.minAzimuthAngle = -Infinity;
-      controls.maxAzimuthAngle = Infinity;
-      controls.minPolarAngle = 0;
-      controls.maxPolarAngle = Math.PI;
-    }
+        // Remove angular limits after reset
+        controls.minAzimuthAngle = -Infinity;
+        controls.maxAzimuthAngle = Infinity;
+        controls.minPolarAngle = 0;
+        controls.maxPolarAngle = Math.PI;
+      }
 
     controls.update();
   };
 
   const handleSpaceUp = (event) => {
     if (event.code === 'Space') {
-      shouldSmoothReset = true;
+      shouldSmoothResetRef.current = true;
       console.log('Camera view has been reset');
     }
   }
-  document.addEventListener('keyup', handleSpaceUp);
-
-  let tapCount = 0;
-  let lastTapTime = 0;
-  const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
 
   const handleTouchStart = (event) => {
     const currentTime = new Date().getTime();
-    const timeSinceLastTap  = currentTime - lastTapTime;
+    const timeSinceLastTap  = currentTime - lastTapTimeRef.current;
   
     if (timeSinceLastTap < maxTapInterval) {
-      tapCount++;
+      tapCountRef.current++;
     } else {
-      tapCount = 1; // Reset to single tap if time interval is too long
+      tapCountRef.current = 1 // Reset to single tap if time interval is too long
     }
   
-    if (tapCount === 3) {
-      shouldSmoothReset = true;
+    if (tapCountRef.current === 3) {
+      shouldSmoothResetRef.current = true;
       console.log('Camera view has been reset (triple-tap)');
-      tapCount = 0; // Reset tap count after triple tap
+      tapCountRef.current = 0; // Reset tap count after triple tap
     }
   
-    lastTapTime = currentTime; // Update the last tap time
+    lastTapTimeRef.current = currentTime; // Update the last tap time
   }
-  document.addEventListener('touchstart', handleTouchStart);
 
+  // Event listener to stop smooth reset on mouse/touch interruption
+  const stopSmoothReset = () => {
+    // Check if a smooth reset is happening (=true) and
+    // (edge case check) that the tap count was reset to 0 on mobile since
+    // each tap increases the tap counter past 0 except when a smooth reset is triggered
+    if (shouldSmoothResetRef.current && !(tapCountRef.current === 0 && isMobile)) {
+      shouldSmoothResetRef.current = false;
+    }
+  };
+  
   useEffect(() => {
     // Scene setup
     const scene = new THREE.Scene();
@@ -249,6 +258,12 @@ const Home = () => {
     // Handle window resize
     window.addEventListener('resize', () => handleResize(renderer, camera));
 
+    // Interaction event listeners
+    document.addEventListener('keyup', handleSpaceUp);
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchstart', stopSmoothReset);
+    document.addEventListener('mousedown', stopSmoothReset);
+
     // Cleanup function when the component unmounts
     return () => {
       cancelAnimationFrame(animationFrameId); // Stop animation
@@ -257,6 +272,7 @@ const Home = () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('keyup', handleSpaceUp);
       document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('mousedown', stopSmoothReset);
       
       if (orbitingNodesRef.current && orbitingNodesRef.current.cleanupMouseEvents) {
         orbitingNodesRef.current.cleanupMouseEvents();
