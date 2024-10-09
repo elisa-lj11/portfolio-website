@@ -45,11 +45,6 @@ const createNodeLabel = (labelDiv, labelRef) => {
 }
 
 const Home = () => {
-  const shouldSmoothResetRef = useRef(false);
-  const tapCountRef = useRef(0);
-  const lastTapTimeRef = useRef(0); // Use ref to store the last tap time
-  const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
-
   const mountRef = useRef(null);
   const labelRef = useRef(null);
   const orbitingNodesRef = useRef(null);
@@ -73,6 +68,12 @@ const Home = () => {
 
   // Will be set in useEffect()
   let isMobile;
+
+  // Used in camera view smooth reset functionality
+  let shouldSmoothReset = false;
+  let tapCount = 0;
+  let lastTapTime = 0;
+  const maxTapInterval = 300; // Maximum interval between taps (in milliseconds)
 
   // Animation loop needs to be defined outside of useEffect to be accessible
   const animate = (scene, camera, controls, renderer, galaxyModel) => {
@@ -99,7 +100,7 @@ const Home = () => {
       galaxyModel.updateAnimations();
 
       // Run the smooth reset if triggered
-      if (shouldSmoothResetRef.current) doSmoothReset(camera, controls);
+      if (shouldSmoothReset) doSmoothReset(camera, controls);
 
       // Update the controls
       controls.update();
@@ -118,7 +119,7 @@ const Home = () => {
   // Smooth reset function also needs to be defined outside of useEffect
   const doSmoothReset = (camera, controls) => {
     // Only run if shouldSmoothReset is true
-    if (!shouldSmoothResetRef.current) return;
+    if (!shouldSmoothReset) return;
 
     // Smooth transition of controls target and camera position
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
@@ -132,7 +133,7 @@ const Home = () => {
     if (camera.position.distanceTo(defaultCameraPosition) < 0.1 &&
       Math.abs(camera.zoom - 1) < 0.1 &&
       controls.target.distanceTo(new THREE.Vector3(0, 0, 0)) < 0.1) {
-        shouldSmoothResetRef.current = false;
+        shouldSmoothReset = false;
 
         // Remove angular limits after reset
         controls.minAzimuthAngle = -Infinity;
@@ -146,28 +147,28 @@ const Home = () => {
 
   const handleSpaceUp = (event) => {
     if (event.code === 'Space') {
-      shouldSmoothResetRef.current = true;
+      shouldSmoothReset = true;
       console.log('Camera view has been reset');
     }
   }
 
   const handleTouchStart = (event) => {
     const currentTime = new Date().getTime();
-    const timeSinceLastTap  = currentTime - lastTapTimeRef.current;
+    const timeSinceLastTap  = currentTime - lastTapTime;
   
     if (timeSinceLastTap < maxTapInterval) {
-      tapCountRef.current++;
+      tapCount++;
     } else {
-      tapCountRef.current = 1 // Reset to single tap if time interval is too long
+      tapCount = 1 // Reset to single tap if time interval is too long
     }
   
-    if (tapCountRef.current === 3) {
-      shouldSmoothResetRef.current = true;
+    if (tapCount === 3) {
+      shouldSmoothReset = true;
       console.log('Camera view has been reset (triple-tap)');
-      tapCountRef.current = 0; // Reset tap count after triple tap
+      tapCount = 0; // Reset tap count after triple tap
     }
   
-    lastTapTimeRef.current = currentTime; // Update the last tap time
+    lastTapTime = currentTime; // Update the last tap time
   }
 
   // Event listener to stop smooth reset on mouse/touch interruption
@@ -175,8 +176,8 @@ const Home = () => {
     // Check if a smooth reset is happening (=true) and
     // (edge case check) that the tap count was reset to 0 on mobile since
     // each tap increases the tap counter past 0 except when a smooth reset is triggered
-    if (shouldSmoothResetRef.current && !(tapCountRef.current === 0 && isMobile)) {
-      shouldSmoothResetRef.current = false;
+    if (shouldSmoothReset && !(tapCount === 0 && isMobile)) {
+      shouldSmoothReset = false;
     }
   };
   
