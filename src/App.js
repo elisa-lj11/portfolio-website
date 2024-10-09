@@ -9,12 +9,9 @@ import NotFound from './pages/NotFound';
 import './assets/style/fonts.css';
 
 const App = () => {
-  // Determine if the app is running on GitHub Pages or locally
-  const basename = process.env.NODE_ENV === 'development' ? '' : '/portfolio';
-
   return (
     <div className="App">
-      <Router basename={basename}>
+      <Router>
         <Routes>
           {/* Update node map in OrbitingNodes.js with new routes */}
           <Route path="/" element={< Home />} />
@@ -25,7 +22,6 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-      
     </div>
   );
 }
