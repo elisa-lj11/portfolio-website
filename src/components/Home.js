@@ -337,6 +337,7 @@ const Home = () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('keyup', handleSpaceUp);
       document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchstart', stopSmoothReset);
       document.removeEventListener('mousedown', stopSmoothReset);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mousedown', handleMouseDown);
