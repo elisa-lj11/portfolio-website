@@ -24,6 +24,7 @@ const SOUNDCLOUD_URL = 'https://soundcloud.com/djbudgiebeats';
 const SPOTIFY_URL = 'https://open.spotify.com/user/5eakug67hyf80pi6igg30qmcg?si=0c3213f09cad4704';
 
 const FUTURAMA_QUOTE_VIDEO_EMBED_URL ='https://www.youtube.com/embed/VofkquwmT40?si=pWm2IUDGlIcW0Ilw&amp;start=34';
+const ZOOX_URL = 'https://zoox.com/';
 const WWOOF_URL = 'https://wwoof.net/';
 const STARDEW_URL = 'https://www.stardewvalley.net/';
 const EXPLORATORIUM_URL ='https://www.exploratorium.edu/';
@@ -189,6 +190,16 @@ const WhoAmI = () => {
       <hr className="solid"></hr>
       <div className="section" id='experience'>
         <h2>Experience</h2>
+        <h3>Zoox</h3>
+        <i>May 2026 - August 2026</i>
+        <p>
+          The summer after my first year at Berkeley, I worked at <a target='_blank' rel='noopener noreferrer' href={ZOOX_URL}>Zoox</a>, a robotaxi company building autonomous vehicles from the ground up, as a Creative Technologist intern on the Experience Design team, where I supported the team's design work on in-vehicle rider experiences by developing interactive software and hardware prototypes. The prototyping tools I created accelerated prototype building and iteration alongside designers, covering everything from designing and previewing animations and audio to deploying them to hardware.
+        </p>
+        <p>
+          I collaborated closely with designers, researchers, and engineers to translate concepts into testable demos, and I contributed to internal design reviews and cross-functional presentations that helped the team evaluate and refine experience concepts. Working in a fast-paced physical product environment, I developed skills in rapid prototyping, tooling development, hardware experimentation, cross-disciplinary collaboration, and AI-augmented workflows.
+        </p>
+        <br />
+        <br />
         <h3>Funemployment</h3>
         <i>February 2024 - July 2025</i>
         <br/>
