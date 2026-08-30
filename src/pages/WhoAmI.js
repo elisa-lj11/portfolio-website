@@ -39,6 +39,7 @@ const VHIL_URL = 'https://vhil.stanford.edu/';
 const EMPATHY_VHIL_URL = 'https://vhil.stanford.edu/projects/2020/empathy-and-perspective-taking';
 const BERKELEY_URL = 'https://www.berkeley.edu/';
 const MDES_URL = 'https://design.berkeley.edu/about-mdes';
+const BCNM_URL = 'https://bcnm.berkeley.edu/news-research/6574/new-media-de-certificate-cohort-fall-2026';
 const STANFORD_URL = 'https://www.stanford.edu/';
 const SYMSYS_URL = 'https://symsys.stanford.edu/';
 
@@ -177,6 +178,9 @@ const WhoAmI = () => {
         <i>August 2025 - December 2026 (expected)</i>
         <p>
           I am a master's student at the <a target='_blank' rel='noopener noreferrer' href={BERKELEY_URL}>University of California, Berkeley</a> in the <a target='_blank' rel='noopener noreferrer' href={MDES_URL}>Master of Design</a> program, which emphasizes a critical approach to design and social practice to address the new realities of emerging technologies. Through this program, I aim to explore human-centered design, human-computer interaction, and user interface design, with a focus on creating innovative physical-digital interfaces that facilitate interpersonal connections.
+        </p>
+        <p>
+          Alongside my master's degree, I am also obtaining a <a target='_blank' rel='noopener noreferrer' href={BCNM_URL}>Graduate Certificate in New Media</a> through the Berkeley Center for New Media, which situates my design practice within the critical and historical study of emerging media technologies.
         </p>
         <br />
         <br />
