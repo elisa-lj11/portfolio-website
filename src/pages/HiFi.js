@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import hifiOverviewImageUrl from '../assets/images/hifi/hifi-overview.jpg';
-import claraImageUrl from '../assets/images/hifi/clara-io-hifi.jpg';
-import pillThumbnailImageUrl from '../assets/images/hifi/pill-thumbnail.png';
+import hifiOverviewImageUrl from '../assets/images/hifi/hifi-overview.webp';
+import claraImageUrl from '../assets/images/hifi/clara-io-hifi.webp';
+import pillThumbnailImageUrl from '../assets/images/hifi/pill-thumbnail.webp';
 import pillVideoUrl from '../assets/images/hifi/pill.mp4';
 
 const HIFI_WIKI_URL = 'https://en.wikipedia.org/wiki/High_Fidelity,_Inc.';
@@ -32,7 +32,7 @@ const HiFi = () => {
       <div className="section" id='overview'>
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>High Fidelity: Content Prototyping</h1>
-        <img src={hifiOverviewImageUrl} alt='Hifi Overview' width='100%'/>
+        <img src={hifiOverviewImageUrl} alt='Hifi Overview' width='100%' loading="lazy" decoding="async" />
         <br></br>
         <p>
           I worked as an intern and later as a software engineer at <a target='_blank' rel='noopener noreferrer' href={HIFI_WIKI_URL}>High Fidelity</a>, a startup that formerly focused on social virtual reality. I was part of the Content Prototyping team, where we created new experiences to showcase the potential of the metaverse. Our goal was to inspire users with engaging content while empowering developers through accessible APIs that allowed them to integrate their own creations easily.
@@ -44,7 +44,7 @@ const HiFi = () => {
       <hr className="solid"></hr>
       <div className="section" id='clara'>
         <h2>Clara.io Integration</h2>
-        <img src={claraImageUrl} alt='Clara.io in Hifi' width='100%'/>
+        <img src={claraImageUrl} alt='Clara.io in Hifi' width='100%' loading="lazy" decoding="async" />
         <p>
           I developed an integration to download 3D entities from an external asset library directly through High Fidelity's interface. My project allowed users to access <a target='_blank' rel='noopener noreferrer' href={CLARA_URL}>Clara.io</a> from in-world to pick a model and directly add it to their domain without leaving the application.
         </p>
@@ -126,7 +126,7 @@ const HiFi = () => {
       <div className="section" id='other-content'>
         <h2>Other Content</h2>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={pillThumbnailImageUrl} muted className="responsive-video">
+          <video preload="none" controls poster={pillThumbnailImageUrl} muted className="responsive-video">
             <source src={pillVideoUrl} type="video/mp4" />
           </video>
         </div>

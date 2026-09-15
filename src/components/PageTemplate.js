@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../assets/style/PageTemplate.css'; // Import the CSS file
 
 // Texture from galaxy model: https://skfb.ly/pr8Kx 
-import galaxyImageUrl from '../assets/images/galaxy.png';
+import galaxyImageUrl from '../assets/images/galaxy.webp';
 
 // Custom cursor asset generated with ChatGPT
 import rocketCursor from '../assets/images/rocketship-cursor.png';
@@ -121,7 +121,7 @@ const PageTemplate = ({ refs, setRefs, children, generateRefsFromDOM }) => {
       <header>
         <button className="home" onClick={goHome}>
           &lt;
-          <img src={galaxyImageUrl} className="galaxy-image" width="40px"/>
+          <img src={galaxyImageUrl} className="galaxy-image" width="40px" loading="lazy" decoding="async" />
           <span>Go back to space</span>
         </button>
         <div className="dropdown">

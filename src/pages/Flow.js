@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import flowHeroImageUrl from '../assets/images/flow/flow-hero.png';
-import conceptSketchImageUrl from '../assets/images/flow/concept-sketch.JPEG';
-import breadboardImageUrl from '../assets/images/flow/breadboard.JPEG';
-import componentLayoutImageUrl from '../assets/images/flow/component-layout-sketch.jpg';
-import componentsBoxImageUrl from '../assets/images/flow/components-box.jpg';
-import cardboardOvalImageUrl from '../assets/images/flow/taped-oval.jpg';
-import tableSawImageUrl from '../assets/images/flow/table-saw.jpg';
-import drillPressImageUrl from '../assets/images/flow/drill-press.jpg';
-import componentsInPocketsImageUrl from '../assets/images/flow/components-in-pockets.jpg';
-import beltSanderImageUrl from '../assets/images/flow/belt-sander.jpg';
-import beforeAfterSandingImageUrl from '../assets/images/flow/before-after-sanding.jpg';
-import componentsInPlaceImageUrl from '../assets/images/flow/screwed-components.jpg';
-import touchdesignerImageUrl from '../assets/images/flow/touchdesigner.png';
-import flowInHandImageUrl from '../assets/images/flow/flow-in-hand.JPG';
+import flowHeroImageUrl from '../assets/images/flow/flow-hero.webp';
+import conceptSketchImageUrl from '../assets/images/flow/concept-sketch.webp';
+import breadboardImageUrl from '../assets/images/flow/breadboard.webp';
+import componentLayoutImageUrl from '../assets/images/flow/component-layout-sketch.webp';
+import componentsBoxImageUrl from '../assets/images/flow/components-box.webp';
+import cardboardOvalImageUrl from '../assets/images/flow/taped-oval.webp';
+import tableSawImageUrl from '../assets/images/flow/table-saw.webp';
+import drillPressImageUrl from '../assets/images/flow/drill-press.webp';
+import componentsInPocketsImageUrl from '../assets/images/flow/components-in-pockets.webp';
+import beltSanderImageUrl from '../assets/images/flow/belt-sander.webp';
+import beforeAfterSandingImageUrl from '../assets/images/flow/before-after-sanding.webp';
+import componentsInPlaceImageUrl from '../assets/images/flow/screwed-components.webp';
+import touchdesignerImageUrl from '../assets/images/flow/touchdesigner.webp';
+import flowInHandImageUrl from '../assets/images/flow/flow-in-hand.webp';
 
 const ESP32_URL = 'https://learn.adafruit.com/adafruit-esp32-feather-v2';
 const MPU_URL = 'https://www.adafruit.com/product/3886';
@@ -61,7 +61,9 @@ const Flow = () => {
               src={conceptSketchImageUrl}
               alt='Concept Sketch'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Concept sketch</figcaption>
           </figure>
         </div>
@@ -78,7 +80,9 @@ const Flow = () => {
               src={breadboardImageUrl}
               alt='Breadboard with Components'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Breadboard with components</figcaption>
           </figure>
         </div>
@@ -98,7 +102,9 @@ const Flow = () => {
               src={componentLayoutImageUrl}
               alt='Component Layout Sketch'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Component layout sketch</figcaption>
           </figure>
         </div>
@@ -111,7 +117,9 @@ const Flow = () => {
               src={componentsBoxImageUrl}
               alt='Components Box'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Laser-cut box for components</figcaption>
           </figure>
         </div>
@@ -124,7 +132,9 @@ const Flow = () => {
               src={cardboardOvalImageUrl}
               alt='Cardboard Case Prototype'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Cardboard case prototype</figcaption>
           </figure>
         </div>
@@ -141,7 +151,9 @@ const Flow = () => {
               src={tableSawImageUrl}
               alt='Table Saw'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Table saw</figcaption>
           </figure>
           <figure>
@@ -149,6 +161,8 @@ const Flow = () => {
               src={drillPressImageUrl}
               alt='Drill Press'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Drill press</figcaption>
           </figure>
@@ -159,7 +173,9 @@ const Flow = () => {
               src={componentsInPocketsImageUrl}
               alt='Components in Pockets'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Components in pockets</figcaption>
           </figure>
         </div>
@@ -172,7 +188,9 @@ const Flow = () => {
               src={beltSanderImageUrl}
               alt='Belt Sander'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Belt sander</figcaption>
           </figure>
           <figure>
@@ -180,6 +198,8 @@ const Flow = () => {
               src={beforeAfterSandingImageUrl}
               alt='Before and After Sanding'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Before and after sanding</figcaption>
           </figure>
@@ -193,7 +213,9 @@ const Flow = () => {
               src={componentsInPlaceImageUrl}
               alt='Components in Place'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Components in place</figcaption>
           </figure>
         </div>
@@ -207,7 +229,9 @@ const Flow = () => {
               src={touchdesignerImageUrl}
               alt='TouchDesigner Tweaks'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>TouchDesigner tweaks</figcaption>
           </figure>
         </div>
@@ -218,11 +242,11 @@ const Flow = () => {
       <hr className="solid"></hr>
       <div className="section" id='final-prototype'>
         <h2>Final Prototype</h2>
-        <img src={flowInHandImageUrl} alt='flow In Hand' width='100%'/>
+        <img src={flowInHandImageUrl} alt='flow In Hand' width='100%' loading="lazy" decoding="async" />
         <p>
           The final prototype, named flow, is an embodied, interactive device that translates real-time movement into a beautiful, calming visualization. "flow" responds to rotational movement (pitch and roll) which is mapped to motion between particles within an x-y coordinate plane, all visualized in TouchDesigner. Along with visual feedback, a user receives subtle haptic feedback whenever they move the device, inviting them to explore virtually infinite interactions with the screen and feel present in their bodies.
         </p>
-        <img src={flowHeroImageUrl} alt='flow Hero Shot' width='100%'/>
+        <img src={flowHeroImageUrl} alt='flow Hero Shot' width='100%' loading="lazy" decoding="async" />
         <p>
           All project files are contained in this <a target='_blank' rel='noopener noreferrer' href={PROJECT_FILES_URL}>Google Drive folder</a>.
         </p>

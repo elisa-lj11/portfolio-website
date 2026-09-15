@@ -7,33 +7,33 @@ import { useErrorBoundary } from 'use-error-boundary';
 import STLModel from '../components/STLModel';
 import PageTemplate from '../components/PageTemplate';
 
-import fullCommandSetupThumbnailImageUrl from '../assets/images/spaceship/full-command-setup-thumbnail.png';
+import fullCommandSetupThumbnailImageUrl from '../assets/images/spaceship/full-command-setup-thumbnail.webp';
 import fullCommandSetupVideoUrl from '../assets/images/spaceship/full-command-setup.mp4';
-import environmentIdeationImageUrl from '../assets/images/spaceship/environment-ideation.png';
-import roomWireframeImageUrl from '../assets/images/spaceship/room-wireframe.png';
-import roomInteractionsWireframeImageUrl from '../assets/images/spaceship/room-interactions-wireframe.png';
-import commandDeckWireframeImageUrl from '../assets/images/spaceship/command-deck-wireframe.png';
-import commandDeckConceptImageUrl from '../assets/images/spaceship/command-deck-concept.jpeg';
-import unityYokeTestThumbnailImageUrl from '../assets/images/spaceship/unity-yoke-test.png';
+import environmentIdeationImageUrl from '../assets/images/spaceship/environment-ideation.webp';
+import roomWireframeImageUrl from '../assets/images/spaceship/room-wireframe.webp';
+import roomInteractionsWireframeImageUrl from '../assets/images/spaceship/room-interactions-wireframe.webp';
+import commandDeckWireframeImageUrl from '../assets/images/spaceship/command-deck-wireframe.webp';
+import commandDeckConceptImageUrl from '../assets/images/spaceship/command-deck-concept.webp';
+import unityYokeTestThumbnailImageUrl from '../assets/images/spaceship/unity-yoke-test.webp';
 import unityYokeTestVideoUrl from '../assets/images/spaceship/unity-yoke-test.mp4';
-import commandDeckLabelsImageUrl from '../assets/images/spaceship/command-deck-labels.png';
-import componentListImageUrl from '../assets/images/spaceship/component-list.png';
-import commandDeckLowFiPrototypeImageUrl from '../assets/images/spaceship/command-deck-low-fi-prototype.jpg';
-import commandDeckCadModelImageUrl from '../assets/images/spaceship/command-deck-cad-model.png';
-import commandDeckLaserCutImageUrl from '../assets/images/spaceship/command-deck-laser-cut.jpeg';
-import commandDeckAcrylicImageUrl from '../assets/images/spaceship/command-deck-acrylic.png';
-import orbArduinoImageUrl from '../assets/images/spaceship/orb-arduino.jpg';
-import orbDockImageUrl from '../assets/images/spaceship/orb-dock.jpg';
-import solderImageUrl from '../assets/images/spaceship/solder.png';
-import componentPlacementImageUrl from '../assets/images/spaceship/component-placement.png';
-import teensyWiringImageUrl from '../assets/images/spaceship/teensy-wiring.png';
-import lightStripThumbnailImageUrl from '../assets/images/spaceship/light-strip-thumbnail.png';
+import commandDeckLabelsImageUrl from '../assets/images/spaceship/command-deck-labels.webp';
+import componentListImageUrl from '../assets/images/spaceship/component-list.webp';
+import commandDeckLowFiPrototypeImageUrl from '../assets/images/spaceship/command-deck-low-fi-prototype.webp';
+import commandDeckCadModelImageUrl from '../assets/images/spaceship/command-deck-cad-model.webp';
+import commandDeckLaserCutImageUrl from '../assets/images/spaceship/command-deck-laser-cut.webp';
+import commandDeckAcrylicImageUrl from '../assets/images/spaceship/command-deck-acrylic.webp';
+import orbArduinoImageUrl from '../assets/images/spaceship/orb-arduino.webp';
+import orbDockImageUrl from '../assets/images/spaceship/orb-dock.webp';
+import solderImageUrl from '../assets/images/spaceship/solder.webp';
+import componentPlacementImageUrl from '../assets/images/spaceship/component-placement.webp';
+import teensyWiringImageUrl from '../assets/images/spaceship/teensy-wiring.webp';
+import lightStripThumbnailImageUrl from '../assets/images/spaceship/light-strip-thumbnail.webp';
 import lightStripVideoUrl from '../assets/images/spaceship/light-strip.mp4';
-import roomSetupImageUrl from '../assets/images/spaceship/room-setup.jpg';
-import fullCommandDeckImageUrl from '../assets/images/spaceship/full-command-deck.jpg';
-import fullCommandDeckLitImageUrl from '../assets/images/spaceship/full-command-deck-lit.jpg';
-import roomPlacardImageUrl from '../assets/images/spaceship/room-placard.png';
-import flightInActionThumbnailImageUrl from '../assets/images/spaceship/flight-in-action-thumbnail.png';
+import roomSetupImageUrl from '../assets/images/spaceship/room-setup.webp';
+import fullCommandDeckImageUrl from '../assets/images/spaceship/full-command-deck.webp';
+import fullCommandDeckLitImageUrl from '../assets/images/spaceship/full-command-deck-lit.webp';
+import roomPlacardImageUrl from '../assets/images/spaceship/room-placard.webp';
+import flightInActionThumbnailImageUrl from '../assets/images/spaceship/flight-in-action-thumbnail.webp';
 import flightInActionVideoUrl from '../assets/images/spaceship/flight-in-action.mp4';
 
 import commandDeckModelUrl from '../assets/models/sg-command-deck.stl';
@@ -78,6 +78,8 @@ const Spaceship = () => {
           src={commandDeckCadModelImageUrl}
           alt='Command deck CAD model'
           style={{ width: '100%', display: 'inline-block' }}
+          loading="lazy"
+          decoding="async"
         />
         <figcaption>Command deck CAD model</figcaption>
       </figure>
@@ -99,7 +101,7 @@ const Spaceship = () => {
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>"Scavenger's Gain": From Hotel Room to Spaceship Adventure</h1>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={fullCommandSetupThumbnailImageUrl} muted className="responsive-video">
+          <video preload="none" controls poster={fullCommandSetupThumbnailImageUrl} muted className="responsive-video">
             <source src={fullCommandSetupVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -120,7 +122,7 @@ const Spaceship = () => {
       <hr className="solid"></hr>
       <div className="section" id='ideation'>
         <h2>Ideation</h2>
-        <img src={environmentIdeationImageUrl} alt='Environment ideation' width='80%'/>
+        <img src={environmentIdeationImageUrl} alt='Environment ideation' width='80%' loading="lazy" decoding="async" />
         <p>
           In our experience storyboard sessions, we brainstormed ideas that could incorporate the sustainability theme while also providing a fun and memorable experience for visitors. We landed on the concept of an alien planet expedition since it would allow us to create a visually stunning environment that starkly contrasts with a traditional hotel room, repurpose old junk to appear "extraterrestrial," and, on a more personal note for the lead artist and crew, propel our vision for the sci-fi future as a place where queer and BIPOC folx can express themselves freely and power innovation. We crafted the following story as the backdrop to the experience:
         </p>
@@ -138,6 +140,8 @@ const Spaceship = () => {
               src={roomWireframeImageUrl}
               alt='Hotel room blueprint'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Hotel room blueprint</figcaption>
           </figure>
@@ -148,6 +152,8 @@ const Spaceship = () => {
               src={roomInteractionsWireframeImageUrl}
               alt='Interactions wireframe'
               style={{ width: '75%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Interactions wireframe</figcaption>
           </figure>
@@ -165,6 +171,8 @@ const Spaceship = () => {
               src={commandDeckWireframeImageUrl}
               alt='Command deck wireframe'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Command deck wireframe</figcaption>
           </figure>
@@ -178,6 +186,8 @@ const Spaceship = () => {
               src={commandDeckConceptImageUrl}
               alt='Command deck wireframe'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Command deck concept</figcaption>
           </figure>
@@ -267,7 +277,7 @@ const Spaceship = () => {
           To enable "Manual Flight" mode, we used a custom script to translate input from the plane yoke into pitch and roll values that we applied to the camera. We simulated the spaceship's descent by applying a constant downward speed to the camera until the flight timed out.
         </p>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={unityYokeTestThumbnailImageUrl} muted className="responsive-video">
+          <video preload="none" controls poster={unityYokeTestThumbnailImageUrl} muted className="responsive-video">
             <source src={unityYokeTestVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -297,6 +307,8 @@ const Spaceship = () => {
               src={commandDeckLabelsImageUrl}
               alt='Labeled command deck'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Command deck diagram</figcaption>
           </figure>
@@ -307,6 +319,8 @@ const Spaceship = () => {
               src={componentListImageUrl}
               alt='Component list'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Partial list of components to match to labels</figcaption>
           </figure>
@@ -320,6 +334,8 @@ const Spaceship = () => {
               src={commandDeckLowFiPrototypeImageUrl}
               alt='Command deck low-fidelity prototype'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Command deck low-fidelity prototype</figcaption>
           </figure>
@@ -392,6 +408,8 @@ const Spaceship = () => {
               src={commandDeckLaserCutImageUrl}
               alt='Laser-cut command deck based on model'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Laser-cut command deck based on model</figcaption>
           </figure>
@@ -402,6 +420,8 @@ const Spaceship = () => {
               src={commandDeckAcrylicImageUrl}
               alt='Acrylic surface on the command deck'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Vinyl wrap and acrylic surface on the command deck</figcaption>
           </figure>
@@ -453,6 +473,8 @@ const Spaceship = () => {
               src={orbArduinoImageUrl}
               alt='Orb with Arduinos'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Orb with Arduinos</figcaption>
           </figure>
@@ -461,6 +483,8 @@ const Spaceship = () => {
               src={orbDockImageUrl}
               alt='Orb with dock'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Orb with dock</figcaption>
           </figure>
@@ -471,6 +495,8 @@ const Spaceship = () => {
               src={solderImageUrl}
               alt='Soldering components together'
               style={{ width: '40%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Soldering components together</figcaption>
           </figure>
@@ -481,6 +507,8 @@ const Spaceship = () => {
               src={componentPlacementImageUrl}
               alt='Component placement'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Component placement</figcaption>
           </figure>
@@ -491,6 +519,8 @@ const Spaceship = () => {
               src={teensyWiringImageUrl}
               alt='Teensy wiring'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Teensy wiring</figcaption>
           </figure>
@@ -499,7 +529,7 @@ const Spaceship = () => {
           We powered the components using a multiplexer hooked into a 5-volt power supply. We processed the analog input through three Teensy microcontrollers (one for each command deck section) connected to the desktop running the Unity program. Some components (e.g., LED strips, NeoTrellis, and sliders) were directly processed by the Teensy, which had Arduino code flashed onto it to handle more of the simple input processing.
         </p>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={lightStripThumbnailImageUrl} muted className="responsive-video">
+          <video preload="none" controls poster={lightStripThumbnailImageUrl} muted className="responsive-video">
             <source src={lightStripVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -516,7 +546,7 @@ const Spaceship = () => {
           The setup of "Scavenger's Gain" took place over three days. The experience remained open for three more days, during which we had a constant stream of visitors eager to try out the spaceship experience among other "toxicity alchemization" activities.
         </p>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={flightInActionThumbnailImageUrl} className="responsive-video">
+          <video preload="none" controls poster={flightInActionThumbnailImageUrl} className="responsive-video">
             <source src={flightInActionVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -529,6 +559,8 @@ const Spaceship = () => {
               src={roomSetupImageUrl}
               alt='Full experience setup'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Full experience setup</figcaption>
           </figure>
@@ -539,6 +571,8 @@ const Spaceship = () => {
               src={fullCommandDeckImageUrl}
               alt='Full command deck setup'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Full command deck setup</figcaption>
           </figure>
@@ -549,6 +583,8 @@ const Spaceship = () => {
               src={fullCommandDeckLitImageUrl}
               alt='Full command deck setup (low lighting)'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Full command deck setup (low lighting)</figcaption>
           </figure>
@@ -559,6 +595,8 @@ const Spaceship = () => {
               src={roomPlacardImageUrl}
               alt='Experience placard'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Experience placard</figcaption>
           </figure>

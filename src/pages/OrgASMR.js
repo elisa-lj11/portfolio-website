@@ -7,25 +7,25 @@ import { useErrorBoundary } from 'use-error-boundary';
 import STLModel from '../components/STLModel'; // Import the STL model component
 import PageTemplate from '../components/PageTemplate';
 
-import firstSketchImageUrl from '../assets/images/orgasmr/first-sketch.jpg';
-import protoboard1ImageUrl from '../assets/images/orgasmr/protoboard-1.jpg';
-import protoboard1ThumbnailImageUrl from '../assets/images/orgasmr/protoboard-1-thumbnail.png';
+import firstSketchImageUrl from '../assets/images/orgasmr/first-sketch.webp';
+import protoboard1ImageUrl from '../assets/images/orgasmr/protoboard-1.webp';
+import protoboard1ThumbnailImageUrl from '../assets/images/orgasmr/protoboard-1-thumbnail.webp';
 import protoboard1VideoUrl from '../assets/images/orgasmr/protoboard-1.mp4';
-import protoboard2ImageUrl from '../assets/images/orgasmr/protoboard-2.jpg';
-import orgasmrCadModelImageUrl from '../assets/images/orgasmr/orgasmr-cad-model.png';
-import printImageUrl from '../assets/images/orgasmr/print.jpg';
-import topBottomImageUrl from '../assets/images/orgasmr/top-bottom.jpg';
-import solidworksWireframeImageUrl from '../assets/images/orgasmr/solidworks-wireframe.png';
-import solidworksRingsImageUrl from '../assets/images/orgasmr/solidworks-rings.png';
-import illustratorRingImageUrl from '../assets/images/orgasmr/illustrator-ring.png';
-import laserCutterImageUrl from '../assets/images/orgasmr/laser-cutter.jpg';
-import ringsImageUrl from '../assets/images/orgasmr/rings.jpg';
-import ringsInHandleImageUrl from '../assets/images/orgasmr/rings-in-handle.jpg';
-import solderingImageUrl from '../assets/images/orgasmr/soldering.jpg';
-import finalProtoboardImageUrl from '../assets/images/orgasmr/final-protoboard.jpg';
-import almostAssembledImageUrl from '../assets/images/orgasmr/almost-assembled.jpg';
-import fullyAssembledImageUrl from '../assets/images/orgasmr/fully-assembled.jpg';
-import finalFormImageUrl from '../assets/images/orgasmr/final-form.jpg';
+import protoboard2ImageUrl from '../assets/images/orgasmr/protoboard-2.webp';
+import orgasmrCadModelImageUrl from '../assets/images/orgasmr/orgasmr-cad-model.webp';
+import printImageUrl from '../assets/images/orgasmr/print.webp';
+import topBottomImageUrl from '../assets/images/orgasmr/top-bottom.webp';
+import solidworksWireframeImageUrl from '../assets/images/orgasmr/solidworks-wireframe.webp';
+import solidworksRingsImageUrl from '../assets/images/orgasmr/solidworks-rings.webp';
+import illustratorRingImageUrl from '../assets/images/orgasmr/illustrator-ring.webp';
+import laserCutterImageUrl from '../assets/images/orgasmr/laser-cutter.webp';
+import ringsImageUrl from '../assets/images/orgasmr/rings.webp';
+import ringsInHandleImageUrl from '../assets/images/orgasmr/rings-in-handle.webp';
+import solderingImageUrl from '../assets/images/orgasmr/soldering.webp';
+import finalProtoboardImageUrl from '../assets/images/orgasmr/final-protoboard.webp';
+import almostAssembledImageUrl from '../assets/images/orgasmr/almost-assembled.webp';
+import fullyAssembledImageUrl from '../assets/images/orgasmr/fully-assembled.webp';
+import finalFormImageUrl from '../assets/images/orgasmr/final-form.webp';
 
 import handleModelUrl from '../assets/models/orgasmr-handle.stl';
 
@@ -74,6 +74,8 @@ const OrgASMR = () => {
           src={orgasmrCadModelImageUrl}
           alt='orgASMR handle CAD model'
           style={{ width: '70%', display: 'inline-block' }}
+          loading="lazy"
+          decoding="async"
         />
         <figcaption>orgASMR handle CAD model</figcaption>
       </figure>
@@ -115,7 +117,7 @@ const OrgASMR = () => {
       <hr className="solid"></hr>
       <div className="section" id='ideation'>
         <h2>Ideation</h2>
-        <img src={firstSketchImageUrl} alt='Sketch of orgASMR' width='80%'/>
+        <img src={firstSketchImageUrl} alt='Sketch of orgASMR' width='80%' loading="lazy" decoding="async" />
         <p>
           I wanted to create an instrument that experimented with multiple sensory modalities: sound, kinesthesia, and tactile feedback. I was intrigued by the versatility of the classic "head-scratcher" contraption, which not only required users to move their arm in three dimensions to simulate a head-scratching motion but also featured flexible arms that adjusted to the shape of the user's head. This added a layer of control to modulate the sound produced by the device.
         </p>
@@ -191,19 +193,19 @@ const OrgASMR = () => {
       <hr className="solid"></hr>
       <div className="section" id='wiring'>
         <h2>Wiring</h2>
-        <img src={protoboard1ImageUrl} alt='First protoboard iteration' width='40%'/>
+        <img src={protoboard1ImageUrl} alt='First protoboard iteration' width='40%' loading="lazy" decoding="async" />
         <p>
           I used a protoboard to wire all of the sensors to the Teensy. The video below demonstrates the chord progressions varying with the Teensy's orientation and the frequency changing with the flex sensor movement.
         </p>
         <div className="video-vertical" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={protoboard1ThumbnailImageUrl} className="responsive-video">
+          <video preload="none" controls poster={protoboard1ThumbnailImageUrl} className="responsive-video">
             <source src={protoboard1VideoUrl} type="video/mp4" />
           </video>
         </div>
         <p>
           Once the orgASMR interactions were tested thoroughly with my first prototype, I moved the components to a smaller protoboard that would fit inside the custom handle that I would need to make.
         </p>
-        <img src={protoboard2ImageUrl} alt='Second protoboard iteration' width='40%'/>
+        <img src={protoboard2ImageUrl} alt='Second protoboard iteration' width='40%' loading="lazy" decoding="async" />
       </div>
       <hr className="solid"></hr>
       <div className="section" id='modeling'>
@@ -278,7 +280,9 @@ const OrgASMR = () => {
               src={printImageUrl}
               alt='3D print in progress'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>3D print in progress</figcaption>
           </figure>
           <figure>
@@ -286,6 +290,8 @@ const OrgASMR = () => {
               src={topBottomImageUrl}
               alt='Top and bottom handle parts'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Top and bottom handle parts</figcaption>
           </figure>
@@ -299,6 +305,8 @@ const OrgASMR = () => {
               src={solidworksWireframeImageUrl}
               alt='SolidWorks wireframe'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>SolidWorks wireframe</figcaption>
           </figure>
@@ -307,6 +315,8 @@ const OrgASMR = () => {
               src={solidworksRingsImageUrl}
               alt='Rings in wireframe'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Rings in wireframe</figcaption>
           </figure>
@@ -318,6 +328,8 @@ const OrgASMR = () => {
               src={illustratorRingImageUrl}
               alt='Illustrator ring design'
               style={{ width: '70%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Illustrator ring design</figcaption>
           </figure>
@@ -328,6 +340,8 @@ const OrgASMR = () => {
               src={laserCutterImageUrl}
               alt='Laser cutter in progress'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Laser cutter in progress</figcaption>
           </figure>
@@ -336,6 +350,8 @@ const OrgASMR = () => {
               src={ringsImageUrl}
               alt='Rings result'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Rings result</figcaption>
           </figure>
@@ -346,6 +362,8 @@ const OrgASMR = () => {
               src={ringsInHandleImageUrl}
               alt='Rings placed in handle'
               style={{ width: '50%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Head-scratcher secured to handle with rings</figcaption>
           </figure>
@@ -357,7 +375,7 @@ const OrgASMR = () => {
       <hr className="solid"></hr>
       <div className="section" id='assembly'>
         <h2>Assembly</h2>
-        <img src={solderingImageUrl} alt='Soldering' width='60%'/>
+        <img src={solderingImageUrl} alt='Soldering' width='60%' loading="lazy" decoding="async" />
         <p>
           I only had a bit of soldering left to finish the orgASMR, as the flex sensor was designed to extend from the base and attach to one of the head-scratcher's arms.
         </p>
@@ -370,6 +388,8 @@ const OrgASMR = () => {
               src={finalProtoboardImageUrl}
               alt='Finalized protoboard'
               style={{ width: '80%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Finalized protoboard with Teensy and sensors</figcaption>
           </figure>
@@ -380,6 +400,8 @@ const OrgASMR = () => {
               src={almostAssembledImageUrl}
               alt='Almost assembled orgASMR'
               style={{ width: '80%', display: 'inline-block', marginRight: '2%' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Functional components ready to be loaded into the handle</figcaption>
           </figure>
@@ -388,6 +410,8 @@ const OrgASMR = () => {
               src={fullyAssembledImageUrl}
               alt='Fully assembled orgASMR'
               style={{ width: '80%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Fully assembled orgASMR with a final touch of galaxy duct tape</figcaption>
           </figure>
@@ -396,7 +420,7 @@ const OrgASMR = () => {
       <hr className="solid"></hr>
       <div className="section" id='showcase'>
         <h2>Instrument Showcase</h2>
-        <img src={finalFormImageUrl} alt='Final form of orgASMR' width='80%'/>
+        <img src={finalFormImageUrl} alt='Final form of orgASMR' width='80%' loading="lazy" decoding="async" />
         <p>
           The final performance took place at Stanford's CCRMA building, where dozens of curious attendees explored the orgASMR alongside 16 other student-designed hybrid instruments. The orgASMR withstood the hands and heads of many users throughout the event. The culmination of my work was performing a musical "piece" in front of the audience to showcase the novelty of my instrument. Even my dad attended, and I think he may have cried with what I only hope were tears of joy.
         </p>

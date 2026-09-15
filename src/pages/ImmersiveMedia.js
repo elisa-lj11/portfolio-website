@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import stanfordCardboardVRImageUrl from '../assets/images/immersive-media/stanford-cardboard-vr.jpg';
-import ricohImageUrl from '../assets/images/immersive-media/ricoh-theta-s.jpg';
-import goProRigImageUrl from '../assets/images/immersive-media/go-pro-rig.png';
-import kolorSoftwareImageUrl from '../assets/images/immersive-media/kolor-software.jpg'
+import stanfordCardboardVRImageUrl from '../assets/images/immersive-media/stanford-cardboard-vr.webp';
+import ricohImageUrl from '../assets/images/immersive-media/ricoh-theta-s.webp';
+import goProRigImageUrl from '../assets/images/immersive-media/go-pro-rig.webp';
+import kolorSoftwareImageUrl from '../assets/images/immersive-media/kolor-software.webp'
 
 const RVVR_VIDEO_URL = 'https://youtu.be/oDeCHxmh2_8?si=joE0MeWDsj4K6VbB';
 const RVVR_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/oDeCHxmh2_8?si=UX632hSjpJd3nykh';
@@ -42,7 +42,7 @@ const ImmersiveMedia = () => {
       <div className="section" id='overview'>
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>Immersive Media: An Exploration of 360&deg; Video Experiences</h1>
-        <img src={stanfordCardboardVRImageUrl} alt='Stanford Cardboard VR' width='40%'/>
+        <img src={stanfordCardboardVRImageUrl} alt='Stanford Cardboard VR' width='40%' loading="lazy" decoding="async" />
         <br />
         <p>
           While I was a student at Stanford University, I produced an assortment of 360&deg; video experiences detailed below.
@@ -88,7 +88,7 @@ const ImmersiveMedia = () => {
           In our research to prepare this piece, we discovered that local governments had struggled to balance public safety with providing support for these RV communities, implementing regulations like reduced parking times, and pursuing limited affordable housing projects. Yet, there is no clear solution, and residents of RV communities, like our two interviewees featured in the video, face daily challenges of survival and stability. We hoped to bring their stories to light in a highly impactful yet ethical way.
         </p>
         <h3>Tools</h3>
-        <img src={ricohImageUrl} alt='Ricoh Theta S' width='30%'/>
+        <img src={ricohImageUrl} alt='Ricoh Theta S' width='30%' loading="lazy" decoding="async" />
         <p>
           We used the <a target='_blank' rel='noopener noreferrer' href={RICOH_URL}>Ricoh Theta S</a> (discontinued) to film our mini-documentary. This camera featured two fish-eye lenses, one for each side of the device, to create full 360&deg; videos with minimal intervention. It also included remote recording and live previews through their app, enabling us to effortlessly capture moments and assess the quality of our takes in real time.
         </p>
@@ -137,11 +137,11 @@ const ImmersiveMedia = () => {
           I took the <a target='_blank' rel='noopener noreferrer' href={SLEEP_AND_DREAMS_CLASS_URL}>"Sleep and Dreams"</a> course led by Dr. William Dement and Dr. Rafael Pelayo, both renowned pioneers in sleep medicine research. For our final project, we were tasked with creating an outreach video that creatively communicated some of the key concepts from the class. At the time, I had just begun working at <a target='_blank' rel='noopener noreferrer' href={VHIL_URL}>VHIL</a>, Stanford's virtual reality lab where I was learning about the effectiveness of <a target='_blank' rel='noopener noreferrer' href={VHIL_LEARNING_URL}>immersive learning</a> and how to operate 360&deg; video capture technology. I saw this Sleep Outreach project as an opportunity to experiment with immersive technology and produce an engaging yet informative lesson on lucid dreaming, a concept that has fascinated me since I was a kid. I also felt that the immersive nature of a 360&deg; video would beautifully complement the theme of dreaming, allowing viewers to fully experience the sensation of being inside a dream. 
         </p>
         <h3>Tools</h3>
-        <img src={goProRigImageUrl} alt='GoPro custom 3D-printed rig' width='40%'/>
+        <img src={goProRigImageUrl} alt='GoPro custom 3D-printed rig' width='40%' loading="lazy" decoding="async" />
         <p>
           For the recording equipment, I mounted six <a target='_blank' rel='noopener noreferrer' href={GO_PRO_HERO_URL}>GoPro HERO4 cameras</a> together using a <a target='_blank' rel='noopener noreferrer' href={GO_PRO_RIG_URL}>custom 3D-printed rig</a>. This technology is obsolete in the wake of today's handheld single-device 360&deg; cameras. In 2016, however, we had to be crafty to take advantage of emerging immersive technology while maintaining high-resolution videos.
         </p>
-        <img src={kolorSoftwareImageUrl} alt='Kolor Autopano Video Pro software' width='80%'/>
+        <img src={kolorSoftwareImageUrl} alt='Kolor Autopano Video Pro software' width='80%' loading="lazy" decoding="async" />
         <p>
           For the stitching software, I used <a target='_blank' rel='noopener noreferrer' href={KOLOR_URL}>Kolor Autopano Video Pro</a> (now deprecated). To prepare a ready-to-use 360&deg; video for YouTube, I manually synced the six individual video clips, cleaned up the seams between the overlapping GoPro fields of view, and exported and rendered the video in a supported 360&deg; format.
         </p>

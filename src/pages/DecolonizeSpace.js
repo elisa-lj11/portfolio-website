@@ -7,14 +7,14 @@ import { useErrorBoundary } from 'use-error-boundary';
 import GLBModel from '../components/GLBModel';
 import PageTemplate from '../components/PageTemplate';
 
-import galaxyModelImageUrl from '../assets/images/decolonize-space/galaxy-model.png';
-import placardImageUrl from '../assets/images/decolonize-space/zine-placard.JPEG';
-import cardsImageUrl from '../assets/images/decolonize-space/zine-cards.JPEG';
-import earthModelImageUrl from '../assets/images/decolonize-space/earth-model.png';
-import marsModelImageUrl from '../assets/images/decolonize-space/mars-model.png';
-import pCModelImageUrl from '../assets/images/decolonize-space/proxima-centauri-model.png';
-import waterModelImageUrl from '../assets/images/decolonize-space/water-model.png';
-import plantModelImageUrl from '../assets/images/decolonize-space/plant-model.png';
+import galaxyModelImageUrl from '../assets/images/decolonize-space/galaxy-model.webp';
+import placardImageUrl from '../assets/images/decolonize-space/zine-placard.webp';
+import cardsImageUrl from '../assets/images/decolonize-space/zine-cards.webp';
+import earthModelImageUrl from '../assets/images/decolonize-space/earth-model.webp';
+import marsModelImageUrl from '../assets/images/decolonize-space/mars-model.webp';
+import pCModelImageUrl from '../assets/images/decolonize-space/proxima-centauri-model.webp';
+import waterModelImageUrl from '../assets/images/decolonize-space/water-model.webp';
+import plantModelImageUrl from '../assets/images/decolonize-space/plant-model.webp';
 
 import galaxyModelUrl from '../assets/models/galaxy_HD.glb'; // Sourced from https://sketchfab.com/3d-models/galaxy-space-portal-black-hole-773ae44fc994471b85679236a36c0918
 import earthModelUrl from '../assets/models/earth.glb'; // Sourced from https://sketchfab.com/3d-models/planet-earth-babd284930204736a938915ceb0a6535
@@ -61,6 +61,8 @@ const DecolonizeSpace = () => {
             src={imageUrl}
             alt={altText}
             style={{ width: '70%', display: 'inline-block' }}
+            loading="lazy"
+            decoding="async"
           />
           <figcaption>{captionText}</figcaption>
         </figure>
@@ -190,6 +192,8 @@ const DecolonizeSpace = () => {
               src={placardImageUrl}
               alt='Zine placard'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Physical portion of zine, laser-cut into plywood</figcaption>
           </figure>
@@ -200,6 +204,8 @@ const DecolonizeSpace = () => {
               src={cardsImageUrl}
               alt='Zine tokens'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Zine tokens, QR code linking to this digital zine</figcaption>
           </figure>

@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageTemplate from '../components/PageTemplate';
 
-import flowImageUrl from '../assets/images/accessible/flow.png';
-import spaceshipImageUrl from '../assets/images/accessible/spaceship.jpg';
-import strivrImageUrl from '../assets/images/accessible/strivr.png';
-import mentalMeterImageUrl from '../assets/images/accessible/mental-meter.png';
-import orgasmrImageUrl from '../assets/images/accessible/orgasmr.jpg';
-import localHiveImageUrl from '../assets/images/accessible/local-hive.png';
-import hifiImageUrl from '../assets/images/accessible/hifi.png';
-import immersiveMediaImageUrl from '../assets/images/accessible/rv-vr.png';
-import windowImageUrl from '../assets/images/accessible/window.png';
+import flowImageUrl from '../assets/images/accessible/flow.webp';
+import spaceshipImageUrl from '../assets/images/accessible/spaceship.webp';
+import strivrImageUrl from '../assets/images/accessible/strivr.webp';
+import mentalMeterImageUrl from '../assets/images/accessible/mental-meter.webp';
+import orgasmrImageUrl from '../assets/images/accessible/orgasmr.webp';
+import localHiveImageUrl from '../assets/images/accessible/local-hive.webp';
+import hifiImageUrl from '../assets/images/accessible/hifi.webp';
+import immersiveMediaImageUrl from '../assets/images/accessible/rv-vr.webp';
+import windowImageUrl from '../assets/images/accessible/window.webp';
 
 const Accessible = () => {
   const [refs, setRefs] = useState([]);

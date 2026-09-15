@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
 // Social media icons sourced from https://www.cleanpng.com/
-import linkedInIconUrl from '../assets/images/who-am-i/linkedin-logo.png';
-import gitHubIconUrl from '../assets/images/who-am-i/github-logo.png';
-import resumeIconUrl from '../assets/images/who-am-i/resume-icon.png';
-import emailIconUrl from '../assets/images/who-am-i/email-icon.png';
-import soundCloudIconUrl from '../assets/images/who-am-i/soundcloud-logo.png';
-import spotifyIconUrl from '../assets/images/who-am-i/spotify-logo.png';
+import linkedInIconUrl from '../assets/images/who-am-i/linkedin-logo.webp';
+import gitHubIconUrl from '../assets/images/who-am-i/github-logo.webp';
+import resumeIconUrl from '../assets/images/who-am-i/resume-icon.webp';
+import emailIconUrl from '../assets/images/who-am-i/email-icon.webp';
+import soundCloudIconUrl from '../assets/images/who-am-i/soundcloud-logo.webp';
+import spotifyIconUrl from '../assets/images/who-am-i/spotify-logo.webp';
 
-import spacedOutImageUrl from '../assets/images/who-am-i/spaced-out.jpg';
-import spacePetsImageUrl from '../assets/images/who-am-i/space-pets.jpg';
-import panamaFarmImageUrl from '../assets/images/who-am-i/panama-farm.jpeg';
-import spaceGradImageUrl from '../assets/images/who-am-i/space-grad.png';
+import spacedOutImageUrl from '../assets/images/who-am-i/spaced-out.webp';
+import spacePetsImageUrl from '../assets/images/who-am-i/space-pets.webp';
+import panamaFarmImageUrl from '../assets/images/who-am-i/panama-farm.webp';
+import spaceGradImageUrl from '../assets/images/who-am-i/space-grad.webp';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/elisa-lupin/';
 const GITHUB_URL = 'https://github.com/elisa-lj11';
@@ -60,7 +60,7 @@ const WhoAmI = () => {
       <div className="section" id='overview'>
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>Who is "Elisa Lupin-Jimenez"?</h1>
-        <img src={spacedOutImageUrl} alt='Spaced Out' width='50%'/>
+        <img src={spacedOutImageUrl} alt='Spaced Out' width='50%' loading="lazy" decoding="async" />
         <br></br>
         <p>
           I'm a night owl. When I'm not outside gazing at the stars, wondering how we ended up as these little sentient specks on this vast cosmic canvas floating aimlessly in the ether, I'm up late daydreaming of unconventional ways to make sense of our existence.
@@ -80,27 +80,27 @@ const WhoAmI = () => {
         <h2>Links</h2>
         <div className='social-media-container'>
           <a className='social-media' target='_blank' rel='noopener noreferrer' href={LINKEDIN_URL}>
-            <img className='social-media' src={linkedInIconUrl} />
+            <img className='social-media' src={linkedInIconUrl} loading="lazy" decoding="async" />
             LinkedIn
           </a>
           <a className='social-media' target='_blank' rel='noopener noreferrer' href={GITHUB_URL}>
-            <img className='social-media' src={gitHubIconUrl} />
+            <img className='social-media' src={gitHubIconUrl} loading="lazy" decoding="async" />
             GitHub
           </a>
           <a className='social-media' target='_blank' rel='noopener noreferrer' href={RESUME_URL}>
-            <img className='social-media' src={resumeIconUrl} />
+            <img className='social-media' src={resumeIconUrl} loading="lazy" decoding="async" />
             Resume
           </a>
           <a className='social-media' href={EMAIL_LINK}>
-            <img className='social-media' src={emailIconUrl} />
+            <img className='social-media' src={emailIconUrl} loading="lazy" decoding="async" />
             Email
           </a>
           <a className='social-media' target='_blank' rel='noopener noreferrer' href={SOUNDCLOUD_URL}>
-            <img className='social-media' src={soundCloudIconUrl} />
+            <img className='social-media' src={soundCloudIconUrl} loading="lazy" decoding="async" />
             SoundCloud
           </a>
           <a className='social-media' target='_blank' rel='noopener noreferrer' href={SPOTIFY_URL}>
-            <img className='social-media' src={spotifyIconUrl} />
+            <img className='social-media' src={spotifyIconUrl} loading="lazy" decoding="async" />
             Spotify Playlists
           </a>
         </div>
@@ -146,7 +146,7 @@ const WhoAmI = () => {
         <h2>Personal</h2>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
           <figure>
-            <img src={spacePetsImageUrl} alt='Space Pets' width='80%' style={{display: 'inline-block'}}/>
+            <img src={spacePetsImageUrl} alt='Space Pets' width='80%' style={{display: 'inline-block'}} loading="lazy" decoding="async" />
             <figcaption>Obligatory pet pics</figcaption>
           </figure>
         </div>
@@ -186,7 +186,7 @@ const WhoAmI = () => {
         <br />
         <h3>Stanford University</h3>
         <i>September 2014 - June 2019</i>
-        <img src={spaceGradImageUrl} alt='Space Grad' width='50%'/>
+        <img src={spaceGradImageUrl} alt='Space Grad' width='50%' loading="lazy" decoding="async" />
         <p>
           I graduated from <a target='_blank' rel='noopener noreferrer' href={STANFORD_URL}>Stanford University</a> with a Bachelor of Science in <a target='_blank' rel='noopener noreferrer' href={SYMSYS_URL}>Symbolic Systems</a>, an interdisciplinary program that branches across computer science, linguistics, philosophy, and psychology. My concentration was "Human-Computer Interaction," where I focused on the design, usability, and evaluation of interactive systems, exploring how technology can be better integrated with human needs and behaviors.
         </p>
@@ -208,7 +208,7 @@ const WhoAmI = () => {
         <i>February 2024 - July 2025</i>
         <br/>
         <br/>
-        <img src={panamaFarmImageUrl} alt='Farming in Panamá' width='80%'/>
+        <img src={panamaFarmImageUrl} alt='Farming in Panamá' width='80%' loading="lazy" decoding="async" />
         <p>
           I left Strivr in January 2024 to explore my dream of living remotely on a farm in Panamá through the volunteer program <a target='_blank' rel='noopener noreferrer' href={WWOOF_URL}>WWOOF</a>. Motivated to connect to my Panamanian roots by learning Spanish, and inspired by my video game experience with virtual farming in <a target='_blank' rel='noopener noreferrer' href={STARDEW_URL}>Stardew Valley</a>, I moved to Boquete, a mountainous region famous for its coffee. Four months of real-life farming later, I realized it was, unsurprisingly, more fun in a video game, so I returned to California to figure out my next steps. 
         </p>

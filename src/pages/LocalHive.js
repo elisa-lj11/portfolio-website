@@ -2,40 +2,40 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import needfindingInterviewsImageUrl from '../assets/images/local-hive/needfinding-interviews.png';
-import initialSynthesisImageUrl from '../assets/images/local-hive/initial-synthesis.jpg';
-import affinityMapImageUrl from '../assets/images/local-hive/affinity-map.jpg';
-import leaderEmpathyMapImageUrl from '../assets/images/local-hive/community-leader-empathy-map.png';
-import memberEmpathyMapImageUrl from '../assets/images/local-hive/community-member-empathy-map.png';
-import journeyMapStickyNotesImageUrl from '../assets/images/local-hive/2-by-2-journey-map-sticky-notes.png';
-import journeyMapCondensedImageUrl from '../assets/images/local-hive/2-by-2-journey-map-condensed.png';
-import hmwIdeationImageUrl from '../assets/images/local-hive/hmw-ideation.jpg';
-import hmwAffinityGroupingImageUrl from '../assets/images/local-hive/hmw-affinity-grouping.jpg';
-import hmwSolutionBrainstormImageUrl from '../assets/images/local-hive/hmw-solution-brainstorm.png';
-import hmwSolutionFinalIdeasImageUrl from '../assets/images/local-hive/hmw-solution-final-ideas.png';
-import e1Prototype1ImageUrl from '../assets/images/local-hive/e1-prototype-1.png';
-import e1Prototype2ImageUrl from '../assets/images/local-hive/e1-prototype-2.png';
-import conceptSketchesImageUrl from '../assets/images/local-hive/concept-sketches.png';
-import uiSketch1ImageUrl from '../assets/images/local-hive/ui-sketch-1.jpg';
-import uiSketch2ImageUrl from '../assets/images/local-hive/ui-sketch-2.jpg';
-import uiSketch3ImageUrl from '../assets/images/local-hive/ui-sketch-3.jpg';
-import easyTaskFlowImageUrl from '../assets/images/local-hive/easy-task-flow.png';
-import mediumTaskFlowImageUrl from '../assets/images/local-hive/medium-task-flow.png';
-import complexTaskFlowImageUrl from '../assets/images/local-hive/complex-task-flow.png';
-import lowFiOverviewImageUrl from '../assets/images/local-hive/low-fi-overview.jpg';
-import medFi1FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-1-figma-overview.png';
-import medFi1JoinTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-join-task-flow.png';
-import medFi1CreateTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-create-task-flow.png';
-import medFi1MonitorTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-monitor-task-flow.png';
-import medFi2FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-2-figma-overview.png';
-import heuristicViolationsImageUrl from '../assets/images/local-hive/heuristic-violations.png';
-import medFi1HomeImageUrl from '../assets/images/local-hive/med-fi-1-home.png';
-import medFi2HomeImageUrl from '../assets/images/local-hive/med-fi-2-home.png';
-import medFi3HomeImageUrl from '../assets/images/local-hive/med-fi-3-home.png';
-import fullAppThumbnailImageUrl from '../assets/images/local-hive/full-app-thumbnail.png';
+import needfindingInterviewsImageUrl from '../assets/images/local-hive/needfinding-interviews.webp';
+import initialSynthesisImageUrl from '../assets/images/local-hive/initial-synthesis.webp';
+import affinityMapImageUrl from '../assets/images/local-hive/affinity-map.webp';
+import leaderEmpathyMapImageUrl from '../assets/images/local-hive/community-leader-empathy-map.webp';
+import memberEmpathyMapImageUrl from '../assets/images/local-hive/community-member-empathy-map.webp';
+import journeyMapStickyNotesImageUrl from '../assets/images/local-hive/2-by-2-journey-map-sticky-notes.webp';
+import journeyMapCondensedImageUrl from '../assets/images/local-hive/2-by-2-journey-map-condensed.webp';
+import hmwIdeationImageUrl from '../assets/images/local-hive/hmw-ideation.webp';
+import hmwAffinityGroupingImageUrl from '../assets/images/local-hive/hmw-affinity-grouping.webp';
+import hmwSolutionBrainstormImageUrl from '../assets/images/local-hive/hmw-solution-brainstorm.webp';
+import hmwSolutionFinalIdeasImageUrl from '../assets/images/local-hive/hmw-solution-final-ideas.webp';
+import e1Prototype1ImageUrl from '../assets/images/local-hive/e1-prototype-1.webp';
+import e1Prototype2ImageUrl from '../assets/images/local-hive/e1-prototype-2.webp';
+import conceptSketchesImageUrl from '../assets/images/local-hive/concept-sketches.webp';
+import uiSketch1ImageUrl from '../assets/images/local-hive/ui-sketch-1.webp';
+import uiSketch2ImageUrl from '../assets/images/local-hive/ui-sketch-2.webp';
+import uiSketch3ImageUrl from '../assets/images/local-hive/ui-sketch-3.webp';
+import easyTaskFlowImageUrl from '../assets/images/local-hive/easy-task-flow.webp';
+import mediumTaskFlowImageUrl from '../assets/images/local-hive/medium-task-flow.webp';
+import complexTaskFlowImageUrl from '../assets/images/local-hive/complex-task-flow.webp';
+import lowFiOverviewImageUrl from '../assets/images/local-hive/low-fi-overview.webp';
+import medFi1FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-1-figma-overview.webp';
+import medFi1JoinTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-join-task-flow.webp';
+import medFi1CreateTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-create-task-flow.webp';
+import medFi1MonitorTaskFlowImageUrl from '../assets/images/local-hive/med-fi-1-monitor-task-flow.webp';
+import medFi2FigmaOverviewImageUrl from '../assets/images/local-hive/med-fi-2-figma-overview.webp';
+import heuristicViolationsImageUrl from '../assets/images/local-hive/heuristic-violations.webp';
+import medFi1HomeImageUrl from '../assets/images/local-hive/med-fi-1-home.webp';
+import medFi2HomeImageUrl from '../assets/images/local-hive/med-fi-2-home.webp';
+import medFi3HomeImageUrl from '../assets/images/local-hive/med-fi-3-home.webp';
+import fullAppThumbnailImageUrl from '../assets/images/local-hive/full-app-thumbnail.webp';
 import fullAppVideoUrl from '../assets/images/local-hive/full-app.mp4';
-import appWebsiteImageUrl from '../assets/images/local-hive/app-website.png';
-import posterImageUrl from '../assets/images/local-hive/poster.png';
+import appWebsiteImageUrl from '../assets/images/local-hive/app-website.webp';
+import posterImageUrl from '../assets/images/local-hive/poster.webp';
 
 const FIGMA_EMBED_URL = 'https://embed.figma.com/proto/buMWRU5wtJCUicu4OEGfRn/Local-Hive?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=7-8&embed-host=share&client-id=W0bOyp7s8UCjcCHJYXANQr';
 const HCI_CLASS_URL = 'https://hci.stanford.edu/courses/cs377e/2019/sp/';
@@ -125,7 +125,9 @@ const LocalHive = () => {
               src={needfindingInterviewsImageUrl}
               alt='Needfinding Interviews'
               style={{ width: '90%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Combined needfinding interviews</figcaption>
           </figure>
         </div>
@@ -135,7 +137,9 @@ const LocalHive = () => {
               src={initialSynthesisImageUrl}
               alt='Initial Synthesis'
               style={{ width: '50%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Interview synthesis</figcaption>
           </figure>
         </div>
@@ -148,7 +152,9 @@ const LocalHive = () => {
               src={affinityMapImageUrl}
               alt='Affinity Map'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Affinity map</figcaption>
           </figure>
         </div>
@@ -158,7 +164,9 @@ const LocalHive = () => {
               src={leaderEmpathyMapImageUrl}
               alt='Community Leader Empathy Map'
               style={{ width: '70%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Community leader empathy map</figcaption>
           </figure>
           <figure>
@@ -166,6 +174,8 @@ const LocalHive = () => {
               src={memberEmpathyMapImageUrl}
               alt='Community Member Empathy Map'
               style={{ width: '70%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Community member empathy map</figcaption>
           </figure>
@@ -179,7 +189,9 @@ const LocalHive = () => {
               src={journeyMapStickyNotesImageUrl}
               alt='Initial 2x2 Journey Map'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Initial 2x2 journey map using sticky notes from past exercises</figcaption>
           </figure>
           <figure>
@@ -187,6 +199,8 @@ const LocalHive = () => {
               src={journeyMapCondensedImageUrl}
               alt='Condensed 2x2 Journey Map'
               style={{ width: '70%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Condensed 2x2 journey map</figcaption>
           </figure>
@@ -262,7 +276,9 @@ const LocalHive = () => {
               src={hmwIdeationImageUrl}
               alt='HMW Ideation'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>HMW ideation</figcaption>
           </figure>
         </div>
@@ -272,7 +288,9 @@ const LocalHive = () => {
               src={hmwAffinityGroupingImageUrl}
               alt='HMW Affinity Grouping'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>HMW affinity grouping</figcaption>
           </figure>
         </div>
@@ -306,7 +324,9 @@ const LocalHive = () => {
               src={hmwSolutionBrainstormImageUrl}
               alt='HMW Solution Brainstorm'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>HMW solution brainstorm</figcaption>
           </figure>
         </div>
@@ -316,7 +336,9 @@ const LocalHive = () => {
               src={hmwSolutionFinalIdeasImageUrl}
               alt='HMW Solution Final Ideas'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>HMW solution final ideas</figcaption>
           </figure>
         </div>
@@ -348,14 +370,16 @@ const LocalHive = () => {
           We developed three experience prototypes based on our solution ideation exercise. Each prototype was designed to test a specific hypothesis over the course of a week, after which we analyzed the testing results.
         </p>
         <h3>EP #1: Skills and Services Marketplace</h3>
-        <img src={e1Prototype1ImageUrl} alt='EP 1 Prototype 1' width='100%'/>
+        <img src={e1Prototype1ImageUrl} alt='EP 1 Prototype 1' width='100%' loading="lazy" decoding="async" />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', textAlign: 'center' }}>
           <figure>
               <img
               src={e1Prototype2ImageUrl}
               alt='EP 1 Prototype 2'
               style={{ width: '40%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Matching members to tasks based on their listed skills</figcaption>
           </figure>
         </div>
@@ -469,7 +493,7 @@ const LocalHive = () => {
           </li>
         </ul>
         <h3>Concept Sketches</h3>
-        <img src={conceptSketchesImageUrl} alt='Concept Sketches' width='100%' />
+        <img src={conceptSketchesImageUrl} alt='Concept Sketches' width='100%' loading="lazy" decoding="async" />
         <p>
           We sketched concepts focusing on four input modalities: web, mobile, AR, and existing platforms (Slack, iMessage, etc.). After voting, we chose web and mobile for further UI sketches.
         </p>
@@ -480,7 +504,9 @@ const LocalHive = () => {
               src={uiSketch1ImageUrl}
               alt='Mobile UI Sketch 1'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Mobile UI sketch 1</figcaption>
           </figure>
           <figure>
@@ -488,6 +514,8 @@ const LocalHive = () => {
               src={uiSketch2ImageUrl}
               alt='Mobile UI Sketch 2'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Mobile UI sketch 2</figcaption>
           </figure>
@@ -498,7 +526,9 @@ const LocalHive = () => {
               src={uiSketch3ImageUrl}
               alt='Web UI Sketch'
               style={{ width: '40%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Web UI sketch</figcaption>
           </figure>
         </div>
@@ -540,7 +570,9 @@ const LocalHive = () => {
               src={easyTaskFlowImageUrl}
               alt='Easy Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Easy task flow</figcaption>
           </figure>
         </div>
@@ -551,7 +583,9 @@ const LocalHive = () => {
               src={mediumTaskFlowImageUrl}
               alt='Medium Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Medium task flow</figcaption>
           </figure>
         </div>
@@ -561,7 +595,9 @@ const LocalHive = () => {
               src={complexTaskFlowImageUrl}
               alt='Complex Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Complex task flow</figcaption>
           </figure>
         </div>
@@ -572,7 +608,9 @@ const LocalHive = () => {
               src={lowFiOverviewImageUrl}
               alt='Low-Fi Overview'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi prototype</figcaption>
           </figure>
         </div>
@@ -675,7 +713,9 @@ const LocalHive = () => {
               src={medFi1FigmaOverviewImageUrl}
               alt='Med-Fi #1 Figma overview'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi #1 Figma overview</figcaption>
           </figure>
         </div>
@@ -688,7 +728,9 @@ const LocalHive = () => {
               src={medFi1JoinTaskFlowImageUrl}
               alt='"Join a Project" Task Flow'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi "Join a Project" task flow</figcaption>
           </figure>
         </div>
@@ -698,7 +740,9 @@ const LocalHive = () => {
               src={medFi1CreateTaskFlowImageUrl}
               alt='"Create a Project" Task Flow'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi "Create a Project" task flow</figcaption>
           </figure>
         </div>
@@ -708,7 +752,9 @@ const LocalHive = () => {
               src={medFi1MonitorTaskFlowImageUrl}
               alt='"Monitor a Community" Task Flow'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi "Monitor a Community" task flow</figcaption>
           </figure>
         </div>
@@ -758,7 +804,9 @@ const LocalHive = () => {
               src={medFi2FigmaOverviewImageUrl}
               alt='Med-Fi 2 Figma Overview'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-Fi #2 Figma overview</figcaption>
           </figure>
         </div>
@@ -804,7 +852,9 @@ const LocalHive = () => {
               src={heuristicViolationsImageUrl}
               alt='Heuristic Violations Summary'
               style={{ width: '100%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Heuristic violations summary</figcaption>
           </figure>
         </div>
@@ -850,7 +900,9 @@ const LocalHive = () => {
               src={medFi1HomeImageUrl}
               alt='First Med-Fi Prototype Home Screen'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>First med-fi prototype home screen</figcaption>
           </figure>
           <figure>
@@ -858,7 +910,9 @@ const LocalHive = () => {
               src={medFi2HomeImageUrl}
               alt='Second Med-Fi Prototype Home Screen'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Second med-fi prototype home screen</figcaption>
           </figure>
           <figure>
@@ -866,7 +920,9 @@ const LocalHive = () => {
               src={medFi3HomeImageUrl}
               alt='Third Med-Fi Prototype Home Screen'
               style={{ width: '90%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Third med-fi prototype home screen</figcaption>
           </figure>
         </div>
@@ -945,7 +1001,7 @@ const LocalHive = () => {
       <div className="section" id='final-prototype'>
         <h2>Final Prototype</h2>
         <div className="video-vertical" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={fullAppThumbnailImageUrl} muted className="responsive-video">
+          <video preload="none" controls poster={fullAppThumbnailImageUrl} muted className="responsive-video">
             <source src={fullAppVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -958,7 +1014,9 @@ const LocalHive = () => {
               src={appWebsiteImageUrl}
               alt='App Website'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>
               <a target='_blank' rel='noopener noreferrer' href={APP_WEBSITE_URL}>App website</a>
             </figcaption>
@@ -973,7 +1031,9 @@ const LocalHive = () => {
               src={posterImageUrl}
               alt='Poster'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Local Hive poster</figcaption>
           </figure>
         </div>

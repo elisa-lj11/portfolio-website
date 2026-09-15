@@ -2,33 +2,33 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import hiFiPrototypeScreenshotImageUrl from '../assets/images/window/hi-fi-prototype-screenshot.png';
-import needfindingMapImageUrl from '../assets/images/window/needfinding-map.png';
-import ep1ImageUrl from '../assets/images/window/ep1.png';
-import ep2ImageUrl from '../assets/images/window/ep2.png';
-import ep3ImageUrl from '../assets/images/window/ep3.png';
-import conceptSketchHeadsetImageUrl from '../assets/images/window/concept-sketch-headset.png';
-import conceptSketchStoreImageUrl from '../assets/images/window/concept-sketch-store-projection.png';
-import conceptSketchWearableImageUrl from '../assets/images/window/concept-sketch-wearable.png';
-import conceptSketchMobileImageUrl from '../assets/images/window/concept-sketch-mobile.png';
-import lowFiSimpleTaskFlowImageUrl from '../assets/images/window/low-fi-simple-task-flow.png';
-import lowFiModerateTaskFlowImageUrl from '../assets/images/window/low-fi-moderate-task-flow.png';
-import lowFiComplexTaskFlowImageUrl from '../assets/images/window/low-fi-complex-task-flow.png';
-import storyboardImageUrl from '../assets/images/window/storyboard.jpg';
-import lowFiPrototypeImageUrl from '../assets/images/window/low-fi-prototype.png';
-import lowFiFlowImageUrl from '../assets/images/window/low-fi-flow.png';
-import medFiSimpleTaskFlowImageUrl from '../assets/images/window/med-fi-simple-task-flow.png';
-import medFiModerateTaskFlowImageUrl from '../assets/images/window/med-fi-moderate-task-flow.png';
-import medFiComplexTaskFlowImageUrl from '../assets/images/window/med-fi-complex-task-flow.png';
-import windowWebsiteImageUrl from '../assets/images/window/window-website.png';
-import heuristicViolationsImageUrl from '../assets/images/window/heuristic-violations.png';
-import hiFiPrototypeMarkerImageUrl from '../assets/images/window/hi-fi-prototype-marker.png';
-import hiFiSimpleTaskFlowImageUrl from '../assets/images/window/hi-fi-simple-task-flow.png';
-import hiFiModerateTaskFlow1ImageUrl from '../assets/images/window/hi-fi-moderate-task-flow-1.png';
-import hiFiModerateTaskFlow2ImageUrl from '../assets/images/window/hi-fi-moderate-task-flow-2.png';
-import hiFiComplexTaskFlow1ImageUrl from '../assets/images/window/hi-fi-complex-task-flow-1.png';
-import hiFiComplexTaskFlow2ImageUrl from '../assets/images/window/hi-fi-complex-task-flow-2.png';
-import windowPosterImageUrl from '../assets/images/window/window-poster.png';
+import hiFiPrototypeScreenshotImageUrl from '../assets/images/window/hi-fi-prototype-screenshot.webp';
+import needfindingMapImageUrl from '../assets/images/window/needfinding-map.webp';
+import ep1ImageUrl from '../assets/images/window/ep1.webp';
+import ep2ImageUrl from '../assets/images/window/ep2.webp';
+import ep3ImageUrl from '../assets/images/window/ep3.webp';
+import conceptSketchHeadsetImageUrl from '../assets/images/window/concept-sketch-headset.webp';
+import conceptSketchStoreImageUrl from '../assets/images/window/concept-sketch-store-projection.webp';
+import conceptSketchWearableImageUrl from '../assets/images/window/concept-sketch-wearable.webp';
+import conceptSketchMobileImageUrl from '../assets/images/window/concept-sketch-mobile.webp';
+import lowFiSimpleTaskFlowImageUrl from '../assets/images/window/low-fi-simple-task-flow.webp';
+import lowFiModerateTaskFlowImageUrl from '../assets/images/window/low-fi-moderate-task-flow.webp';
+import lowFiComplexTaskFlowImageUrl from '../assets/images/window/low-fi-complex-task-flow.webp';
+import storyboardImageUrl from '../assets/images/window/storyboard.webp';
+import lowFiPrototypeImageUrl from '../assets/images/window/low-fi-prototype.webp';
+import lowFiFlowImageUrl from '../assets/images/window/low-fi-flow.webp';
+import medFiSimpleTaskFlowImageUrl from '../assets/images/window/med-fi-simple-task-flow.webp';
+import medFiModerateTaskFlowImageUrl from '../assets/images/window/med-fi-moderate-task-flow.webp';
+import medFiComplexTaskFlowImageUrl from '../assets/images/window/med-fi-complex-task-flow.webp';
+import windowWebsiteImageUrl from '../assets/images/window/window-website.webp';
+import heuristicViolationsImageUrl from '../assets/images/window/heuristic-violations.webp';
+import hiFiPrototypeMarkerImageUrl from '../assets/images/window/hi-fi-prototype-marker.webp';
+import hiFiSimpleTaskFlowImageUrl from '../assets/images/window/hi-fi-simple-task-flow.webp';
+import hiFiModerateTaskFlow1ImageUrl from '../assets/images/window/hi-fi-moderate-task-flow-1.webp';
+import hiFiModerateTaskFlow2ImageUrl from '../assets/images/window/hi-fi-moderate-task-flow-2.webp';
+import hiFiComplexTaskFlow1ImageUrl from '../assets/images/window/hi-fi-complex-task-flow-1.webp';
+import hiFiComplexTaskFlow2ImageUrl from '../assets/images/window/hi-fi-complex-task-flow-2.webp';
+import windowPosterImageUrl from '../assets/images/window/window-poster.webp';
 
 const HCI_CLASS_URL = 'https://hci.stanford.edu/courses/cs147/2016/au/';
 const WINDOW_CONCEPT_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/w4h3qxlXQhY?si=nNUvJKlMIMrlfmz-';
@@ -57,7 +57,7 @@ const Window = () => {
       <div className="section" id='overview'>
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>"Window": An AR Clothes Shopping App</h1>
-        <img src={hiFiPrototypeScreenshotImageUrl} alt='Window Hi-Fi prototype' width='40%'/>
+        <img src={hiFiPrototypeScreenshotImageUrl} alt='Window Hi-Fi prototype' width='40%' loading="lazy" decoding="async" />
         <br></br>
         <p>
           "Window" uses augmented reality on a mobile platform to place a personalized mannequin in a storefront window so users can easily view a store's offering.
@@ -75,7 +75,9 @@ const Window = () => {
               src={needfindingMapImageUrl}
               alt='Initial needfinding map'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Initial needfinding map</figcaption>
           </figure>
         </div>
@@ -127,7 +129,9 @@ const Window = () => {
               src={ep1ImageUrl}
               alt='Experience prototype 1'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>EP #1: Sharing virtual clothes from a closet with friends</figcaption>
           </figure>
           <figure>
@@ -135,6 +139,8 @@ const Window = () => {
               src={ep2ImageUrl}
               alt='Experience prototype 2'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>EP #2: Trying on virtual clothes from a store</figcaption>
           </figure>
@@ -145,7 +151,9 @@ const Window = () => {
               src={ep3ImageUrl}
               alt='Experience prototype 3'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>EP #3: Using an AR mannequin to display outfits</figcaption>
           </figure>
         </div>
@@ -183,7 +191,9 @@ const Window = () => {
               src={conceptSketchHeadsetImageUrl}
               alt='Concept sketch: headset'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Concept sketch: headset</figcaption>
           </figure>
           <figure>
@@ -191,6 +201,8 @@ const Window = () => {
               src={conceptSketchStoreImageUrl}
               alt='Concept sketch: store projector'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Concept sketch: store projector</figcaption>
           </figure>
@@ -201,7 +213,9 @@ const Window = () => {
               src={conceptSketchWearableImageUrl}
               alt='Concept sketch: wearable'
               style={{ width: '90%', display: 'inline-block', marginRight: '2%' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Concept sketch: wearable</figcaption>
           </figure>
           <figure>
@@ -209,6 +223,8 @@ const Window = () => {
               src={conceptSketchMobileImageUrl}
               alt='Concept sketch: mobile'
               style={{ width: '90%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Concept sketch: mobile</figcaption>
           </figure>
@@ -251,7 +267,9 @@ const Window = () => {
               src={lowFiSimpleTaskFlowImageUrl}
               alt='Low-fi Simple Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi simple task flow</figcaption>
           </figure>
         </div>
@@ -261,7 +279,9 @@ const Window = () => {
               src={lowFiModerateTaskFlowImageUrl}
               alt='Low-fi Moderate Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi moderate task flow</figcaption>
           </figure>
         </div>
@@ -271,7 +291,9 @@ const Window = () => {
               src={lowFiComplexTaskFlowImageUrl}
               alt='Low-fi Complex Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi complex task flow</figcaption>
           </figure>
         </div>
@@ -282,7 +304,9 @@ const Window = () => {
               src={storyboardImageUrl}
               alt='Concept video storyboard'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Concept video storyboard</figcaption>
           </figure>
         </div>
@@ -300,7 +324,9 @@ const Window = () => {
               src={lowFiPrototypeImageUrl}
               alt='Low-fi prototype'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi prototype</figcaption>
           </figure>
         </div>
@@ -316,7 +342,9 @@ const Window = () => {
               src={lowFiFlowImageUrl}
               alt='Low-fi example flow'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Low-fi example flow</figcaption>
           </figure>
         </div>
@@ -369,7 +397,9 @@ const Window = () => {
               src={medFiSimpleTaskFlowImageUrl}
               alt='Med-fi Simple Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi simple task flow</figcaption>
           </figure>
         </div>
@@ -379,7 +409,9 @@ const Window = () => {
               src={medFiModerateTaskFlowImageUrl}
               alt='Med-fi Moderate Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi moderate task flow</figcaption>
           </figure>
         </div>
@@ -389,7 +421,9 @@ const Window = () => {
               src={medFiComplexTaskFlowImageUrl}
               alt='Med-fi Complex Task Flow'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Med-fi complex task flow</figcaption>
           </figure>
         </div>
@@ -400,7 +434,9 @@ const Window = () => {
               src={windowWebsiteImageUrl}
               alt='Window website'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Window website</figcaption>
           </figure>
         </div>
@@ -452,7 +488,9 @@ const Window = () => {
               src={heuristicViolationsImageUrl}
               alt='Heuristic Violations Summary'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Heuristic violations summary</figcaption>
           </figure>
         </div>
@@ -525,7 +563,9 @@ const Window = () => {
               src={hiFiPrototypeMarkerImageUrl}
               alt='Hi-fi prototype labeled'
               style={{ width: '70%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi prototype with marker</figcaption>
           </figure>
         </div>
@@ -544,7 +584,9 @@ const Window = () => {
               src={hiFiSimpleTaskFlowImageUrl}
               alt='Hi-fi simple task flow'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi simple task flow</figcaption>
           </figure>
         </div>
@@ -554,7 +596,9 @@ const Window = () => {
               src={hiFiModerateTaskFlow1ImageUrl}
               alt='Hi-fi moderate task flow 1'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi moderate task flow</figcaption>
           </figure>
         </div>
@@ -564,7 +608,9 @@ const Window = () => {
               src={hiFiModerateTaskFlow2ImageUrl}
               alt='Hi-fi moderate task flow 2'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi moderate task flow (cont.)</figcaption>
           </figure>
         </div>
@@ -574,7 +620,9 @@ const Window = () => {
               src={hiFiComplexTaskFlow1ImageUrl}
               alt='Hi-fi complex task flow 1'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi complex task flow</figcaption>
           </figure>
         </div>
@@ -584,7 +632,9 @@ const Window = () => {
               src={hiFiComplexTaskFlow2ImageUrl}
               alt='Hi-fi complex task flow 2'
               style={{ width: '80%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Hi-fi complex task flow (cont.)</figcaption>
           </figure>
         </div>
@@ -607,7 +657,9 @@ const Window = () => {
               src={windowPosterImageUrl}
               alt='Window poster'
               style={{ width: '60%', display: 'inline-block' }}
-            />
+              loading="lazy"
+              decoding="async"
+              />
             <figcaption>Window poster</figcaption>
           </figure>
         </div>

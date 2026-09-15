@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import galaxyImageUrl from '../assets/images/galaxy.png';
+import galaxyImageUrl from '../assets/images/galaxy.webp';
 
 // Custom cursor asset generated with ChatGPT
 import rocketCursor from '../assets/images/rocketship-cursor.png';
@@ -52,7 +52,9 @@ const NotFound = () => {
             height: '40px', // Maintain aspect ratio
             marginRight: '5px' // Add space between the image and text
           }} 
-          alt="Galaxy Icon" 
+          alt="Galaxy Icon"
+          loading="lazy"
+          decoding="async"
         />
         Go back in time
       </button>

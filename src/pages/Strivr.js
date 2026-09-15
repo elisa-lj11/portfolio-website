@@ -2,25 +2,25 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import immersiveLobbyThumbnailImageUrl from '../assets/images/strivr/immersive-lobby-thumbnail.png';
+import immersiveLobbyThumbnailImageUrl from '../assets/images/strivr/immersive-lobby-thumbnail.webp';
 import immersiveLobbyVideoUrl from '../assets/images/strivr/immersive-lobby.mp4';
-import oldAcclimationImageUrl from '../assets/images/strivr/old-acclimation.png';
-import oldLobby1ImageUrl from '../assets/images/strivr/old-lobby-1.png';
+import oldAcclimationImageUrl from '../assets/images/strivr/old-acclimation.webp';
+import oldLobby1ImageUrl from '../assets/images/strivr/old-lobby-1.webp';
 import oldButtonImageUrl from '../assets/images/strivr/old-button-interaction.gif'
-import experiencePrototypeImage1Url from '../assets/images/strivr/experience-prototype-1.png';
-import experiencePrototypeImage2Url from '../assets/images/strivr/experience-prototype-2.png';
-import experiencePrototypeImage3Url from '../assets/images/strivr/experience-prototype-3.png';
-import newAcclimationEnvironmentImageUrl from '../assets/images/strivr/new-acclimation-environment.png';
-import lobbyLayoutImageUrl from '../assets/images/strivr/lobby-layout.png';
-import xLayoutImageUrl from '../assets/images/strivr/x-layout.png';
-import wireframesImageUrl from '../assets/images/strivr/wireframes.png';
-import figmaClickthroughImageUrl from '../assets/images/strivr/figma-clickthrough.png';
-import newAcclimationImageUrl from '../assets/images/strivr/new-acclimation.png';
-import lobbyMenuToolbarImageUrl from '../assets/images/strivr/lobby-menu-toolbar.png';
-import lobbyTeleportHotspot1ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-1.png';
-import lobbyTeleportHotspot2ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-2.png';
-import lobbyTeleportHotspot3ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-3.png';
-import lobbyTeleportHotspot4ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-4.png';
+import experiencePrototypeImage1Url from '../assets/images/strivr/experience-prototype-1.webp';
+import experiencePrototypeImage2Url from '../assets/images/strivr/experience-prototype-2.webp';
+import experiencePrototypeImage3Url from '../assets/images/strivr/experience-prototype-3.webp';
+import newAcclimationEnvironmentImageUrl from '../assets/images/strivr/new-acclimation-environment.webp';
+import lobbyLayoutImageUrl from '../assets/images/strivr/lobby-layout.webp';
+import xLayoutImageUrl from '../assets/images/strivr/x-layout.webp';
+import wireframesImageUrl from '../assets/images/strivr/wireframes.webp';
+import figmaClickthroughImageUrl from '../assets/images/strivr/figma-clickthrough.webp';
+import newAcclimationImageUrl from '../assets/images/strivr/new-acclimation.webp';
+import lobbyMenuToolbarImageUrl from '../assets/images/strivr/lobby-menu-toolbar.webp';
+import lobbyTeleportHotspot1ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-1.webp';
+import lobbyTeleportHotspot2ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-2.webp';
+import lobbyTeleportHotspot3ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-3.webp';
+import lobbyTeleportHotspot4ImageUrl from '../assets/images/strivr/lobby-teleport-hotspot-4.webp';
 
 const STRIVR_URL = 'https://www.strivr.com/';
 const STRIVR_REALTIME_DEMO_URL = 'https://app.strivr.com/demo';
@@ -45,7 +45,7 @@ const Strivr = () => {
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>Strivr: "Immersive Lobby" Upgrade</h1>
         <div className="video" style={{ height: 'auto', width: '100%' }}>
-          <video controls poster={immersiveLobbyThumbnailImageUrl} className="responsive-video">
+          <video preload="none" controls poster={immersiveLobbyThumbnailImageUrl} className="responsive-video">
             <source src={immersiveLobbyVideoUrl} type="video/mp4" />
           </video>
         </div>
@@ -105,6 +105,8 @@ const Strivr = () => {
               src={oldAcclimationImageUrl}
               alt="Old Acclimation"
               style={{ width: '70%', display: 'inline-block'}}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Floating text and images</figcaption>
           </figure>
@@ -115,6 +117,8 @@ const Strivr = () => {
               src={oldLobby1ImageUrl}
               alt="Old Lobby"
               style={{ width: '70%', display: 'inline-block'}}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Gray environment throughout the platform</figcaption>
           </figure>
@@ -125,6 +129,8 @@ const Strivr = () => {
               src={oldButtonImageUrl}
               alt="Old Button Interaction"
               style={{ width: '60%', display: 'inline-block'}}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Reactive tilt-shifting buttons</figcaption>
           </figure>
@@ -208,6 +214,8 @@ const Strivr = () => {
                 src={experiencePrototypeImage1Url}
                 alt="Experience Prototype 1"
                 style={{ width: '70%', display: 'inline-block', marginRight: '2%' }}
+                loading="lazy"
+                decoding="async"
               />
               <figcaption>EP #1: "Free Roam"</figcaption>
             </figure>
@@ -216,6 +224,8 @@ const Strivr = () => {
                 src={experiencePrototypeImage2Url}
                 alt="Experience Prototype 2"
                 style={{ width: '70%', display: 'inline-block' }}
+                loading="lazy"
+                decoding="async"
               />
               <figcaption>EP #2: "Rotate"</figcaption>
             </figure>
@@ -226,6 +236,8 @@ const Strivr = () => {
                 src={experiencePrototypeImage3Url}
                 alt="Experience Prototype 3"
                 style={{ width: '60%', display: 'inline-block' }}
+                loading="lazy"
+                decoding="async"
               />
               <figcaption>EP #3: "Teleport"</figcaption>
             </figure>
@@ -282,6 +294,8 @@ const Strivr = () => {
               src={wireframesImageUrl}
               alt="Wireframes"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>UI wireframes</figcaption>
           </figure>
@@ -295,6 +309,8 @@ const Strivr = () => {
               src={figmaClickthroughImageUrl}
               alt="Figma Clickthrough"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Figma clickthrough</figcaption>
           </figure>
@@ -309,6 +325,8 @@ const Strivr = () => {
               src={newAcclimationEnvironmentImageUrl}
               alt="New Acclimation Environment"
               style={{ width: '50%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>New acclimation environment</figcaption>
           </figure>
@@ -322,6 +340,8 @@ const Strivr = () => {
               src={lobbyLayoutImageUrl}
               alt="Lobby Layout Prototype"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Lobby layout prototype</figcaption>
           </figure>
@@ -338,6 +358,8 @@ const Strivr = () => {
               src={xLayoutImageUrl}
               alt="X-shape for lobby"
               style={{ width: '50%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>X-shape for lobby</figcaption>
           </figure>
@@ -407,6 +429,8 @@ const Strivr = () => {
               src={newAcclimationImageUrl}
               alt="New Acclimation"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>New acclimation with encapsulated text and images</figcaption>
           </figure>
@@ -417,6 +441,8 @@ const Strivr = () => {
               src={lobbyMenuToolbarImageUrl}
               alt="Lobby menu and toolbar"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Lobby with encapsulated content menu and toolbar</figcaption>
           </figure>
@@ -427,6 +453,8 @@ const Strivr = () => {
               src={lobbyTeleportHotspot1ImageUrl}
               alt="Lobby teleport hotspot"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Teleport hotspot to the left of the user</figcaption>
           </figure>
@@ -437,6 +465,8 @@ const Strivr = () => {
               src={lobbyTeleportHotspot2ImageUrl}
               alt="Patio hot spot"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Teleport hotspot on the patio</figcaption>
           </figure>
@@ -447,6 +477,8 @@ const Strivr = () => {
               src={lobbyTeleportHotspot3ImageUrl}
               alt="Entryway hotspot"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Teleport hotspot by the entryway</figcaption>
           </figure>
@@ -457,6 +489,8 @@ const Strivr = () => {
               src={lobbyTeleportHotspot4ImageUrl}
               alt="Behind the user hotspot"
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Teleport hotspot behind the user</figcaption>
           </figure>

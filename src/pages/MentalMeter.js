@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 
-import heroImageUrl from '../assets/images/mental-meter/mental-meter-hero.png';
-import cadModelImageUrl from '../assets/images/mental-meter/cad-model.png';
-import hardwarePrototypeImageUrl from '../assets/images/mental-meter/hardware-prototype.jpeg';
-import systemDiagramImageUrl from '../assets/images/mental-meter/system-diagram.png';
-import appUiImageUrl from '../assets/images/mental-meter/app-ui.png';
+import heroImageUrl from '../assets/images/mental-meter/mental-meter-hero.webp';
+import cadModelImageUrl from '../assets/images/mental-meter/cad-model.webp';
+import hardwarePrototypeImageUrl from '../assets/images/mental-meter/hardware-prototype.webp';
+import systemDiagramImageUrl from '../assets/images/mental-meter/system-diagram.webp';
+import appUiImageUrl from '../assets/images/mental-meter/app-ui.webp';
 
 const PSYCHBATTERY_URL = 'https://psych-battery.vercel.app/';
 const ACTIVITYWATCH_URL = 'https://activitywatch.net/';
@@ -34,6 +34,8 @@ const MentalMeter = () => {
               src={heroImageUrl}
               alt='Mental Meter device on a desk'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
           </figure>
         </div>
@@ -67,6 +69,8 @@ const MentalMeter = () => {
               src={cadModelImageUrl}
               alt='Fusion 360 CAD model of Mental Meter'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Fusion 360 CAD model</figcaption>
           </figure>
@@ -80,6 +84,8 @@ const MentalMeter = () => {
               src={hardwarePrototypeImageUrl}
               alt='Mental Meter hardware prototype'
               style={{ width: '50%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Hardware prototype with e-ink display and LED ring</figcaption>
           </figure>
@@ -94,6 +100,8 @@ const MentalMeter = () => {
               src={systemDiagramImageUrl}
               alt='System diagram showing the Mental Meter feedback loop'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>System diagram: awareness feedback loop</figcaption>
           </figure>
@@ -114,6 +122,8 @@ const MentalMeter = () => {
               src={appUiImageUrl}
               alt='Mental Meter companion web app UI'
               style={{ width: '100%', display: 'inline-block' }}
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>Companion app: activity breakdowns and circadian baseline</figcaption>
           </figure>

@@ -22,7 +22,7 @@ const SamplePage = () => {
       <div className="section" id='overview'>
         <h2 style={{ display: 'none' }}>Overview</h2>
         <h1>Sample Page Title</h1>
-        {/*<img src={sampleImageUrl} alt='Sample Image' width='100%'/>*/}
+        {/*<img src={sampleImageUrl} alt='Sample Image' width='100%' loading="lazy" decoding="async" />*/}
         <br></br>
         <p>
           This is the introduction for Sample Page.

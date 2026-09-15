@@ -7,7 +7,7 @@ import OrbitingNodes from './OrbitingNodes'; // Import the OrbitingNodes class
 import GLTFModel from './GLTFModel'; // Import the Model class
 import '../assets/style/Home.css'; // Import the external CSS file
 
-import owlImageUrl from '../assets/images/owl-in-space.png'; // Import the owl image for the loading spinner
+import owlImageUrl from '../assets/images/owl-in-space.webp'; // Import the owl image for the loading spinner
 
 // Purchased from https://skfb.ly/pr8Kx
 import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
@@ -456,7 +456,7 @@ const Home = () => {
   return (
     <div ref={mountRef} className="scene-container">
       <div className="loading-overlay" id="loading-overlay">
-      <img src={owlImageUrl} alt="Owl" className="spinner-image" />
+      <img src={owlImageUrl} alt="Owl" className="spinner-image" loading="lazy" decoding="async" />
         <div className="spinner"></div>
         <p>Blasting off...</p>
         <div className="accessible-link" style={{ fontSize: "16px" }}>
