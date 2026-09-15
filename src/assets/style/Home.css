@@ -155,6 +155,60 @@ body, html, #root {
   color: #db13bd
 }
 
+/* Looks like .span-link, but is a real button: reachable by keyboard and
+   announced as a control. Used for anything that navigates on click. */
+.button-link {
+  pointer-events: auto;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  color: #db13bd;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+}
+
+.button-link:hover {
+  font-weight: bold;
+}
+
+.button-link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.slow-load {
+  max-width: 420px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.slow-load p {
+  margin: 0 0 10px;
+  color: #ffffff;
+}
+
+/* The 3D scene is the whole point of the home page, but honor a request for
+   less motion by dropping the fades that are purely decorative. */
+@media (prefers-reduced-motion: reduce) {
+  .black-overlay,
+  #instruction-text {
+    transition: none;
+  }
+
+  #instruction-text.fade-in {
+    animation: none;
+    opacity: 1;
+  }
+
+  .spinner {
+    animation-duration: 3s; /* Keep the loading cue, slow it right down */
+  }
+}
+
 @media (pointer:none), (pointer:coarse) {
   #title {
     display: none;

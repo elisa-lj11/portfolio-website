@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/style/PageTemplate.css'; // Import the CSS file
+import { prefersSimpleView, setViewPreference, SPACE_VIEW } from '../utils/viewPreference';
 
 // Texture from galaxy model: https://skfb.ly/pr8Kx 
 import galaxyImageUrl from '../assets/images/galaxy.webp';
@@ -16,9 +17,23 @@ const PageTemplate = ({ refs, setRefs, children, generateRefsFromDOM }) => {
 
   const projectName = window.location.hash.split('#/')[1].split('#')[0];
 
+  // The simple view is its own home, so from there the button offers the 3D
+  // scene as an explicit opt-in rather than pointing the visitor back at itself.
+  const isSimpleHome = projectName === 'simple-view';
+  const returnToSimpleView = !isSimpleHome && prefersSimpleView();
+
   const goHome = () => {
-    navigate('/'); // Navigate to the home page
+    if (isSimpleHome) {
+      setViewPreference(SPACE_VIEW); // Choosing the galaxy clears the opt-out
+      navigate('/');
+    } else if (returnToSimpleView) {
+      navigate('/simple-view'); // Respect the visitor's choice to skip WebGL
+    } else {
+      navigate('/');
+    }
   };
+
+  const homeLabel = returnToSimpleView ? 'Go back to projects' : 'Go back to space';
 
   // Function to search DOM for div elements and generate refs array
   const generateRefsFromDOMInternal = () => {
@@ -85,6 +100,10 @@ const PageTemplate = ({ refs, setRefs, children, generateRefsFromDOM }) => {
       }
     };
 
+    // Tracking the visible section is a progressive enhancement: without it the
+    // page still scrolls and navigates, the URL hash just stops following along.
+    if (typeof IntersectionObserver === 'undefined') return;
+
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Observe each section (the refs should correspond to section headers)
@@ -119,10 +138,10 @@ const PageTemplate = ({ refs, setRefs, children, generateRefsFromDOM }) => {
     /* Set custom cursor here when page loads quicker than previous page unload/cleanup */
     <div className="page-template" style={{ cursor: `url(${rocketCursor}), auto` }}>
       <header>
-        <button className="home" onClick={goHome}>
+        <button className="home" onClick={goHome} aria-label={homeLabel}>
           &lt;
-          <img src={galaxyImageUrl} className="galaxy-image" width="40px" loading="lazy" decoding="async" />
-          <span>Go back to space</span>
+          <img src={galaxyImageUrl} alt="" className="galaxy-image" width="40px" decoding="async" />
+          <span>{homeLabel}</span>
         </button>
         <div className="dropdown">
           <select onChange={handleScroll} value={selectedSection || ""}>

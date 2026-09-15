@@ -8,6 +8,15 @@ import GLTFModel from './GLTFModel'; // Import the Model class
 import '../assets/style/Home.css'; // Import the external CSS file
 
 import owlImageUrl from '../assets/images/owl-in-space.webp'; // Import the owl image for the loading spinner
+import {
+  prefersSimpleView,
+  setViewPreference,
+  isWebGLAvailable,
+  SIMPLE_VIEW,
+} from '../utils/viewPreference';
+
+// How long to wait before offering the simple view as the primary way out
+const SLOW_LOAD_MS = 8000;
 
 // Purchased from https://skfb.ly/pr8Kx
 import GALAXY_MODEL from '../assets/models/galaxy_HD.glb';
@@ -81,11 +90,25 @@ const Home = () => {
   const orbitingNodes = new OrbitingNodes(); // Instantiate the nodes with the OrbitingNodes class
 
   const [isBlackOverlayActive, setIsBlackOverlayActive] = useState(true); // State to control fade
+  const [isSlowLoad, setIsSlowLoad] = useState(false); // Loading is taking too long
   const navigate = useNavigate(); // Hook to navigate between routes
 
+  // A visitor who already opted out of WebGL, or whose device cannot run it,
+  // should never be dropped into the 3D scene. Decided before first paint so
+  // the scene is never built in the first place.
+  const [shouldSkipScene] = useState(() => prefersSimpleView() || !isWebGLAvailable());
+
   const handleNavigateToAccessible = () => {
+    setViewPreference(SIMPLE_VIEW); // Remember the choice across pages and visits
     document.body.style.cursor = `url(${rocketCursor}), auto`; // Reset cursor
     navigate('/simple-view');
+  };
+
+  // Fall back to the simple view without recording it as a preference: this is
+  // a failure path, not something the visitor chose.
+  const fallBackToAccessible = () => {
+    document.body.style.cursor = `url(${rocketCursor}), auto`;
+    navigate('/simple-view', { replace: true });
   };
 
   // Default positions for desktop and mobile
@@ -277,6 +300,8 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (shouldSkipScene) return; // Nothing rendered to attach to
+
     const overlay = document.querySelector('.black-overlay');
     const instructionText = document.getElementById('instruction-text');
 
@@ -293,9 +318,21 @@ const Home = () => {
     };
   }, []);
   
+  // Honor a stored simple-view preference, and rescue anyone whose device has
+  // no WebGL at all, before any of the 3D setup below runs.
   useEffect(() => {
+    if (shouldSkipScene) fallBackToAccessible();
+  }, [shouldSkipScene]);
+
+  useEffect(() => {
+    if (shouldSkipScene) return; // Redirecting; never construct the renderer
+
     document.body.style.zoom = 1; // Reset the zoom by setting it to the default 1
     window.scrollTo(0, 0); // Scroll to the top on page load
+
+    // If the galaxy is still loading well past the point of patience, promote
+    // the simple view from a footnote to the obvious way forward.
+    const slowLoadTimer = setTimeout(() => setIsSlowLoad(true), SLOW_LOAD_MS);
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -368,7 +405,9 @@ const Home = () => {
     Promise.all([loadGalaxyModel(), loadSkyboxModel(), loadOrbitingNodes()])
       .then(() => {
         if (process.env.IS_DEVELOPMENT) console.log('All assets loaded. Starting animation.');
-        
+
+        clearTimeout(slowLoadTimer); // Loaded in time; no need to offer an escape
+
         // Hide the loading overlay
         const loadingOverlay = document.getElementById('loading-overlay');
         if (loadingOverlay) {
@@ -380,6 +419,11 @@ const Home = () => {
       })
       .catch((error) => {
         if (process.env.IS_DEVELOPMENT) console.error('An error occurred while loading assets:', error);
+
+        // Previously this only logged in development, leaving production stuck
+        // on "Blasting off..." forever. Send the visitor somewhere that works.
+        clearTimeout(slowLoadTimer);
+        fallBackToAccessible();
       });
 
     // Handle window resize
@@ -398,6 +442,7 @@ const Home = () => {
     // Cleanup function when the component unmounts
     return () => {
       isMouseDown = false; // Reset mouse state
+      clearTimeout(slowLoadTimer);
       cancelAnimationFrame(animationFrameId); // Stop animation
 
       // Clean up event listeners to avoid memory leaks
@@ -453,26 +498,39 @@ const Home = () => {
     };
   }, []); // Empty dependency array, runs once on mount
 
+  // Redirecting to the simple view; rendering the scene container would build a
+  // WebGL context we are about to throw away (or cannot build at all).
+  if (shouldSkipScene) return null;
+
   return (
     <div ref={mountRef} className="scene-container">
       <div className="loading-overlay" id="loading-overlay">
-      <img src={owlImageUrl} alt="Owl" className="spinner-image" loading="lazy" decoding="async" />
+      <img src={owlImageUrl} alt="" className="spinner-image" decoding="async" />
         <div className="spinner"></div>
-        <p>Blasting off...</p>
-        <div className="accessible-link" style={{ fontSize: "16px" }}>
-          <span className="span-link" onClick={handleNavigateToAccessible}>
-            "Elisa's space" simple view
-          </span>
-        </div>
+        <p>{isSlowLoad ? 'Still blasting off...' : 'Blasting off...'}</p>
+        {isSlowLoad ? (
+          <div className="accessible-link slow-load">
+            <p>Taking longer than it should. The simple view has everything, without the 3D.</p>
+            <button className="button-link" onClick={handleNavigateToAccessible}>
+              Go to the simple view
+            </button>
+          </div>
+        ) : (
+          <div className="accessible-link" style={{ fontSize: "16px" }}>
+            <button className="button-link" onClick={handleNavigateToAccessible}>
+              "Elisa's space" simple view
+            </button>
+          </div>
+        )}
       </div>
       {/* Use CSS class to control fading effect */}
       <div className={`black-overlay ${isBlackOverlayActive ? 'fade-in' : 'fade-out'}`}></div>
       <div id="title">
         <p><b>ELISA LUPIN-JIMENEZ</b>, creative technologist and space nerd</p>
         <div className="accessible-link">
-          <span className="span-link" onClick={handleNavigateToAccessible}>
+          <button className="button-link" onClick={handleNavigateToAccessible}>
             Simple view
-          </span>
+          </button>
         </div>
       </div>
       <div id="title-mobile">
@@ -487,9 +545,9 @@ const Home = () => {
       </div>
       <div id="instruction-text-mobile">
         <p>
-          <span className="span-link" onClick={handleNavigateToAccessible}>
+          <button className="button-link" onClick={handleNavigateToAccessible}>
             &gt; Simple view
-          </span><br></br>
+          </button><br></br>
           &gt; Click a celestial body to explore projects<br></br>
           &gt; Drag and pinch-to-zoom to navigate the space<br></br>
           &gt; Triple-tap to reset the view

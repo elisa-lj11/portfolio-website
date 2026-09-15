@@ -53,12 +53,12 @@ const Accessible = () => {
           A far-out portfolio of my projects from work, school, and leisure. Select a button to get a deeper look. 
         </p>
         <p>
-          <span 
-            className="span-link"
-            onClick={() => handleNavigate('who-am-i')} 
+          <button
+            className="button-link"
+            onClick={() => handleNavigate('who-am-i')}
           >
             Who am I?
-          </span>
+          </button>
         </p>
       </div>
       <hr className="solid" />
