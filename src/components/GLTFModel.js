@@ -9,7 +9,8 @@ class GLTFModel {
     this.scale = scale;
     this.mixer = null;
     this.speed = 1; // Speed constant for the orbiting motion
-    this.clock = new THREE.Clock(); // Clock to update animations
+    this.timer = new THREE.Timer(); // Timer to update animations
+    this.timerStarted = false; // Timer is reset on the first frame so the first delta is ~0
   }
 
   // Load the model with animations
@@ -36,10 +37,17 @@ class GLTFModel {
     });
   }
 
-  // Update the animation mixer based on the clock delta time
+  // Update the animation mixer based on the timer delta time
   updateAnimations() {
+    // Unlike Clock, Timer must be advanced once per frame before reading the delta
+    if (!this.timerStarted) {
+      this.timer.reset(); // Avoids a huge first delta covering the time since construction
+      this.timerStarted = true;
+    }
+    this.timer.update();
+
     if (this.mixer) {
-      const delta = this.clock.getDelta() * this.speed;
+      const delta = this.timer.getDelta() * this.speed;
       this.mixer.update(delta);
     }
   }

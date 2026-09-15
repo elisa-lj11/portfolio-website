@@ -126,7 +126,8 @@ class OrbitingNodes {
     this.hoverDelay = 200; // Time in milliseconds before switching speeds
     this.hoveredNode = null; // Track the currently hovered node
 
-    this.clock = new THREE.Clock();
+    this.timer = new THREE.Timer();
+    this.timerStarted = false; // Timer is reset on the first frame so the first delta is ~0
     this.levelOffsetAngle = Math.PI / this.nodesPerLevel; // Offset each level by half of the angle spacing
 
     this.heightMultiplier = -2; // Controls how much the nodes "fall down" the cone vertically
@@ -306,8 +307,15 @@ class OrbitingNodes {
   
   // Handle orbiting logic on animation frame updates
   updateNodes(camera) {
-    const deltaTime = this.clock.getDelta(); // Use deltaTime for incremental updates
-    const elapsedTime = this.clock.getElapsedTime() - this.rotationStartDelay; // Use elapsedTime for approach to final radius
+    // Unlike Clock, Timer must be advanced once per frame before reading delta/elapsed
+    if (!this.timerStarted) {
+      this.timer.reset(); // Avoids a huge first delta covering the time since construction
+      this.timerStarted = true;
+    }
+    this.timer.update();
+
+    const deltaTime = this.timer.getDelta(); // Use deltaTime for incremental updates
+    const elapsedTime = this.timer.getElapsed() - this.rotationStartDelay; // Use elapsedTime for approach to final radius
 
     // Set raycaster from camera perspective
     this.raycaster.setFromCamera(this.mouse, camera);
